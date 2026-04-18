@@ -1,0 +1,7 @@
+{
+  "name": "see-sea",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
