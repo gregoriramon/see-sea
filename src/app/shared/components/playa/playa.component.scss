@@ -1,0 +1,59 @@
+
+.playa-compact-item {
+  --min-height: 50px; /* Forzamos a que sea bajito */
+  --padding-start: 4px;
+  --padding-end: 4px;
+}
+
+.mini-code {
+  font-size: 0.6rem;
+  background: var(--ion-color-light);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--ion-color-medium);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-row h2 {
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  margin: 0;
+}
+
+.municipio-tag {
+  font-size: 0.7rem;
+  color: var(--ion-color-step-600);
+}
+
+.days-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.mini-day {
+  font-size: 0.65rem;
+  color: var(--ion-color-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.provincia-col {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.provincia-col p {
+  font-size: 0.7rem;
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--ion-color-medium);
+}
+
+

@@ -1,2 +1,117 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+/* Ocean & Sun Theme */
+:root {
+  /** primary: Azul Profundo (Océano) **/
+   --ion-color-primary: #005f73;
+  --ion-color-primary-rgb: 0, 95, 115;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #005465;
+  --ion-color-primary-tint: #1a6f81;
+  /** primary: Azul Piscina / Turquesa Eléctrico **/
+/*   --ion-color-primary: #2ecfca;
+  --ion-color-primary-rgb: 46, 207, 202;
+  --ion-color-primary-shade: #29b6b2;
+  --ion-color-primary-tint: #43d4cf; */
+
+
+  /** secondary: Turquesa (Agua cristalina) **/
+/*   --ion-color-secondary: #0a9396;
+  --ion-color-secondary-rgb: 10, 147, 150;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #098184;
+  --ion-color-secondary-tint: #229ea1; */
+
+  /** tertiary: Coral suave (Vida marina) **/
+  --ion-color-tertiary: #ee9b00;
+  --ion-color-tertiary-rgb: 238, 155, 0;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #d18800;
+  --ion-color-tertiary-tint: #f0a51a;
+  /** secondary: Rosa Coral (Atardecer vibrante) **/
+/*   --ion-color-secondary: #ff4e62;
+  --ion-color-secondary-rgb: 255, 78, 98;
+  --ion-color-secondary-shade: #e04556;
+  --ion-color-secondary-tint: #ff6072; */
+
+
+  /** success: Verde Alga **/
+/*   --ion-color-success: #94d2bd;
+  --ion-color-success-rgb: 148, 210, 189;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #82b9a6;
+  --ion-color-success-tint: #9fd7c4; */
+
+  /** warning: Sol de mediodía **/
+/*   --ion-color-warning: #e9d8a6;
+  --ion-color-warning-rgb: 233, 216, 166;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #cdbe92;
+  --ion-color-warning-tint: #ebdcaf; */
+
+  /** danger: Atardecer (Rojo cálido) **/
+ /*  --ion-color-danger: #ae2012;
+  --ion-color-danger-rgb: 174, 32, 18;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #991c10;
+  --ion-color-danger-tint: #b6362a; */
+
+  /** light: Arena blanca **/
+/*   --ion-color-light: #f8f9fa;
+  --ion-color-light-rgb: 248, 249, 250;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #dadbdc;
+  --ion-color-light-tint: #f9fafb; */
+
+  /** medium: Espuma de mar o nubes **/
+/*   --ion-color-medium: #9ca3af;
+  --ion-color-medium-rgb: 156, 163, 175;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #898f9a;
+  --ion-color-medium-tint: #a6acb7; */
+
+  /** dark: Azul medianoche (Fondo marino) **/
+/*   --ion-color-dark: #001219;
+  --ion-color-dark-rgb: 0, 18, 25;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #001016;
+  --ion-color-dark-tint: #1a2a30; */
+
+
+
+
+
+
+
+
+
+
+  /** tertiary: Amarillo Sol Intenso **/
+  --ion-color-tertiary: #f8df77;
+  --ion-color-tertiary-rgb: 248, 223, 119;
+  --ion-color-tertiary-shade: #dac469;
+  --ion-color-tertiary-tint: #f9e285;
+
+  /** light: Crema Arena Clara **/
+  --ion-color-light: #f9f3de;
+  --ion-color-light-rgb: 249, 243, 222;
+
+  /** dark: Azul Marino de Noche **/
+  --ion-color-dark: #0b3d6f;
+  --ion-color-dark-rgb: 11, 61, 111;
+
+
+}
+
+

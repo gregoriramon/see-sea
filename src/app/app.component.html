@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <!-- Definición del Menú -->
+      <ion-menu contentId="main-content">
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>See Sea (SiSi)</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <ion-menu-toggle>
+              <ion-item button routerLink="/tabs/favoritas">Inicio</ion-item>
+              <ion-item button routerLink="/settings">Configuración</ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  <ion-router-outlet  id="main-content"></ion-router-outlet>
 </ion-app>
