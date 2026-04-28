@@ -1,59 +1,67 @@
 
 .playa-compact-item {
-  --min-height: 50px; /* Forzamos a que sea bajito */
+  --min-height: 70px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  align-items: center;
+
+  ion-label {
+    margin: 8px 0;
+  }
+}
+
+.location-start-button {
+  --padding-start: 0;
+  --padding-end: 8px;
+  margin: 0;
+  height: auto;
+  min-width: auto;
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}
+
+.playa-nombre {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.municipio-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ion-color-step-600);
+  margin: 4px 0 0 0;
+}
+
+.provincia-text {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+  margin: 4px 0 0 0;
+  text-transform: uppercase;
+}
+
+.actions-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.favorita-button {
   --padding-start: 4px;
   --padding-end: 4px;
-}
-
-.mini-code {
-  font-size: 0.6rem;
-  background: var(--ion-color-light);
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: var(--ion-color-medium);
-}
-
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-row h2 {
-  font-size: 0.7rem !important;
-  font-weight: 600;
   margin: 0;
+  min-width: auto;
+  min-height: auto;
+
+  ion-icon {
+    font-size: 1.5rem;
+  }
 }
 
-.municipio-tag {
-  font-size: 0.7rem;
-  color: var(--ion-color-step-600);
-}
 
-.days-row {
-  display: flex;
-  gap: 4px;
-  margin-top: 2px;
-}
 
-.mini-day {
-  font-size: 0.65rem;
-  color: var(--ion-color-primary);
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.provincia-col {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.provincia-col p {
-  font-size: 0.7rem;
-  margin: 0;
-  text-transform: uppercase;
-  color: var(--ion-color-medium);
-}
 
 

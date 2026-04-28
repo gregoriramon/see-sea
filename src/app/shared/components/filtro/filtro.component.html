@@ -1,0 +1,46 @@
+<ion-header>
+  <!-- Contenedor de filtros -->
+  <ion-toolbar>
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <!-- Provincia -->
+        @if(showProvincias){
+        <ion-col size="6">
+          <ion-select label="Provincia .." label-placement="floating" fill="outline"
+                      [(ngModel)]="selectedProvincia" (ionChange)="onProvinciaChange($event.detail.value)"
+                      class="ion-margin-horizontal">
+            <ion-select-option value="**">Todas</ion-select-option>
+            @for (provincia of provinciasList; track provincia.cod_provincia) {
+              <ion-select-option [value]="provincia.cod_provincia">{{ provincia.provincia }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-col>
+        }
+
+        <!-- Municipio -->
+        @if (showMunicipios){
+        <ion-col size="6">
+          <ion-select label="Municipio ..." label-placement="floating" fill="outline"
+                      [(ngModel)]="selectedMunicipio" (ionChange)="onMunicipioChange($event.detail.value)"
+                      class="ion-margin-horizontal">
+            <ion-select-option value="*****">Todos</ion-select-option>
+            @for (municipio of municipiosList; track municipio.cod_municipio) {
+              <ion-select-option [value]="municipio.cod_municipio">{{ municipio.municipio }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-col>
+        }
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-searchbar placeholder="Busca Playa"
+                         [(ngModel)]="patterName"
+                         [debounce]="500"
+                         (ionInput)="onPatterNameChange()">
+          </ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>

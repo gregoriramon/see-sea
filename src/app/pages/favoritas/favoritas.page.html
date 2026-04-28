@@ -1,6 +1,29 @@
-<app-header tituloPagina="Favorita"/>
+<app-header tituloPagina="Mis Favoritas"/>
 
-<ion-content>
-  <p> Favoritas </p>
-
+<ion-content [fullscreen]="true">
+  <section>
+    @if (favoritas.length === 0) {
+      <div style="padding: 24px; text-align: center; color: var(--ion-color-medium);">
+        <p>No tienes playas favoritas aún</p>
+        <ion-button expand="block" color="primary" (click)="irABuscar()" style="margin-top: 16px;">
+          Buscar playas
+        </ion-button>
+      </div>
+    } @else {
+      <ion-grid fixed>
+        <ion-row>
+          @for (item of favoritas; track item.cod_playa) {
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
+            <app-playa
+              [conDetalle]=false
+              [playa]="item"
+              [esParticularFavorita]="esFavorita(item)"
+              (toggleFavorita)="onToggleFavorita($event)">
+            </app-playa>
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    }
+  </section>
 </ion-content>

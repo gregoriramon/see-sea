@@ -1,0 +1,273 @@
+[{
+	"unidad_generadora": "Área de Explotación y Gestión de Datos",
+	"periodicidad": "Dos veces al día",
+	"descripcion": "Predicciones para playas generadas de forma automática a partir de modelos numéricos y estadísticos de predicción meteorológica",
+	"formato": "json/xml",
+	"campos": [{
+			"origen": [{
+					"id": "productor",
+					"descripcion": "Agencia Estatal de Meteorología - AEMET. Gobierno de España",
+					"tipo_datos": "string",
+					"requerido": true
+				},
+
+				{
+					"id": "web",
+					"descripcion": "URL de la Web de AEMET - https://www.aemet.es",
+					"tipo_datos": "",
+					"requerido": true
+				},
+
+				{
+					"id": "language",
+					"descripcion": "es",
+					"tipo_datos": "string",
+					"requerido": true
+				},
+
+				{
+					"id": "copyright",
+					"descripcion": "© AEMET. Autorizado el uso de la información y su reproducción citando a AEMET como autora de la misma.",
+					"tipo_datos": "string",
+					"requerido": true
+				},
+
+				{
+					"id": "nota_legal",
+					"descripcion": "https://www.aemet.es/es/nota_legal</nota_legal",
+					"tipo_datos": "anyURI",
+					"requerido": true
+				}
+			]
+		}, {
+			"id": "id",
+			"descripcion": "Indicativo de la playa",
+			"tipo_datos": "int",
+			"requerido": true
+		},
+
+		{
+			"id": "elaborado",
+			"descripcion": "Fecha de elaboración",
+			"tipo_datos": "datatime",
+			"requerido": true
+		},
+
+
+		{
+			"id": "nombre",
+			"descripcion": "Nombre de la playa",
+			"tipo_datos": "string",
+			"requerido": true
+		},
+
+		{
+			"id": "localidad",
+			"descripcion": "Indicativo del municipio al que pertenece la playa",
+			"tipo_datos": "long",
+			"requerido": true
+		}, {
+			"prediccion": [{
+				"dia": [{
+						"id": "fecha",
+						"descripcion": "Período de validez (AAAAMMDD)",
+						"tipo_datos": "string",
+						"requerido": true
+					},
+
+					{
+						"estadoCielo": [{
+								"id": "f1",
+								"descripcion": "Código de estado de cielo por la mañana. Posibles valores 100 despejado, 110 nuboso, 120 muy nuboso, 130chubascos, 140 muy nuboso con lluvia)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion1",
+								"descripcion": "Descripción textual del estado de cielo por la mañana",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "f2",
+								"descripcion": "Código de estado de cielo por la tarde Posibles valores 100 despejado, 110 nuboso, 120 muy nuboso, 130chubascos, 140 muy nuboso con lluvia)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion2",
+								"descripcion": "Descripción textual del estado de cielo por la tarde",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+
+					}, {
+						"viento": [{
+
+
+								"id": "f1",
+								"descripcion": "Código de estado del viento por la mañana (210 flojo, 220 moderado, 230 fuerte)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion1",
+								"descripcion": "Descripción textual del estado del viento por la mañana",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "f2",
+								"descripcion": "Código de estado del viento por la tarde (210 flojo, 220 moderado, 230 fuerte)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion2",
+								"descripcion": "Descripción textual del estado del viento por la tarde",
+								"tipo_datos": "string",
+								"requerido": true
+							}, {
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+					},
+
+
+					{
+						"oleaje": [{
+								"id": "f1",
+								"descripcion": "Código de estado del oleaje por la mañana (310 débil, 320 moderado, 330 fuerte)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion1",
+								"descripcion": "Descripción textual del estado del oleaje por la mañana",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "f2",
+								"descripcion": "Código de estado del oleaje por la tarde (310 débil, 320 moderado, 330 fuerte)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion2",
+								"descripcion": "Descripción textual del estado del oleaje por la tarde",
+								"tipo_datos": "string",
+								"requerido": true
+							}, {
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+					},
+
+
+					{
+						"tMaxima": [{
+
+
+								"id": "valor1",
+								"descripcion": "Temperatura máxima en grados Celsius prevista",
+								"tipo_datos": "byte",
+								"unidad": "grados Celsius",
+								"requerido": true
+							},
+
+							{
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+					},
+
+					{
+						"sTermica": [{
+
+								"id": "valor1",
+								"descripcion": "Indice de sensación térmica (410 muy frío, 420 frío, 430 muy fresco, 440 fresco, 450 suave, 460 calor agradable, 470 calor moderado, 480 calor fuerte)",
+								"tipo_datos": "string",
+								"requerido": true
+							},
+
+							{
+								"id": "descripcion1",
+								"descripcion": "Descripción textual de la sensación térmica",
+								"tipo_datos": "string",
+								"requerido": true
+							}, {
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+					},
+
+					{
+						"tAgua": [{
+
+							"id": "valor1",
+							"descripcion": "Temperatura del agua en grados Celsius prevista",
+							"tipo_datos": "byte",
+							"unidad": "grados Celsius",
+							"requerido": true
+						}, {
+							"id": "value",
+							"descripcion": "Campo auxiliar",
+							"tipo_datos": "string",
+							"requerido": true
+						}]
+					},
+
+					{
+						"uvMax": [{
+								"id": "valor1",
+								"descripcion": "Índice UV Máximo para cielo despejado",
+								"tipo_datos": "byte",
+								"requerido": true
+
+							},
+
+							{
+								"id": "value",
+								"descripcion": "Campo auxiliar",
+								"tipo_datos": "string",
+								"requerido": true
+							}
+						]
+					}
+				]
+			}]
+		}
+	]
+}]
+
+

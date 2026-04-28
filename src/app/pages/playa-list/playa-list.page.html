@@ -1,0 +1,55 @@
+<app-header tituloPagina="Buscar cabecera" />
+<ion-content [fullscreen]="true">
+  <!-- Sección fija con sombra y margen -->
+  <section
+    style="position: sticky;
+           top: 0;
+           z-index: 10;
+           background: var(--ion-background-color, #fff);
+           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+           margin-bottom: 12px;">
+
+    <app-filtro [showName]="true" [patterName]="patterName" [showProvincias]="true" [showMunicipios]="true" (filtroChange)="onFiltroChange($event)"  />
+  </section>
+
+  <!-- Warning cuando no hay filtros seleccionados -->
+<!--    @if (!getSomethingSelected()) {
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+      <div style="text-align: center; color: var(--ion-color-warning, #ffc409);">
+        <ion-icon name="warning-outline" style="font-size: 48px; margin-bottom: 16px;"></ion-icon>
+        <p style="font-size: 16px; margin: 0;">Selecciones en el filtro para buscar playas</p>
+      </div>
+    </section>
+   }  -->
+
+  <!-- Spinner de carga -->
+  @if (isLoading) {
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
+      <ion-spinner name="circular"></ion-spinner>
+    </section>
+  }
+
+  <!-- Lista de playas -->
+  <!-- @if (getSomethingSelected()) { -->
+    <section>
+      <ion-grid fixed>
+        <ion-row>
+          <!-- size="12" (Móvil: 1 columna) -->
+          <!-- size-md="6" (Tablet: 2 columnas) -->
+          <!-- size-lg="4" (Escritorio: 3 columnas) -->
+
+          @for (item of playas; track item.cod_playa) {
+          <ion-col size="12"  class="ion-no-padding">
+            <!-- Tu componente personalizado -->
+            <app-playa
+              [playa]="item"
+              [esParticularFavorita]="esFavorita(item)"
+              (toggleFavorita)="onToggleFavorita($event)">
+            </app-playa>
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </section>
+  <!-- } -->
+</ion-content>

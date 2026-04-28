@@ -1,60 +1,49 @@
-<!-- <ion-card class="playa-card">
-  <ion-card-header>
-    <ion-card-subtitle class="ion-text-uppercase">
-      Cod: {{ playa.cod_playa }}
-    </ion-card-subtitle>
-    <ion-card-title>{{ playa.playa }}</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content>
-    <ion-list lines="none">
-      <ion-item class="ion-no-padding">
-        <ion-icon name="water-outline" slot="start" color="primary"></ion-icon>
-        <ion-label>
-          <h3>{{ playa.municipio }}</h3>
-          <p>{{ playa.provincia }}</p>
-          <p>({{ playa.ccaa }})</p>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-           @for (dia of playa.prediccion?.dia; track dia.fecha) {
-            <ion-label>{{dia.fecha | diaSemana}}</ion-label>
-           }
-      </ion-item>
-      <div class="metadata-grid">
-        <div class="meta-item">
-          <small>Cód. Mun: {{ playa.cod_municipo }}</small>
-        </div>
-        <div class="meta-item">
-          <small>Cód. Prov: {{ playa.cod_provincia }}</small>
-        </div>
-      </div>
-    </ion-list>
-  </ion-card-content>
-</ion-card>
- -->
 <ion-item lines="full" class="playa-compact-item">
-  <!-- Slot de inicio: Un badge o icono pequeño con el código -->
-<!--   <div slot="start" class="mini-code">
-    <small>{{ playa.cod_playa }}</small>
-  </div> -->
+  <!-- Icono de location en la parte izquierda - clickeable para abrir Google Maps -->
+  <ion-button slot="start" fill="clear" size="big" (click)="abrirGoogleMaps()" class="location-start-button">
+    <ion-icon slot="icon-only"  name="location" color="primary"></ion-icon>
+  </ion-button>
 
   <ion-label>
-    <div slot="start" class="header-row">
-      <h2>{{ playa.playa }}</h2>
-      <span class="municipio-tag">{{ playa.municipio }}</span>
-    </div>
+    <!-- Nombre de playa -->
+    <h2 class="playa-nombre">{{ playa.playa }}</h2>
 
-<!--     <div class="days-row">
-      @for (dia of playa.prediccion?.dia; track dia.fecha) {
-        <span class="mini-day">{{ (dia.fecha | diaSemana) }}</span>
-      }
-    </div> -->
+    <!-- Municipio -->
+    <p class="municipio-text">{{ playa.municipio }}</p>
+
+    <!-- Provincia -->
+    <p class="provincia-text">{{ playa.provincia }} </p>
+
+    <p >{{ playa.aemet_date |diaSemana}}</p>
+
   </ion-label>
 
-  <!-- Slot de fin: Provincia discreta -->
-  <div slot="end" class="provincia-col">
-    <p>{{ playa.provincia }}</p>
-    <ion-icon slot="end" name="chevron-forward-outline" color="medium"></ion-icon>
+  <!-- Botón de favoritos con corazón en la parte derecha -->
+  <div slot="end" class="actions-col">
+    <ion-button
+      fill="clear"
+      size="small"
+      (click)="onToggleFavorita($event)"
+      class="favorita-button">
+      <ion-icon
+        slot="icon-only"
+        [name]="esParticularFavorita ? 'heart' : 'heart-outline'"
+        [color]="esParticularFavorita ? 'danger' : 'medium'">
+      </ion-icon>
+    </ion-button>
   </div>
+
 </ion-item>
+<ion-label class="playa-prediccion" >
+  <p>Predicción: {{ playa.prediccion }}</p>
+</ion-label>
+@if (playa.prediccion) {
+<ion-accordion-group >
+  <ion-accordion   value="Prediccion">
+    <ion-item slot="header" color="light">
+      <ion-label>{{playa.prediccion}}</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">First Content</div>
+  </ion-accordion>
+  </ion-accordion-group>
+  }

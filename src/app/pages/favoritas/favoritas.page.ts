@@ -1,14 +1,90 @@
-import { Component } from '@angular/core';
-import {IonContent } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonContent, IonGrid, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
+import { FavoritasService } from 'src/app/core/services/favoritas/favoritas.service';
+import { Playa } from 'src/app/models/playa';
+import { Supabase } from 'src/app/core/services/supabase/supabase';
 
 
 @Component({
   selector: 'app-favoritas',
   templateUrl: 'favoritas.page.html',
   styleUrls: ['favoritas.page.scss'],
-  imports: [IonContent, HeaderComponent],
+  imports: [IonContent, HeaderComponent, IonGrid, IonRow, IonCol, PlayaComponent, IonButton],
 })
-export class FavoritasPage {
-  constructor() {}
+export class FavoritasPage implements OnInit {
+  public favoritas: Playa[] = [];
+
+  constructor(
+    public favoritasService: FavoritasService,
+    private supabaseService: Supabase,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.cargarFavoritas();
+    // Suscribirse a cambios en favoritas
+    this.favoritasService.favoritas$.subscribe((favoritas) => {
+      this.favoritas = favoritas;
+    });
+    this.refreshFavoritas();
+  }
+
+  cargarFavoritas() {
+    this.favoritas = this.favoritasService.obtenerFavoritas();
+  }
+
+  esFavorita(playa: Playa): boolean {
+    return this.favoritasService.esFavorita(playa);
+  }
+
+  onToggleFavorita(playa: Playa) {
+      if (!this.esFavorita(playa)) {
+        this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
+          if (playaDetails && !Array.isArray(playaDetails)) {
+            playa = playaDetails; // Actualizamos la información de la playa con los detalles completos obtenidos
+          }
+        });
+      }
+    this.favoritasService.toggleFavorita(playa);
+  }
+
+  irABuscar() {
+    this.router.navigate(['/tabs/buscar']);
+  }
+
+  refreshFavoritas() {
+     if (this.favoritas.length != 0) {
+        const fechaActual = new Date().setHours(0, 0, 0, 0); // Normalizamos la fecha actual a medianoche para comparar solo la fecha sin hora
+        this.favoritas.forEach(playa => {
+          console.log("Comparando fecha actual: ".concat(`${fechaActual.toLocaleString()}`).concat(" con fecha de playa: ").concat(`${playa.aemet_date}`));
+          const fechaAComparar = this.getFecha(playa.aemet_date).setHours(0, 0, 0, 0); // Normalizamos la fecha de la playa a medianoche para comparar solo la fecha sin hora
+          // Comparar usando operadores lógicos
+          if (fechaAComparar < fechaActual) {
+
+            console.log("Fecha actual:".concat(`${fechaActual.toLocaleString()}`).concat(" es mayor que fecha de playa: ").concat(`${playa.aemet_date}`));
+            console.log("La playa ".concat(playa.playa).concat(" tiene datos desactualizados, actualizando..."));
+            this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
+              if (playaDetails) {
+                    if (!Array.isArray(playaDetails)) {
+                      this.favoritasService.refreshFavorita(playaDetails);
+                    } else {
+                      console.warn("Se esperaba un solo resultado para cod_playa: ".concat(playa.cod_playa).concat(", pero se recibió una lista. No se actualizará la playa."));
+                    }               }
+            });
+          }
+        });
+      }
+  }
+  private getFecha(fechaStr: string): Date {
+    const anio = parseInt(fechaStr.substring(0, 4));
+    const mes = parseInt(fechaStr.substring(4, 6)) - 1; // Restamos 1 porque los meses van de 0 a 11
+    const dia = parseInt(fechaStr.substring(6, 8));
+
+    const fechaAComparar = new Date(anio, mes, dia);
+    return fechaAComparar;
+
+  }
 }

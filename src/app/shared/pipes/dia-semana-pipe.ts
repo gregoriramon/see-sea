@@ -6,10 +6,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DiaSemanaPipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    return this.obtenerDiaSemana (value);
+    if (typeof value === 'string') {
+      return this.obtenerDiaSemana (value);
+    }
+    return value as string;
+
   }
 
 private obtenerDiaSemana(fechaNum: unknown): string {
+
+
   // 1. Convertimos a string por si viene como número
   const fechaStr = String(fechaNum);
 
@@ -24,8 +30,9 @@ private obtenerDiaSemana(fechaNum: unknown): string {
   const fecha = new Date(año, mes, dia);
 
   // Retornamos el nombre del día en español con la primera letra en mayúscula
-  const diaSemana = fecha.toLocaleDateString('es-ES', { weekday: 'long' });
-  return diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+  const diaSemana = fecha.toLocaleDateString('es-ES', { weekday: 'short' });
+
+  return diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1).toLowerCase() + " " + dia;
 }
 
 }

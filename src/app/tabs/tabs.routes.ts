@@ -14,7 +14,7 @@ export const routes: Routes = [
       {
         path: 'buscar',
         loadComponent: () =>
-          import('../pages/buscar/buscar.page').then((m) => m.BuscarPage),
+          import('../pages/playa-list/playa-list.page').then((m) => m.PlayaListPage),
       },
       {
         path: 'calendario',

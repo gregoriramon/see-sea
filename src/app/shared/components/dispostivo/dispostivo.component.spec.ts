@@ -3,6 +3,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { DispostivoComponent } from './dispostivo.component';
 
+/// <reference types="jasmine" />
+
 describe('DispostivoComponent', () => {
   let component: DispostivoComponent;
   let fixture: ComponentFixture<DispostivoComponent>;
@@ -14,6 +16,7 @@ describe('DispostivoComponent', () => {
 
     fixture = TestBed.createComponent(DispostivoComponent);
     component = fixture.componentInstance;
+    component.dispositivo = { id: 1, nombre: 'Test' };
     fixture.detectChanges();
   }));
 

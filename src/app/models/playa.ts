@@ -1,12 +1,16 @@
 export interface Playa {
   cod_playa: string
   playa: string
-  cod_municipo:string
+  cod_municipio:string
   municipio:string
   cod_provincia: string
   provincia:string
   cod_ccaa:string
   ccaa:string
+  lat:number
+  lon:number
+  last_update_date:string
+  aemet_date:string
   prediccion?:Prediccion
 }
 
