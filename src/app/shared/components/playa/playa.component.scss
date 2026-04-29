@@ -11,12 +11,11 @@
 }
 
 .location-start-button {
-  --padding-start: 0;
-  --padding-end: 8px;
+  --padding-start: 4px;
+  --padding-end: 4px;
   margin: 0;
-  height: auto;
   min-width: auto;
-
+  min-height: auto;
   ion-icon {
     font-size: 1.5rem;
   }
@@ -59,6 +58,16 @@
   ion-icon {
     font-size: 1.5rem;
   }
+}
+  .vertical-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Opcional: ajustar el espacio entre botones */
+  gap: 4px;
+
 }
 
 

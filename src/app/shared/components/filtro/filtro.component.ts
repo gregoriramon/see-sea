@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonTitle, IonGrid, IonRow, IonCol } from "@ionic/angular/standalone";
+import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonGrid, IonRow, IonCol } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { CommonLocalService } from 'src/app/core/services/common-local/common-local.service';
@@ -10,7 +10,7 @@ import { Municipio, Provincia } from 'src/app/models/common';
   templateUrl: './filtro.component.html',
   styleUrls: ['./filtro.component.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonGrid, IonTitle, IonHeader, IonSearchbar, IonToolbar, IonSelect, IonSelectOption, FormsModule],
+  imports: [IonCol, IonRow, IonGrid,  IonHeader, IonSearchbar, IonToolbar, IonSelect, IonSelectOption, FormsModule],
 })
 export class FiltroComponent  implements OnInit {
 

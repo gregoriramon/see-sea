@@ -1,0 +1,69 @@
+<div class="forecast-grid">
+
+  @for (dia of dias; track dia.fecha; let esPrimero = $first) {
+  <div class="day-card">
+    <!-- Cabecera compacta -->
+    <div class="day-header" [style.background-color]="getColorOleaje(dia.oleaje.f1,false)">
+      <span class="day-name">{{ dia.fecha | diaSemana }}</span>
+    </div>
+
+    <!-- Cuerpo de datos -->
+    <div class="day-content">
+      <!-- Sub-headers Mañana/Tarde -->
+      <div class="time-labels">
+        <span>M</span>
+        <span>T</span>
+      </div>
+
+      <!-- Filas de datos con iconos pequeños -->
+      <div class="data-row">
+          <fa-icon [icon]="faWater" [style.color]="getColorOleaje(dia.oleaje.f1, false)"></fa-icon>
+        <div class="values">
+          <span [style.font-size]="'bold'" [style.color]="getColorOleaje(dia.oleaje.f1, false)" >{{ dia.oleaje.f1 | oleaje }}</span>
+          <span [style.color]="getColorOleaje(dia.oleaje.f2, false)">{{ dia.oleaje.f2 | oleaje }}</span>
+        </div>
+      </div>
+
+      <div class="data-row highlight-temp">
+
+          <fa-icon [icon]="faTemp"></fa-icon>
+
+        <div class="values">
+          <span>{{ dia.tAgua.valor1 | temperatura }}</span>
+          <span>{{ dia.tAgua.valor1 | temperatura }}</span>
+        </div>
+      </div>
+
+      <div class="data-row">
+
+          <fa-icon [icon]="faWind"></fa-icon>
+
+        <div class="values">
+          <span>{{ dia.viento.f1 | viento }}</span>
+          <span>{{ dia.viento.f2 | viento }}</span>
+        </div>
+      </div>
+
+      <div class="data-row uv-box">
+
+          <fa-icon [icon]="faSun"></fa-icon>
+
+        <div class="values">
+          <span>{{ dia.uvMax.valor1 }}</span>
+          <span>{{ dia.uvMax.valor1 }}</span>
+        </div>
+      </div>
+
+      <div class="data-row sky-row">
+
+          <fa-icon [icon]="faCloud"></fa-icon>
+
+        <div class="values">
+          <span class="sky-text" style="font-size: 0.6rem;  white-space: normal;">{{ dia.estadoCielo.f1 | estadoCielo }}</span>
+          <span class="sky-text" style="font-size: 0.6rem;  white-space: normal;">{{ dia.estadoCielo.f2 | estadoCielo }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

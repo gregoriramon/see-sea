@@ -9,6 +9,9 @@ export class DiaSemanaPipe implements PipeTransform {
     if (typeof value === 'string') {
       return this.obtenerDiaSemana (value);
     }
+    if (typeof value === 'number') {
+      return this.obtenerDiaSemana (value as unknown as string);
+    }
     return value as string;
 
   }

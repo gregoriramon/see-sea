@@ -1,0 +1,66 @@
+<div class="forecast-container">
+  <!-- 1. Columna fija de iconos (Labels) -->
+  <div class="icons-column">
+    <div class="header-spacer"></div> <!-- Espacio para igualar el header de los días -->
+    <div class="time-spacer"></div>   <!-- Espacio para igualar M / T -->
+
+    <div class="icon-label"><fa-icon [icon]="faWater"></fa-icon></div>
+    <div class="icon-label"><fa-icon [icon]="faTemp"></fa-icon></div>
+    <div class="icon-label"><fa-icon [icon]="faWind"></fa-icon></div>
+    <div class="icon-label"><fa-icon [icon]="faSun"></fa-icon></div>
+    <div class="icon-label"><fa-icon [icon]="faCloud"></fa-icon></div>
+  </div>
+
+  <!-- 2. Grid de datos (Scrollable si hay muchos días) -->
+  <div class="forecast-grid">
+    @for (dia of dias; track dia.fecha) {
+      <div class="day-card">
+        <div class="day-header" [style.background-color]="getColorOleaje(dia.oleaje.f1,false)">
+          <span class="day-name">{{ dia.fecha | diaSemana }}</span>
+        </div>
+
+        <div class="day-content">
+          <div class="time-labels">
+            <span>M</span>
+            <span>T</span>
+          </div>
+
+          <div class="data-row">
+            <div class="values">
+              <span [style.color]="getColorOleaje(dia.oleaje.f1, false)">{{ dia.oleaje.f1 | oleaje }}</span>
+              <span [style.color]="getColorOleaje(dia.oleaje.f2, false)">{{ dia.oleaje.f2 | oleaje }}</span>
+            </div>
+          </div>
+
+          <div class="data-row highlight-temp">
+            <div class="values">
+              <span>{{ dia.tAgua.valor1 | temperatura }}</span>
+              <span>{{ dia.tAgua.valor1 | temperatura }}</span>
+            </div>
+          </div>
+
+          <div class="data-row">
+            <div class="values">
+              <span>{{ dia.viento.f1 | viento }}</span>
+              <span>{{ dia.viento.f2 | viento }}</span>
+            </div>
+          </div>
+
+          <div class="data-row uv-box">
+            <div class="values">
+              <span>{{ dia.uvMax.valor1 }}</span>
+              <span>{{ dia.uvMax.valor1 }}</span>
+            </div>
+          </div>
+
+          <div class="data-row sky-row">
+            <div class="values">
+              <span class="sky-text">{{ dia.estadoCielo.f1 | estadoCielo }}</span>
+              <span class="sky-text">{{ dia.estadoCielo.f2 | estadoCielo }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

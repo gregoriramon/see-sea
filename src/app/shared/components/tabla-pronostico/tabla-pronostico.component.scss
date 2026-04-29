@@ -1,0 +1,105 @@
+.forecast-grid {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  padding: 5px;
+  background: #f4f9fb;
+  font-family: 'Inter', sans-serif; // O la que uses en Ionic
+}
+
+.day-card {
+  flex: 1; // Fuerza a que los 3 ocupen lo mismo (33% cada uno)
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.day-header {
+  padding: 6px;
+  text-align: center;
+  // color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.day-content {
+  padding: 4px;
+
+  .time-labels {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.6rem;
+    color: #999;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+}
+.data-row-first {
+  display: flex;
+  align-items: right;
+  margin-bottom: 4px;
+  padding: 0px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  ion-icon {
+    font-size: 2rem;
+    color: #5ab1ce;
+    width: 100%;
+  }
+}
+
+
+.data-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  padding: 2px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  ion-icon {
+    font-size: 1rem;
+    color: #5ab1ce;
+    width: 20%;
+  }
+
+  .values {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    span {
+      font-size: 0.8rem;
+      color: #333;
+      width: 50%;
+      text-align: center;
+        white-space: nowrap;    /* Evita que el texto salte a la siguiente línea */
+  overflow: hidden;       /* Esconde el texto que se sale del contenedor */
+  text-overflow: ellipsis;
+    }
+  }
+
+  &.highlight-temp .values span {
+    color: #ef6c00;
+    font-weight: bold;
+  }
+
+  &.uv-box {
+    background: #fff8e1;
+    border-radius: 4px;
+    border-bottom: none;
+  }
+
+  &.sky-row {
+    border-bottom: none;
+    .sky-text {
+      font-size: 0.6rem;
+      line-height: 1;
+      padding: 2px;
+      color: #666;
+      word-break: break-word; // Para que quepa "Muy nuboso"
+    }
+  }
+}
