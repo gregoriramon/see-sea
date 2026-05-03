@@ -1,6 +1,12 @@
 <app-header tituloPagina="Mis Favoritas"/>
 
 <ion-content [fullscreen]="true">
+  <div style="padding: 16px; display: flex; justify-content: flex-end;">
+    <ion-button color="secondary" shape="round" fill="solid" size="small" (click)="irABuscar()">
+      +
+    </ion-button>
+  </div>
+
   <section>
     @if (favoritas.length === 0) {
       <div style="padding: 24px; text-align: center; color: var(--ion-color-medium);">

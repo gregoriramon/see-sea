@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonInput, IonButton, IonSearchbar, IonSpinner } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonInput, IonButton, IonSearchbar, IonSpinner } from '@ionic/angular/standalone';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
-import { FavoritasService } from 'src/app/core/services/favoritas/favoritas.service';
-import { CommonLocalService } from 'src/app/core/services/common-local/common-local.service';
+import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Playa } from 'src/app/models/playa';
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { PlayaComponent } from "src/app/shared/components/playa/playa.component";
@@ -16,7 +15,7 @@ import { FiltroComponent } from "src/app/shared/components/filtro/filtro.compone
   selector: 'app-buscar',
   templateUrl: 'playa-list.page.html',
   styleUrls: ['playa-list.page.scss'],
-  imports: [IonSearchbar, IonSpinner, IonIcon, FormsModule, IonCol, IonRow, IonGrid, IonToolbar, IonContent, HeaderComponent, HeaderComponent, PlayaComponent, FiltroComponent],
+  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent,  PlayaComponent, FiltroComponent, IonTitle],
 })
 export class PlayaListPage implements OnInit, OnDestroy {
   public patterName: string = "";
@@ -29,13 +28,13 @@ export class PlayaListPage implements OnInit, OnDestroy {
 
   constructor(
     private supabaseService: Supabase,
-    public favoritasService: FavoritasService,
-    private commonLocalService: CommonLocalService
+    public localRepositoryService: LocalRepositoryService
   ) {
 
   }
 
   ngOnInit() {
+    console.log("Inicializando PlayaListPage, obteniendo playas...");
     this.getPlayasAll();
 
   }
@@ -49,8 +48,8 @@ export class PlayaListPage implements OnInit, OnDestroy {
     this.isLoading = true;
 
     // Verificar si existen playas en almacenamiento local
-    if (this.commonLocalService.existenPlayas()) {
-      this.playasAll = this.commonLocalService.obtenerPlayas();
+    if (this.localRepositoryService.existenPlayas()) {
+      this.playasAll = this.localRepositoryService.obtenerPlayas();
       console.log(`Total de playas obtenidas del almacenamiento local: ${this.playasAll.length}`);
       this.refrescarPlayas();
       this.isLoading = false;
@@ -62,7 +61,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
       then((playas) => {
         this.playasAll = playas;
         // Guardar en almacenamiento local
-        this.commonLocalService.guardarPlayas(playas);
+        this.localRepositoryService.guardarPlayas(playas);
         console.log(`Total de playas obtenidas del supabase y guardadas localmente: ${this.playasAll.length}`);
         this.refrescarPlayas();
         this.isLoading = false;
@@ -88,7 +87,9 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.getPlayasAllSinFiltro();
       return;
     }
-    this.playas = this.playasAll.filter(playa => playa.playa.toLowerCase().includes(this.patterName.toLowerCase()));
+    this.playas = this.playasAll.filter(playa => playa.playa.toLowerCase().includes(this.patterName.toLowerCase())
+      || playa.municipio.toLowerCase().includes(this.patterName.toLowerCase())
+      || playa.provincia.toLowerCase().includes(this.patterName.toLowerCase()));
     console.log("Total de playas de ".concat(`${this.playas.length}`).concat(" playas para patter: ").concat(this.patterName));
     this.isLoading = false;
   }
@@ -165,7 +166,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
 
   esFavorita(playa: Playa): boolean {
-    return this.favoritasService.esFavorita(playa);
+    return this.localRepositoryService.esFavorita(playa);
   }
 
   onToggleFavorita(playa: Playa) {
@@ -173,11 +174,18 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
         if (playaDetails && !Array.isArray(playaDetails)) {
           playa = playaDetails; // Actualizamos la información de la playa con los detalles completos obtenidos
-          this.favoritasService.toggleFavorita(playaDetails)
+          this.localRepositoryService.toggleFavorita(playaDetails)
         }
       });
+      this.localRepositoryService.deviceId$.subscribe((deviceId) => {
+        this.supabaseService.registraDispositivo({ id_dispositivo: deviceId, accion: 'ADD-FAVORITA' , data:playa.cod_playa}).then(() => {
+          console.log('Dispositivo registrado en Supabase playas favoritas '+  deviceId + ':' + playa.cod_playa);
+        }).catch((error) => {
+          console.error('Error al registrar dispositivo en Supabase:', error);
+        });
+      });
     } else {
-      this.favoritasService.toggleFavorita(playa);
+      this.localRepositoryService.toggleFavorita(playa);
     }
 
   }

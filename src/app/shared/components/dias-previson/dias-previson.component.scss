@@ -1,0 +1,38 @@
+/*
+.day-card {
+  flex: 1; // Fuerza a que los 3 ocupen lo mismo (33% cada uno)
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.day-header {
+  padding: 6px;
+  text-align: center;
+  // color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+} */
+.day-card {
+  display: flex;         /* Activa el modo horizontal */
+  flex-direction: row;   /* Asegura que vayan de izquierda a derecha */
+  gap: 15px;             /* Opcional: añade espacio entre los días */
+  overflow-x: auto;      /* Opcional: añade scroll si los días no caben en pantalla */
+  padding: 2px;
+}
+
+.day-header {
+  flex: 0 0 auto;        /* Evita que los elementos se deformen */
+  min-width: 80px;       /* Ajusta el ancho según necesites */
+  text-align: center;
+  border-radius: 8px;    /* Para que se vea mejor */
+}
+.day-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}

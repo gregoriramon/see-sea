@@ -1,0 +1,8 @@
+ <div class="day-card">
+  @for (dia of dias; track dia.fecha) {
+    <!-- Cabecera compacta -->
+    <div class="day-header" [style.background-color]="getColorOleaje(dia.oleaje.f1,false)">
+      <span class="day-name">{{ dia.fecha | diaSemana }}</span>
+    </div>
+    }
+  </div>

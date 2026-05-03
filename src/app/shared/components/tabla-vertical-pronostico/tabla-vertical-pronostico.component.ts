@@ -23,7 +23,6 @@ import { getColorOleaje } from "../../utils/templateUtils";
     OlajePipe,
     TemperaturaPipe,
     VientoPipe,
-    UvMaxPipe,
     EstadoCieloPipe
   ],
   templateUrl: './tabla-vertical-pronostico.component.html',

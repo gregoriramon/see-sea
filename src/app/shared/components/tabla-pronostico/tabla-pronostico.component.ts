@@ -19,7 +19,7 @@ import { faWater, faTemperatureHigh, faWind, faSun, faCloud } from '@fortawesome
 @Component({
   selector: 'app-tabla-pronostico',
   standalone: true,
-  imports: [FontAwesomeModule,CommonModule, IonicModule, DiaSemanaPipe, OlajePipe, TemperaturaPipe, VientoPipe, UvMaxPipe, EstadoCieloPipe],
+  imports: [FontAwesomeModule,CommonModule, IonicModule, DiaSemanaPipe, OlajePipe, TemperaturaPipe, VientoPipe, EstadoCieloPipe],
   templateUrl: './tabla-pronostico.component.html',
   styleUrls: ['./tabla-pronostico.component.scss'],
 })

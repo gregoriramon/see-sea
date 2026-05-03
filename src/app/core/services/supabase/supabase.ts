@@ -31,7 +31,7 @@ export class Supabase {
 
     const { data, error } = await this.supabase
       .from('tb_dispositivos')
-      .select('id, nombre');
+      .select('id_dispositivo, register_at');
 
     if (error) {
       console.error('Error al obtener dispositivos:', error);
@@ -44,7 +44,7 @@ export class Supabase {
   async getDispositivo(id: number = 0): Promise<Dispositivo> {
     const { data, error } = await this.supabase
       .from('tb_dispositivos').
-      select('id, nombre').eq("id", id).single();
+      select('id_dispositivo, register_at').eq("id_dispositivo", id).single();
 
     if (error) {
       console.error('Error al obtener dispositivos:', error);
@@ -57,7 +57,7 @@ export class Supabase {
 
     const { data, error } = await this.supabase
       .from('tb_dispositivos')
-      .select('id, nombre')
+      .select('id_dispositivo, register_at')
       .ilike('nombre', name);
 
     if (error) {
@@ -68,14 +68,26 @@ export class Supabase {
     return data as Dispositivo[];
   }
 
-  updateDispositivo(dispositivo: Dispositivo) {
+  async updateDispositivo(dispositivo: Dispositivo) {
     console.log("insert on service");
-    return this.supabase.from('tb_dispositivos').update(dispositivo);
+
+      const { data, error } = await this.supabase
+        .from('tb_dispositivos')
+        .update(dispositivo)
+        .eq('id', dispositivo.id_dispositivo)
+
+      if (error) {
+        console.error('Error al actualizar dispositivo:', error);
+      }
+
   }
 
-  insertDispositivo(dispositivo: Dispositivo) {
-    console.log("insert on service");
-    return this.supabase.from('tb_dispositivos').insert(dispositivo);
+  async registraDispositivo(dispositivo: Dispositivo) {
+    console.log("insert on service: " + dispositivo.id_dispositivo + " - " + dispositivo.accion);
+    const {data,error} = await this.supabase.from('tb_dispositivos').insert(dispositivo);
+    if (error) {
+      console.error('Error al registrar dispositivo:', error);
+    }
   }
 
   async getPlayasByName(name: string, conPrevison: boolean | undefined = false): Promise<Playa[]> {

@@ -1,16 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonGrid, IonRow, IonCol } from "@ionic/angular/standalone";
+import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonGrid, IonRow, IonCol, IonButton } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
-import { CommonLocalService } from 'src/app/core/services/common-local/common-local.service';
+import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Municipio, Provincia } from 'src/app/models/common';
+import { IonIcon } from "@ionic/angular/standalone";
+import { addIcons } from 'ionicons';
+import { trashOutline } from 'ionicons/icons';
+
+
 
 @Component({
   selector: 'app-filtro',
   templateUrl: './filtro.component.html',
   styleUrls: ['./filtro.component.scss'],
   standalone: true,
-  imports: [IonCol, IonRow, IonGrid,  IonHeader, IonSearchbar, IonToolbar, IonSelect, IonSelectOption, FormsModule],
+  imports: [IonSelect,IonSearchbar,FormsModule, IonButton, IonIcon, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption],
 })
 export class FiltroComponent  implements OnInit {
 
@@ -30,9 +35,9 @@ export class FiltroComponent  implements OnInit {
 
   constructor(
     private supabaseService: Supabase,
-    private commonLocalService: CommonLocalService
+    private localRepositoryService: LocalRepositoryService
   ) {
-
+    addIcons({ trashOutline });
   }
 
   ngOnInit() {
@@ -46,8 +51,8 @@ export class FiltroComponent  implements OnInit {
 
   getProvincias() {
     // Verificar si existen provincias en almacenamiento local
-    if (this.commonLocalService.existenProvincias()) {
-      this.provinciasList = this.commonLocalService.obtenerProvincias();
+    if (this.localRepositoryService.existenProvincias()) {
+      this.provinciasList = this.localRepositoryService.obtenerProvincias();
       console.log(`Provincias obtenidas del almacenamiento local: ${this.provinciasList.length}`);
       return;
     }
@@ -56,7 +61,7 @@ export class FiltroComponent  implements OnInit {
     this.supabaseService.getProvinciaAll().then((provincias) => {
       this.provinciasList = provincias;
       // Guardar en almacenamiento local
-      this.commonLocalService.guardarProvincias(provincias);
+      this.localRepositoryService.guardarProvincias(provincias);
       console.log(`Provincias obtenidas del supabase y guardadas localmente: ${this.provinciasList.length}`);
     })
     .catch(reason => console.log(reason));
@@ -80,8 +85,8 @@ export class FiltroComponent  implements OnInit {
 
   getMunicipiosAll() {
     // Verificar si existen municipios en almacenamiento local
-    if (this.commonLocalService.existenMunicipios()) {
-      this.municipiosListAll = this.commonLocalService.obtenerMunicipios();
+    if (this.localRepositoryService.existenMunicipios()) {
+      this.municipiosListAll = this.localRepositoryService.obtenerMunicipios();
       console.log(`Municipios obtenidos del almacenamiento local: ${this.municipiosListAll.length}`);
       return;
     }
@@ -90,7 +95,7 @@ export class FiltroComponent  implements OnInit {
     this.supabaseService.getMunicipioAll().then((municipios) => {
       this.municipiosListAll = municipios;
       // Guardar en almacenamiento local
-      this.commonLocalService.guardarMunicipios(municipios);
+      this.localRepositoryService.guardarMunicipios(municipios);
       console.log(`Municipios obtenidos del supabase y guardados localmente: ${this.municipiosListAll.length}`);
     })
     .catch(reason => console.log(reason));
@@ -110,6 +115,13 @@ export class FiltroComponent  implements OnInit {
       municipio: this.selectedMunicipio,
       patterName: this.patterName
     });
+  }
+
+  public resetFiltros() {
+    this.selectedProvincia = "";
+    this.selectedMunicipio = "";
+    this.patterName = "";
+    this.emitFiltros();
   }
 }
 

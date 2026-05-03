@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { IonContent, IonGrid, IonRow, IonCol, IonButton } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
-import { FavoritasService } from 'src/app/core/services/favoritas/favoritas.service';
 import { Playa } from 'src/app/models/playa';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
+import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+
 
 
 @Component({
@@ -18,26 +19,25 @@ export class FavoritasPage implements OnInit {
   public favoritas: Playa[] = [];
 
   constructor(
-    public favoritasService: FavoritasService,
+  private localRepositoryService: LocalRepositoryService,
     private supabaseService: Supabase,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.cargarFavoritas();
     // Suscribirse a cambios en favoritas
-    this.favoritasService.favoritas$.subscribe((favoritas) => {
+    this.localRepositoryService.favoritas$.subscribe((favoritas) => {
       this.favoritas = favoritas;
     });
     this.refreshFavoritas();
   }
 
   cargarFavoritas() {
-    this.favoritas = this.favoritasService.obtenerFavoritas();
+    this.favoritas = this.localRepositoryService.obtenerFavoritas();
   }
 
   esFavorita(playa: Playa): boolean {
-    return this.favoritasService.esFavorita(playa);
+    return this.localRepositoryService.esFavorita(playa);
   }
 
   onToggleFavorita(playa: Playa) {
@@ -48,7 +48,7 @@ export class FavoritasPage implements OnInit {
           }
         });
       }
-    this.favoritasService.toggleFavorita(playa);
+    this.localRepositoryService.toggleFavorita(playa);
   }
 
   irABuscar() {
@@ -59,17 +59,14 @@ export class FavoritasPage implements OnInit {
      if (this.favoritas.length != 0) {
         const fechaActual = new Date().setHours(0, 0, 0, 0); // Normalizamos la fecha actual a medianoche para comparar solo la fecha sin hora
         this.favoritas.forEach(playa => {
-          console.log("Comparando fecha actual: ".concat(`${fechaActual.toLocaleString()}`).concat(" con fecha de playa: ").concat(`${playa.aemet_date}`));
           const fechaAComparar = this.getFecha(playa.aemet_date).setHours(0, 0, 0, 0); // Normalizamos la fecha de la playa a medianoche para comparar solo la fecha sin hora
           // Comparar usando operadores lógicos
           if (fechaAComparar < fechaActual) {
-
-            console.log("Fecha actual:".concat(`${fechaActual.toLocaleString()}`).concat(" es mayor que fecha de playa: ").concat(`${playa.aemet_date}`));
             console.log("La playa ".concat(playa.playa).concat(" tiene datos desactualizados, actualizando..."));
             this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
               if (playaDetails) {
                     if (!Array.isArray(playaDetails)) {
-                      this.favoritasService.refreshFavorita(playaDetails);
+                      this.localRepositoryService.refreshFavorita(playaDetails);
                     } else {
                       console.warn("Se esperaba un solo resultado para cod_playa: ".concat(playa.cod_playa).concat(", pero se recibió una lista. No se actualizará la playa."));
                     }               }

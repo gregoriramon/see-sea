@@ -1,4 +1,12 @@
-<app-header tituloPagina="Buscar cabecera" />
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/favoritas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Volver a favoritas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <!-- Sección fija con sombra y margen -->
   <section

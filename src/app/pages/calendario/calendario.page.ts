@@ -6,7 +6,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
   selector: 'app-calendario',
   templateUrl: 'calendario.page.html',
   styleUrls: ['calendario.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent,HeaderComponent]
+  imports: [IonContent,HeaderComponent]
 })
 export class CalendarioPage {
 
