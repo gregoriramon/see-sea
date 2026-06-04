@@ -1,0 +1,13 @@
+{
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Bash(npm *)"
+    ]
+  },
+  "env": {
+    "BRAVE_API_KEY": "BSAujit1Q1lIZFKAmITQkga0vhTK47D"
+  }
+}

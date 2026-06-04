@@ -26,38 +26,43 @@ Check if the skills are already installed before proceeding:
 The MCP server allows the agent to interact directly with Firebase projects.
 
 1. **Locate MCP Configuration**: Find the configuration file for your agent (e.g., `~/.codeium/windsurf/mcp_config.json`, `cline_mcp_settings.json`, or `claude_desktop_config.json`).
-   
-   *Note: If the document or its containing directory does not exist, create them and initialize the file with `{ "mcpServers": {} }` before proceeding.*
+
+   *Note: If the configuration file or its containing directory does not exist, create them. Initialize the new file with `{ "mcpServers": {} }` before proceeding.*
 2. **Check Existing Configuration**: Open the configuration file and check the `mcpServers` section for a `firebase` entry.
-   - It is already configured if the `command` is `"firebase"` OR if the `command` is `"npx"` with `"firebase-tools"` and `"mcp"` in the `args`.
-   - **Important**: If a valid `firebase` entry is found, the MCP server is already configured. **Skip step 3** and proceed directly to step 4.
-   
-   **Example valid configurations**:
+
+   The server is correctly configured if a `firebase` key exists inside `mcpServers` and its value is an object where:
+   - The `command` is `"firebase"` and `args` contains `"mcp"`.
+   - OR the `command` is `"npx"` and `args` includes `"firebase-tools"` and `"mcp"`.
+
+   **Important**: If a valid `firebase` entry is found, the MCP server is already configured. **Skip step 3** and proceed to step 4.
+
+   **Example of a valid configuration**:
    ```json
-   "firebase": {
-     "command": "npx",
-     "args": ["-y", "firebase-tools@latest", "mcp"]
+   {
+     "mcpServers": {
+       "firebase": {
+         "command": "npx",
+         "args": ["-y", "firebase-tools@latest", "mcp"]
+       }
+     }
    }
    ```
-   OR
+3. **Add or Update Configuration**: If the `firebase` block is missing or incorrect, add or update it within the `mcpServers` object in your configuration file.
+
+   **Recommended `firebase` configuration**:
    ```json
-   "firebase": {
-     "command": "firebase",
-     "args": ["mcp"]
+   {
+     "firebase": {
+       "command": "npx",
+       "args": [
+         "-y",
+         "firebase-tools@latest",
+         "mcp"
+       ]
+     }
    }
    ```
-3. **Add or Update Configuration**: If the `firebase` block is missing or incorrect, add it to the `mcpServers` object:
-   ```json
-   "firebase": {
-     "command": "npx",
-     "args": [
-       "-y",
-       "firebase-tools@latest",
-       "mcp"
-     ]
-   }
-   ```
-   *CRITICAL: Merge this configuration into the existing file. You MUST preserve any other existing servers inside the `mcpServers` object.*
+   *CRITICAL: Merge this JSON block into the `mcpServers` object. You MUST preserve any other servers that are already configured.*
 4. **Verify Configuration**: Save the file and confirm the `firebase` block is present and properly formatted JSON.
 
 ### 3. Restart and Verify Connection

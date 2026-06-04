@@ -74,7 +74,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
   getPlayasAllSinFiltro() {
     this.isLoading = true;
-    this.playas = this.playasAll.slice(0, 100);
+    this.playas = this.playasAll.slice(0, 25);
     console.log("Mostrando todas las playas sin filtro" + this.playasAll.length);
     console.log(`Total de playas sin filtro: ${this.playas.length}`);
     this.isLoading = false;

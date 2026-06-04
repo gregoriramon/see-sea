@@ -1,14 +1,22 @@
 <app-header tituloPagina="Mis Favoritas"/>
 
 <ion-content [fullscreen]="true">
-  <div style="padding: 16px; display: flex; justify-content: flex-end;">
-    <ion-button color="secondary" shape="round" fill="solid" size="small" (click)="irABuscar()">
-      +
-    </ion-button>
-  </div>
-
-  <section>
-    @if (favoritas.length === 0) {
+  @if (isLoading) {
+    <div class="loading-screen">
+      <img src="/assets/sisi.svg" alt="Cargando favoritas" />
+      <p class="loading-text">Cargando tus favoritas...</p>
+    </div>
+  } @else {
+<!--     <div style="padding: 16px; display: flex; justify-content: flex-end;">
+      <ion-button color="secondary" shape="round" fill="solid" size="small" (click)="irABuscar()">
+        +
+      </ion-button>
+    </div> -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <section>
+      @if (favoritas.length === 0) {
       <div style="padding: 24px; text-align: center; color: var(--ion-color-medium);">
         <p>No tienes playas favoritas aún</p>
         <ion-button expand="block" color="primary" (click)="irABuscar()" style="margin-top: 16px;">
@@ -32,4 +40,5 @@
       </ion-grid>
     }
   </section>
+  }
 </ion-content>
