@@ -182,11 +182,11 @@ Del texto y HTML extraído, intenta identificar y extraer:
 ```
 fecha_evento         → Busca patrones de fecha (ej: "25 de junio", "25/06/2026")
                        Convierte a formato ISO DATE (2026-06-25)
-                       Si no encuentras, deja NULL
+                       Si no encuentras, deja NULL, si hay varias utilizar mas lejana.
 
 descripcion         → El título de la página + primer párrafo (max 500 caracteres)
 
-lugar_evento        → Nombre del recinto/ciudad donde ocurre (ej: "Playa de la Malvarrosa")
+lugar_evento        → Nombre del recinto/ciudad/muncipio/lugar donde ocurre (ej: "Playa de la Malvarrosa")
                        Busca en: "en Valencia", "en Benidorm", "en..." o dentro de la ubicación
 
 organizador         → Club, federación o entidad que organiza
@@ -210,7 +210,7 @@ lat / lon           → Coordenadas (si aparecen en la página)
                        Formato: número decimal (ej: 39.4669, -0.3793 para Valencia)
                        Si no hay coords explícitas → NULL
 
-url_info            → La URL que visitamos (importante para deduplicación)
+url_info            → La URL que visitamos para extraer los detalles
 ```
 
 ### Paso 3: Validación básica

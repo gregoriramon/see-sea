@@ -55,7 +55,7 @@ export class LocalRepositoryService {
   agregarFavorita(playa: Playa): void {
     if (!this.esFavorita(playa)) {
       const actuales = this.favoritasSubject.value;
-      const nuevasFavoritas = [...actuales, playa];
+      const nuevasFavoritas = [playa, ...actuales];
       this.favoritasSubject.next(nuevasFavoritas);
       this.guardarFavoritas(nuevasFavoritas);
     }

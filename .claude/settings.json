@@ -1,13 +1,37 @@
 {
-  "enableAllProjectMcpServers": true,
+  "env": {
+    "BRAVE_API_KEY": "BSAwp5BPKgyBGZxYNrxnZkpoRqYrsTD"
+  },
   "permissions": {
     "allow": [
       "Read",
       "Write",
-      "Bash(npm *)"
+      "Bash(npm *)",
+      "Edit(/.claude/skills/search-events/**)",
+      "Bash(node diagnose-chiplevante.js)",
+      "Bash(node search-chiplevante-v2.js \"https://www.chiplevante.com/\")",
+      "Bash(node .claude/skills/search-events/scripts/search-chiplevante-v2.js https://www.chiplevante.com/)",
+      "Bash(grep -E \"\\\\.js$\")",
+      "Bash(node .claude/skills/search-events/scripts/search-generic.js https://www.dorsalchip.es/)",
+      "Bash(node -e ' *)",
+      "Bash(node .claude/skills/search-events/scripts/search-dorsalchip.js https://www.dorsalchip.es/)",
+      "Bash(node .claude/skills/search-events/scripts/search-generic.js https://multiesport.es/)",
+      "Bash(node .claude/skills/search-events/scripts/search-multiesport.js https://multiesport.es/)",
+      "Bash(node \".claude/skills/search-events/scripts/search-multiesport.js\" \"https://multiesport.es/\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-dorsalchip.js\" \"https://www.dorsalchip.es/proximoseventos.aspx\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-chiplevante.js\" \"https://www.chiplevante.com/\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-crono4sports.js\" \"https://www.crono4sports.es/index.php\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-crono4sports.js\" \"https://www.crono4sports.es\")",
+      "Bash(node \".claude/skills/search-events/scripts/diagnose-crono4sports.js\" \"https://www.crono4sports.es\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-crono4sports.js\" \"https://www.crono4sports.es/eventos.php\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-crono4sports.js\" \"https://www.crono4sports.es/eventos/1/\")",
+      "Bash(node \".claude/skills/search-events/scripts/diagnose-crono4sports-v2.js\" \"https://www.crono4sports.es/eventos/1/\")",
+      "Bash(node \".claude/skills/search-events/scripts/diagnose-crono4sports.js\" \"https://www.crono4sports.es/eventos/1/\")",
+      "Bash(node \".claude/skills/search-events/scripts/search-crono4sports-v4-detallado.js\" \"https://www.crono4sports.es/eventos/1/\")",
+      "WebSearch",
+      "Bash(node scripts/search-events-sites-cataluna.js)",
+      "Bash(node scripts/search-events-sites-improved.js)"
     ]
   },
-  "env": {
-    "BRAVE_API_KEY": "BSAujit1Q1lIZFKAmITQkga0vhTK47D"
-  }
+  "enableAllProjectMcpServers": true
 }

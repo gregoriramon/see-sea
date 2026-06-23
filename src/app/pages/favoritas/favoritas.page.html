@@ -26,12 +26,14 @@
     } @else {
       <ion-grid fixed>
         <ion-row>
-          @for (item of favoritas; track item.cod_playa) {
+          @for (item of favoritas; track item.cod_playa; let i = $index) {
           <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
             <app-playa
               [conDetalle]=false
               [playa]="item"
               [esParticularFavorita]="esFavorita(item)"
+              [prediccionColapsable]="true"
+              [prediccionExpandidaInicial]="i === 0"
               (toggleFavorita)="onToggleFavorita($event)">
             </app-playa>
           </ion-col>

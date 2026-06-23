@@ -40,11 +40,16 @@
         [color]="esParticularFavorita ? 'danger' : 'medium'">
       </ion-icon>
     </ion-button>
+    @if (prediccionColapsable && playa.prediccion) {
+      <ion-button fill="clear" size="small" (click)="togglePrediccion($event)" class="toggle-prediccion-button">
+        <ion-icon slot="icon-only" [name]="prediccionExpandida ? 'chevron-up-outline' : 'chevron-down-outline'" color="medium"></ion-icon>
+      </ion-button>
+    }
   </div>
 
 </ion-item>
 
-  @if (playa.prediccion) {
+  @if (playa.prediccion && prediccionExpandida) {
     <div slot="content">
       <app-tabla-pronostico [dias]="diasNoPasados"></app-tabla-pronostico>
     </div>

@@ -4,7 +4,7 @@ import { IonicModule } from "@ionic/angular";
 import { Dia, Playa } from 'src/app/models/playa';
 import { DiaSemanaPipe } from '../../pipes/dia-semana-pipe';
 import { addIcons } from 'ionicons';
-import { chevronForwardOutline, water, location, heart, heartOutline } from 'ionicons/icons';
+import { chevronForwardOutline, chevronDownOutline, chevronUpOutline, water, location, heart, heartOutline } from 'ionicons/icons';
 import { TablaPronosticoComponent } from "../tabla-pronostico/tabla-pronostico.component";
 import { fechaEsPasada, getColorOleaje } from "../../utils/templateUtils";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,18 +30,27 @@ export class PlayaComponent implements  OnChanges, OnInit {
   @Input() esParticularFavorita: boolean = false;
   @Output() toggleFavorita = new EventEmitter<Playa>();
   @Input () conDetalle: boolean = false;
+  @Input() prediccionColapsable: boolean = false;
+  @Input() prediccionExpandidaInicial: boolean = true;
 
   public primerDia: number = 0;
   public diasNoPasados: Dia[] = [];
+  public prediccionExpandida: boolean = true;
 
   constructor(private toastController: ToastController, private alertController: AlertController) {
-    addIcons({ chevronForwardOutline, water, location, heart, heartOutline });
+    addIcons({ chevronForwardOutline, chevronDownOutline, chevronUpOutline, water, location, heart, heartOutline });
   }
 
 
   ngOnInit(): void {
     this.primerDia = this.getPrimerDia();
     this.diasNoPasados = this.playa.prediccion?.dia.slice().filter((_, index) => !this.esDiaPasado(index)) || [];
+    this.prediccionExpandida = this.prediccionColapsable ? this.prediccionExpandidaInicial : true;
+  }
+
+  togglePrediccion(event: Event): void {
+    event.stopPropagation();
+    this.prediccionExpandida = !this.prediccionExpandida;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

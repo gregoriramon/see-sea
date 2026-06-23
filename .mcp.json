@@ -4,11 +4,13 @@
       "command": "npx",
       "args": [
         "-y",
-        "@supabase/mcp-server"
+        "@supabase/mcp-server-supabase",
+        "--access-token",
+        "${SUPABASE_ACCESS_TOKEN}"
       ],
       "env": {
-        "SUPABASE_URL": "${env:SUPABASE_URL}",
-        "SUPABASE_ANON_KEY": "${env:SUPABASE_ANON_KEY}"
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}"
       }
     },
     "brave-search": {
@@ -18,7 +20,7 @@
         "@modelcontextprotocol/server-brave-search"
       ],
       "env": {
-        "BRAVE_API_KEY": "${env:BRAVE_API_KEY}"
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
       }
     },
     "puppeteer": {

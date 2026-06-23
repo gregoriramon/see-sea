@@ -162,6 +162,40 @@ Toma una captura de pantalla de la página completa de https://ejemplo.com
 
 ---
 
+### 4. `click_and_extract`
+
+Hace clic en un elemento de la p-gina (usando un selector CSS) y, a continuaci-n, extrae el contenido de la p-gina resultante. Es ideal para interactuar con contenido din-mico que aparece tras una acci-n del usuario.
+
+#### Par-metros
+
+| Par-metro | Tipo | Requerido | Descripci-n |
+|-----------|------|-----------|-------------|
+| `url` | string | ✅ S- | La URL de la p-gina inicial |
+| `selector` | string | ✅ S- | El selector CSS del elemento en el que hacer clic (ej: `a.ver-mas`, `#boton-submit`) |
+
+#### Respuesta (Exitosa)
+
+```json
+{
+  "success": true,
+  "data": {
+    "title": "T-tulo de la p-gina DESPU-S del clic",
+    "url": "https://ejemplo.com/nueva-pagina",
+    "html": "<html>... nuevo contenido HTML ...</html>",
+    "text": "Nuevo texto plano"
+  }
+}
+```
+
+#### Casos de Uso
+
+- Navegar a trav-s de paginaciones (hacer clic en "Siguiente").
+- Abrir modales o pop-ups para extraer su contenido.
+- Aceptar cookies o banners de consentimiento para acceder al contenido principal.
+- Desplegar secciones de "leer m-s" o "ver detalles".
+
+---
+
 ## Respuestas de Error
 
 Todas las herramientas retornan la siguiente estructura en caso de error:
@@ -335,13 +369,13 @@ page.on('request', (request) => {
 
 ## Resumen de Herramientas
 
-| Herramienta | Propósito | Parámetros Clave | Salida |
+| Herramienta | Prop-sito | Par-metros Clave | Salida |
 |-------------|-----------|-----------------|--------|
 | `extract_page_content` | Obtener HTML, texto y metadatos | `url` | Objeto con contenido |
 | `extract_table_data` | Extraer tablas HTML | `url`, `tableSelector` | Array de tablas |
 | `take_screenshot` | Capturar pantalla | `url`, `fullPage` | PNG en base64 |
+| `click_and_extract` | Hacer clic y extraer contenido | `url`, `selector` | Objeto con nuevo contenido |
 
 ---
 
 **Última actualización:** 2 de junio de 2026
-

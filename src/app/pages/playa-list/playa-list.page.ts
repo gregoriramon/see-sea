@@ -9,6 +9,7 @@ import { PlayaComponent } from "src/app/shared/components/playa/playa.component"
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FiltroComponent } from "src/app/shared/components/filtro/filtro.component";
+import { normalizeSearch } from "src/app/shared/utils/templateUtils";
 
 
 @Component({
@@ -87,9 +88,11 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.getPlayasAllSinFiltro();
       return;
     }
-    this.playas = this.playasAll.filter(playa => playa.playa.toLowerCase().includes(this.patterName.toLowerCase())
-      || playa.municipio.toLowerCase().includes(this.patterName.toLowerCase())
-      || playa.provincia.toLowerCase().includes(this.patterName.toLowerCase()));
+    const q = normalizeSearch(this.patterName);
+    this.playas = this.playasAll.filter(playa =>
+      normalizeSearch(playa.playa).includes(q)
+      || normalizeSearch(playa.municipio).includes(q)
+      || normalizeSearch(playa.provincia).includes(q));
     console.log("Total de playas de ".concat(`${this.playas.length}`).concat(" playas para patter: ").concat(this.patterName));
     this.isLoading = false;
   }
@@ -150,7 +153,8 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.getPlayasByName();
       return;
     }
-    this.playas = this.playasAll.filter(playa => playa.cod_municipio === codMunicipio && playa.playa.toLowerCase().includes(name.toLowerCase()));
+    const q = normalizeSearch(name);
+    this.playas = this.playasAll.filter(playa => playa.cod_municipio === codMunicipio && normalizeSearch(playa.playa).includes(q));
     this.isLoading = false;
   }
 
@@ -160,7 +164,8 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.getPlayasByName();
       return;
     }
-    this.playas = this.playasAll.filter(playa => playa.cod_provincia === codProvincia && playa.playa.toLowerCase().includes(name.toLowerCase()));
+    const q = normalizeSearch(name);
+    this.playas = this.playasAll.filter(playa => playa.cod_provincia === codProvincia && normalizeSearch(playa.playa).includes(q));
     this.isLoading = false;
 
   }

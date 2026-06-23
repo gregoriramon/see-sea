@@ -1,11 +1,42 @@
+.filtro-toolbar {
+  --background: transparent;
+  --border-width: 0;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
+}
+
 .compact-select {
   --padding-start: 8px;
   --padding-end: 8px;
-  min-height: 44px;
-  margin: 4px;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
+  min-height: 36px;
+  margin: 2px 4px;
+  font-size: 0.8rem;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.05);
+  border-radius: 10px;
+}
+
+.compact-select::part(label) {
+  font-size: 0.7rem;
+  opacity: 0.75;
 }
 
 .compact-search {
   padding-top: 0;
   padding-bottom: 0;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.06);
+  --box-shadow: none;
+  --border-radius: 12px;
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 0.7;
+  --icon-color: var(--ion-color-medium);
+  --color: var(--ion-text-color);
+  font-size: 0.8rem;
+  min-height: 36px;
+}
+
+.compact-search .searchbar-input {
+  font-size: 0.8rem !important;
+  min-height: 36px !important;
 }

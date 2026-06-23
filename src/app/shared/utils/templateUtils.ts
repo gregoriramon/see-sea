@@ -42,6 +42,19 @@ export function parseFecha(fechaNum: string): Date {
   return new Date(año, mes, dia);
 }
 
+export function normalizeSearch(value: string | null | undefined): string {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  return value
+    .toString()
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/\s+/g, ' ');
+}
+
 export function fechaEsPasada(fechaNum: string): boolean {
   const fecha = parseFecha(fechaNum);
   const hoy = new Date();
