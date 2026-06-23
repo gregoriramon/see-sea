@@ -8,6 +8,14 @@
   ion-label {
     margin: 8px 0;
   }
+
+  // El slot start debe ocupar el espacio restante y permitir truncar
+  [slot="start"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 90px);
+    margin-inline-end: 8px;
+  }
 }
 
 .location-start-button {
@@ -26,6 +34,10 @@
   font-weight: 700;
   margin: 0 0 8px 0;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .municipio-text {
@@ -67,7 +79,9 @@
   text-align: center;
   /* Opcional: ajustar el espacio entre botones */
   gap: 4px;
-
+  width: 82px;
+  min-width: 82px;
+  flex-shrink: 0;
 }
 
 

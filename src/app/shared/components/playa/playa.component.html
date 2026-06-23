@@ -1,10 +1,10 @@
 <ion-item lines="full" class="playa-compact-item">
 
   <div slot="start">
-    <ion-label>
+    <ion-label style="min-width: 0;">
       <!-- Contenedor flex para alinear en la misma línea -->
-      <div style="display: flex; justify-content: space-between; align-items: baseline;">
-        <h2 class="playa-nombre" style="margin: 0;">{{ playa.playa }}</h2>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; min-width: 0;">
+        <h2 class="playa-nombre" style="margin: 0;" [title]="playa.playa">{{ playa.playa }}</h2>
       </div>
       <!-- Municipio -->
       <p class="municipio-text">{{ playa.municipio }}</p>
