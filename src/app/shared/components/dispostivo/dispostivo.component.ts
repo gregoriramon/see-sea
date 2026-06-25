@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicModule } from "@ionic/angular";
 import { Dispositivo } from 'src/app/models/dispositivo';
 
@@ -9,12 +9,10 @@ import { Dispositivo } from 'src/app/models/dispositivo';
   standalone:true,
   imports: [IonicModule],
 })
-export class DispostivoComponent  implements OnInit {
+export class DispostivoComponent {
 
   @Input() dispositivo!:Dispositivo;
 
   constructor() { }
-
-  ngOnInit() {}
 
 }

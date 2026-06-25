@@ -17,7 +17,7 @@
         }
 
         <!-- Municipio (Solo si aplica) -->
-        @if (showMunicipios && selectedProvincia != "" && selectedProvincia != "**") {
+        @if (showMunicipios && selectedProvincia !== "" && selectedProvincia !== "**") {
         <ion-col size="12" size-md="3">
           <ion-select label="Municipio" label-placement="stacked" fill="outline" [(ngModel)]="selectedMunicipio"
             (ionChange)="onMunicipioChange($event.detail.value)" class="compact-select">

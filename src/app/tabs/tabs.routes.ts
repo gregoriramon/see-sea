@@ -27,6 +27,11 @@ export const routes: Routes = [
           import('../pages/tips/tips.page').then((m) => m.TipsPage),
       },
       {
+        path: 'playa/:codPlaya',
+        loadComponent: () =>
+          import('../pages/playa-view/playa-view.page').then((m) => m.PlayaViewPage),
+      },
+      {
         path: '',
         redirectTo: '/tabs/favoritas',
         pathMatch: 'full',

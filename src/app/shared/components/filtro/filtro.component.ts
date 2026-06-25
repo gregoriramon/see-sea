@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonGrid, IonRow, IonCol, IonButton } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
@@ -18,6 +18,9 @@ import { trashOutline } from 'ionicons/icons';
   imports: [IonSelect,IonSearchbar,FormsModule, IonButton, IonIcon, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption],
 })
 export class FiltroComponent  implements OnInit {
+  private supabaseService = inject(Supabase);
+  private localRepositoryService = inject(LocalRepositoryService);
+
 
   @Input()  showMunicipios: boolean = false;
   @Input()  showProvincias: boolean = false;
@@ -33,10 +36,7 @@ export class FiltroComponent  implements OnInit {
   @Input() patterName:string = "";
 
 
-  constructor(
-    private supabaseService: Supabase,
-    private localRepositoryService: LocalRepositoryService
-  ) {
+  constructor() {
     addIcons({ trashOutline });
   }
 

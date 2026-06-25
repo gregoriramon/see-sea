@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { IonButton, ToastController, AlertController } from '@ionic/angular/standalone';
 import { IonicModule } from "@ionic/angular";
 import { Dia, Playa } from 'src/app/models/playa';
@@ -6,22 +6,26 @@ import { DiaSemanaPipe } from '../../pipes/dia-semana-pipe';
 import { addIcons } from 'ionicons';
 import { chevronForwardOutline, chevronDownOutline, chevronUpOutline, water, location, heart, heartOutline } from 'ionicons/icons';
 import { TablaPronosticoComponent } from "../tabla-pronostico/tabla-pronostico.component";
-import { fechaEsPasada, getColorOleaje } from "../../utils/templateUtils";
+import { fechaEsPasada, getColorOleaje, getColorTemperatura } from "../../utils/templateUtils";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faWater, faTemperatureHigh, faWind, faSun, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { TablaVerticalPronosticoComponent } from "../tabla-vertical-pronostico/tabla-vertical-pronostico.component";
-import { OlajePipe } from "../../pipes/oleaje-pipe";
+import { OleajePipe } from "../../pipes/oleaje-pipe";
 import { TemperaturaPipe } from "../../pipes/temperatura-pipe";
 import { DiasPrevisonComponent } from "../dias-previson/dias-previson.component";
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-playa',
   templateUrl: './playa.component.html',
   styleUrls: ['./playa.component.scss'],
   standalone:true,
-  imports: [FontAwesomeModule, IonicModule, TablaPronosticoComponent,  OlajePipe],
+  imports: [FontAwesomeModule, IonicModule, TablaPronosticoComponent,  OleajePipe, DiaSemanaPipe],
 })
-export class PlayaComponent implements  OnChanges, OnInit {
+export class PlayaComponent implements OnInit {
+  private toastController = inject(ToastController);
+  private alertController = inject(AlertController);
+
 
   faWater = faWater;
   faTemp = faTemperatureHigh;
@@ -29,15 +33,17 @@ export class PlayaComponent implements  OnChanges, OnInit {
   @Input() playa!: Playa;
   @Input() esParticularFavorita: boolean = false;
   @Output() toggleFavorita = new EventEmitter<Playa>();
+  @Output() itemClick = new EventEmitter<Playa>();
   @Input () conDetalle: boolean = false;
   @Input() prediccionColapsable: boolean = false;
   @Input() prediccionExpandidaInicial: boolean = true;
+  @Input() mostrarBotonFavorita: boolean = false;
 
   public primerDia: number = 0;
   public diasNoPasados: Dia[] = [];
   public prediccionExpandida: boolean = true;
 
-  constructor(private toastController: ToastController, private alertController: AlertController) {
+  constructor() {
     addIcons({ chevronForwardOutline, chevronDownOutline, chevronUpOutline, water, location, heart, heartOutline });
   }
 
@@ -48,19 +54,19 @@ export class PlayaComponent implements  OnChanges, OnInit {
     this.prediccionExpandida = this.prediccionColapsable ? this.prediccionExpandidaInicial : true;
   }
 
+  onItemClick(): void {
+    this.itemClick.emit(this.playa);
+  }
+
   togglePrediccion(event: Event): void {
     event.stopPropagation();
     this.prediccionExpandida = !this.prediccionExpandida;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes);
-  }
-
   async onToggleFavorita(event: Event): Promise<void> {
     event.stopPropagation();
 
-    if (this.esParticularFavorita || this.playa.prediccion) {
+    if (this.esParticularFavorita) {
       const alert = await this.alertController.create({
         header: 'Eliminar de favoritas',
         message: `¿Eliminar la playa '${this.playa.playa}' de favoritas?`,
@@ -90,13 +96,25 @@ export class PlayaComponent implements  OnChanges, OnInit {
     }
   }
 
-  abrirGoogleMaps(): void {
-    const url = `https://www.google.com/maps/?q=${this.playa.lat},${this.playa.lon}`;
-    window.open(url, '_blank');
+  abrirGoogleMaps(event?: Event): void {
+    event?.stopPropagation();
+    const { lat, lon, playa } = this.playa;
+    const platform = Capacitor.getPlatform();
+    if (platform === 'ios') {
+      window.location.href = `maps://?q=${lat},${lon}`;
+    } else if (platform === 'android') {
+      window.location.href = `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(playa)})`;
+    } else {
+      window.open(`https://www.google.com/maps/?q=${lat},${lon}`, '_blank');
+    }
   }
 
   getColorOleaje(oleaje: string, ionicColors: boolean): string {
     return getColorOleaje(oleaje, ionicColors);
+  }
+
+  getColorTemperatura(temperatura: number, ionicColors: boolean): string {
+    return getColorTemperatura(temperatura, ionicColors);
   }
     async presentToast(message:string) {
     const toast = await this.toastController.create({

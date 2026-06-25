@@ -1,39 +1,69 @@
+.playa-card {
+  background: var(--ion-color-step-50, #f7fafc);
+  border: 1px solid var(--ion-color-step-150, rgba(0, 0, 0, 0.08));
+  border-radius: 12px;
+  margin: 10px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+
+  ion-item.playa-compact-item {
+    --background: transparent;
+    --inner-border-width: 0;
+    --border-width: 0;
+  }
+
+  &.con-prediccion .playa-compact-item {
+    --inner-padding-bottom: 0;
+  }
+
+  .toggle-prediccion-row {
+    border-top: 1px dashed var(--ion-color-step-150, rgba(0, 0, 0, 0.08));
+    margin-top: 4px;
+  }
+}
 
 .playa-compact-item {
   --min-height: 70px;
   --padding-start: 8px;
-  --padding-end: 8px;
-  align-items: center;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+
+  align-items: flex-start;
 
   ion-label {
-    margin: 8px 0;
+    margin: 4px 0;
   }
 
-  // El slot start debe ocupar el espacio restante y permitir truncar
   [slot="start"] {
     flex: 1 1 auto;
     min-width: 0;
-    max-width: calc(100% - 90px);
+    max-width: calc(100% - 96px);
     margin-inline-end: 8px;
   }
 }
 
-.location-start-button {
-  --padding-start: 4px;
-  --padding-end: 4px;
+.location-start-button,
+.favorita-button {
+  --padding-start: 0;
+  --padding-end: 0;
   margin: 0;
   min-width: auto;
   min-height: auto;
-  ion-icon {
-    font-size: 1.5rem;
-  }
+  align-self: flex-end;
+}
+
+.location-start-button ion-icon { font-size: 1.5rem; }
+
+.favorita-button {
+  height: auto;
+  ion-icon { font-size: 1.5rem; }
 }
 
 .playa-nombre {
   font-size: 1.1rem;
   font-weight: 700;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
+  margin: 0 0 2px 0;
+  line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,47 +74,67 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--ion-color-step-600);
-  margin: 4px 0 0 0;
+  margin: 2px 0 0 0;
+  line-height: 1.15;
 }
 
 .provincia-text {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--ion-color-medium);
-  margin: 4px 0 0 0;
+  margin: 2px 0 0 0;
   text-transform: uppercase;
+  line-height: 1.15;
 }
 
-.actions-col {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.playa-oleaje {
+  font-size: 1rem;
 }
 
-.favorita-button {
-  --padding-start: 4px;
-  --padding-end: 4px;
-  margin: 0;
-  min-width: auto;
-  min-height: auto;
-
-  ion-icon {
-    font-size: 1.5rem;
-  }
-}
-  .vertical-buttons {
+.vertical-buttons {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  /* Opcional: ajustar el espacio entre botones */
-  gap: 4px;
-  width: 82px;
-  min-width: 82px;
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right;
+  gap: 2px;
+  font-size: 1rem;
+  width: 96px;
+  min-width: 96px;
   flex-shrink: 0;
+  margin: 4px 0 0 0;
+  padding-right: 12px;
 }
 
+.toggle-prediccion-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
+.dias-resumen {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  flex: 0 0 auto;
+  min-width: 0;
+}
 
+.dia-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: #fff;
+}
 
-
+.boton-favorita-row {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 16px;
+}

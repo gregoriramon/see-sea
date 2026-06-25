@@ -11,9 +11,11 @@
             <ion-menu-toggle>
               <ion-item button routerLink="/tabs/favoritas">Inicio</ion-item>
               <ion-item button routerLink="/settings">Configuración</ion-item>
+              <ion-item button (click)="mostrarAcercaDe()">Acerca de...</ion-item>
             </ion-menu-toggle>
           </ion-list>
         </ion-content>
       </ion-menu>
   <ion-router-outlet  id="main-content"></ion-router-outlet>
+  <app-ios-install-banner />
 </ion-app>

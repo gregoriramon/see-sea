@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonInput, IonButton, IonSearchbar, IonSpinner } from '@ionic/angular/standalone';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
@@ -19,6 +20,10 @@ import { normalizeSearch } from "src/app/shared/utils/templateUtils";
   imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent,  PlayaComponent, FiltroComponent, IonTitle],
 })
 export class PlayaListPage implements OnInit, OnDestroy {
+  private supabaseService = inject(Supabase);
+  localRepositoryService = inject(LocalRepositoryService);
+  private router = inject(Router);
+
   public patterName: string = "";
   public playas: Playa[] = [];
   private playasAll: Playa[] = [];
@@ -26,13 +31,6 @@ export class PlayaListPage implements OnInit, OnDestroy {
   public selectedMunicipio: string = "";
   public isLoading: boolean = false;
   private destroy$ = new Subject<void>();
-
-  constructor(
-    private supabaseService: Supabase,
-    public localRepositoryService: LocalRepositoryService
-  ) {
-
-  }
 
   ngOnInit() {
     console.log("Inicializando PlayaListPage, obteniendo playas...");
@@ -193,6 +191,10 @@ export class PlayaListPage implements OnInit, OnDestroy {
       this.localRepositoryService.toggleFavorita(playa);
     }
 
+  }
+
+  onPlayaClick(playa: Playa) {
+    this.router.navigate(['/tabs/playa', playa.cod_playa]);
   }
 
   getSomethingSelected(): boolean {

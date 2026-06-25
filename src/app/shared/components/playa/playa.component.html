@@ -1,4 +1,5 @@
-<ion-item lines="full" class="playa-compact-item">
+<div class="playa-card" [class.con-prediccion]="prediccionColapsable && playa.prediccion">
+<ion-item lines="none" class="playa-compact-item" button="true" detail="false" (click)="onItemClick()">
 
   <div slot="start">
     <ion-label style="min-width: 0;">
@@ -25,10 +26,12 @@
         [style.color]="getColorOleaje(playa.prediccion.dia[primerDia].oleaje.f1, false)"></fa-icon>
     </div>
     <div style="display: flex; justify-content: space-between; align-items: baseline;">
-      <p style="margin: 0;">
+      <p style="margin: 0;"
+        [style.color]="getColorTemperatura(playa.prediccion.dia[primerDia].tAgua.valor1, false)">
         {{ playa.prediccion.dia[primerDia].tAgua.valor1 }}
       </p>
-      <fa-icon [icon]="faTemp"></fa-icon>
+      <fa-icon [icon]="faTemp"
+        [style.color]="getColorTemperatura(playa.prediccion.dia[primerDia].tAgua.valor1, false)"></fa-icon>
     </div>
     } @else {
     <ion-button slot="end" fill="clear" size="big" (click)="abrirGoogleMaps()" class="location-start-button">
@@ -40,20 +43,46 @@
         [color]="esParticularFavorita ? 'danger' : 'medium'">
       </ion-icon>
     </ion-button>
-    @if (prediccionColapsable && playa.prediccion) {
-      <ion-button fill="clear" size="small" (click)="togglePrediccion($event)" class="toggle-prediccion-button">
-        <ion-icon slot="icon-only" [name]="prediccionExpandida ? 'chevron-up-outline' : 'chevron-down-outline'" color="medium"></ion-icon>
-      </ion-button>
-    }
   </div>
 
 </ion-item>
+
+@if (prediccionColapsable && playa.prediccion) {
+  <div class="toggle-prediccion-row">
+    <div class="dias-resumen">
+      @for (dia of diasNoPasados; track dia.fecha) {
+        <div class="dia-chip" [style.background-color]="getColorOleaje(dia.oleaje.f1, false)">
+          <span class="dia-nombre">{{ dia.fecha | diaSemana }}</span>
+        </div>
+      }
+    </div>
+    <ion-button fill="clear" size="small" (click)="togglePrediccion($event)" class="toggle-prediccion-button">
+      <ion-icon slot="icon-only" [name]="prediccionExpandida ? 'chevron-up-outline' : 'chevron-down-outline'" color="medium"></ion-icon>
+    </ion-button>
+  </div>
+}
 
   @if (playa.prediccion && prediccionExpandida) {
     <div slot="content">
       <app-tabla-pronostico [dias]="diasNoPasados"></app-tabla-pronostico>
     </div>
   }
+
+  @if (mostrarBotonFavorita) {
+    <div class="boton-favorita-row">
+      <ion-button
+        fill="outline"
+        [color]="esParticularFavorita ? 'danger' : 'primary'"
+        (click)="onToggleFavorita($event)">
+        <ion-icon
+          slot="start"
+          [name]="esParticularFavorita ? 'heart' : 'heart-outline'">
+        </ion-icon>
+        {{ esParticularFavorita ? 'Eliminar de Favoritas' : 'Añadir a Favoritas' }}
+      </ion-button>
+    </div>
+  }
+</div>
 <!--
 @if (playa.prediccion) {
 <ion-accordion-group>

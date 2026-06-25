@@ -18,12 +18,23 @@ export function getColorOleaje(oleaje: string, ionicColors?: boolean): string {
       case '320':
         return 'orange';
       case '330':
-        return 'red';
+        return '#c5000f';
       default:
-        return 'red';
+        return '#c5000f';
     }
   }
 
+}
+
+export function getColorTemperatura(temperatura: number, ionicColors?: boolean): string {
+  if (ionicColors) {
+    if (temperatura >= 20) return 'danger';
+    if (temperatura >= 17) return 'warning';
+    return 'primary';
+  }
+  if (temperatura >= 20) return '#c5000f';
+  if (temperatura >= 17) return 'orange';
+  return 'blue';
 }
 
 export function parseFecha(fechaNum: string): Date {

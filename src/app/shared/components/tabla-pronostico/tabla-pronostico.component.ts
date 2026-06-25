@@ -5,7 +5,7 @@ import { Dia } from 'src/app/models/playa';
 import { DiaSemanaPipe } from "../../pipes/dia-semana-pipe";
 import { flag,sunnyOutline, thermometerOutline, cloudOutline, umbrellaOutline, waterOutline, flagOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { OlajePipe } from "../../pipes/oleaje-pipe";
+import { OleajePipe } from "../../pipes/oleaje-pipe";
 import { TemperaturaPipe } from "../../pipes/temperatura-pipe";
 import { VientoPipe } from "../../pipes/viento-pipe";
 import { UvMaxPipe } from "../../pipes/uv-max-pipe";
@@ -19,7 +19,7 @@ import { faWater, faTemperatureHigh, faWind, faSun, faCloud } from '@fortawesome
 @Component({
   selector: 'app-tabla-pronostico',
   standalone: true,
-  imports: [FontAwesomeModule,CommonModule, IonicModule, DiaSemanaPipe, OlajePipe, TemperaturaPipe, VientoPipe, EstadoCieloPipe],
+  imports: [FontAwesomeModule,CommonModule, IonicModule, DiaSemanaPipe, OleajePipe, TemperaturaPipe, VientoPipe, EstadoCieloPipe],
   templateUrl: './tabla-pronostico.component.html',
   styleUrls: ['./tabla-pronostico.component.scss'],
 })

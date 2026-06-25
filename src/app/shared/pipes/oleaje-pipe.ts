@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'oleaje',
   standalone: true
 })
-export class OlajePipe implements PipeTransform {
+export class OleajePipe implements PipeTransform {
   private readonly oleajeMap: { [key: string]: string } = {
     '310': 'Débil',
     '320': 'Moderado',

@@ -52,7 +52,8 @@
             <app-playa
               [playa]="item"
               [esParticularFavorita]="esFavorita(item)"
-              (toggleFavorita)="onToggleFavorita($event)">
+              (toggleFavorita)="onToggleFavorita($event)"
+              (itemClick)="onPlayaClick($event)">
             </app-playa>
           </ion-col>
           }

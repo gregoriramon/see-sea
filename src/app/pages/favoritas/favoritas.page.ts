@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent, IonGrid, IonRow, IonCol, IonButton, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -16,14 +16,12 @@ import { RefresherCustomEvent } from '@ionic/angular';
   imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonRow, IonCol, PlayaComponent, IonButton],
 })
 export class FavoritasPage implements OnInit {
+  private localRepositoryService = inject(LocalRepositoryService);
+  private supabaseService = inject(Supabase);
+  private router = inject(Router);
+
   public favoritas: Playa[] = [];
   public isLoading = true;
-
-  constructor(
-  private localRepositoryService: LocalRepositoryService,
-    private supabaseService: Supabase,
-    private router: Router
-  ) { }
 
   async ngOnInit() {
     // Suscribirse a cambios en favoritas

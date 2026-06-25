@@ -1,10 +1,10 @@
-import { OlajePipe } from './oleaje-pipe';
+import { OleajePipe } from './oleaje-pipe';
 
 describe('OlajePipe', () => {
-  let pipe: OlajePipe;
+  let pipe: OleajePipe;
 
   beforeEach(() => {
-    pipe = new OlajePipe();
+    pipe = new OleajePipe();
   });
 
   it('should create an instance', () => {

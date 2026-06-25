@@ -8,11 +8,11 @@ import { IonHeader, IonToolbar, IonButtons, IonMenuButton } from '@ionic/angular
   standalone: true,
   imports: [IonHeader, IonToolbar, IonButtons, IonMenuButton]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input() tituloPagina!: string;
+  private static nextId = 0;
+  readonly maskId = `logoMask-${++HeaderComponent.nextId}`;
   constructor() { }
-
-
 
 }

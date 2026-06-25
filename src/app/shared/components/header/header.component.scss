@@ -2,8 +2,23 @@
   width: 40px;
   height: auto;
   margin-left: 10px;
+  vertical-align: top;
 }
 
 .svg-letters {
   fill: #ffffff;
+}
+
+.header-title {
+  margin-left: 12px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  vertical-align: top;
+}
+
+.header-subtitle {
+  margin-left: 12px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  vertical-align: center;
 }
