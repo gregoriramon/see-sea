@@ -15,7 +15,7 @@ import { trashOutline, closeCircleOutline } from 'ionicons/icons';
   templateUrl: './filtro.component.html',
   styleUrls: ['./filtro.component.scss'],
   standalone: true,
-  imports: [IonSelect,IonSearchbar,FormsModule, IonButton, IonIcon, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption],
+  imports: [IonSelect,IonSearchbar,FormsModule, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption],
 })
 export class FiltroComponent  implements OnInit {
   private supabaseService = inject(Supabase);
