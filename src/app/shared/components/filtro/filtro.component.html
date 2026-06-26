@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar class="filtro-toolbar">
     <ion-grid class="ion-no-padding">
-      <ion-row class="ion-align-items-center">
-
-        <!-- Provincia (Solo si aplica) -->
-        @if(showProvincias){
-        <ion-col size="12" size-md="3">
+      <!-- Provincia (Solo si aplica) -->
+      @if(showProvincias){
+      <ion-row>
+        <ion-col size="12">
           <ion-select label="Provincia" label-placement="stacked" fill="outline" [(ngModel)]="selectedProvincia"
             (ionChange)="onProvinciaChange($event.detail.value)" class="compact-select">
             <ion-select-option value="**">Todas</ion-select-option>
@@ -14,23 +13,12 @@
             }
           </ion-select>
         </ion-col>
-        }
+      </ion-row>
+      }
 
-        <!-- Municipio (Solo si aplica) -->
-        @if (showMunicipios && selectedProvincia !== "" && selectedProvincia !== "**") {
-        <ion-col size="12" size-md="3">
-          <ion-select label="Municipio" label-placement="stacked" fill="outline" [(ngModel)]="selectedMunicipio"
-            (ionChange)="onMunicipioChange($event.detail.value)" class="compact-select">
-            <ion-select-option value="*****">Todos</ion-select-option>
-            @for (municipio of municipiosList; track municipio.cod_municipio) {
-            <ion-select-option [value]="municipio.cod_municipio">{{ municipio.municipio }}</ion-select-option>
-            }
-          </ion-select>
-        </ion-col>
-        }
-
+      <ion-row class="ion-align-items-center">
         <!-- Búsqueda -->
-        <ion-col size="10" size-md="5">
+        <ion-col size="12">
           <ion-searchbar placeholder="Municipo, Playa , Cala ..." [(ngModel)]="patterName"
             [debounce]="500"
             (ionInput)="onPatterNameChange()" class="compact-search">
@@ -38,12 +26,11 @@
         </ion-col>
 
         <!-- Botón Reset -->
-        <ion-col size="2" size-md="1" class="ion-text-center">
-          <ion-button fill="clear" (click)="resetFiltros()" title="Limpiar filtros">
-            <ion-icon slot="icon-only" name="trash-outline" color="primary"></ion-icon>
-          </ion-button>
-        </ion-col>
-
+<!--        <ion-col size="2" class="ion-text-center">-->
+<!--          <ion-button fill="clear" (click)="resetFiltros()" title="Limpiar filtros">-->
+<!--            <ion-icon slot="icon-only" name="close-circle-outline" color="primary"></ion-icon>-->
+<!--          </ion-button>-->
+<!--        </ion-col>-->
       </ion-row>
     </ion-grid>
   </ion-toolbar>

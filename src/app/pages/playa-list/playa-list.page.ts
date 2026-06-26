@@ -73,7 +73,8 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
   getPlayasAllSinFiltro() {
     this.isLoading = true;
-    this.playas = this.playasAll.slice(0, 25);
+    //this.playas = this.playasAll.slice(0, 25);
+    this.playas = this.playasAll;
     console.log("Mostrando todas las playas sin filtro" + this.playasAll.length);
     console.log(`Total de playas sin filtro: ${this.playas.length}`);
     this.isLoading = false;
@@ -163,7 +164,12 @@ export class PlayaListPage implements OnInit, OnDestroy {
       return;
     }
     const q = normalizeSearch(name);
-    this.playas = this.playasAll.filter(playa => playa.cod_provincia === codProvincia && normalizeSearch(playa.playa).includes(q));
+    this.playas = this.playasAll.filter(playa =>
+      playa.cod_provincia === codProvincia && (
+        normalizeSearch(playa.playa).includes(q) ||
+        normalizeSearch(playa.municipio).includes(q)
+      )
+    );
     this.isLoading = false;
 
   }

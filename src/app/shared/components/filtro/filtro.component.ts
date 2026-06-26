@@ -6,7 +6,7 @@ import { LocalRepositoryService } from 'src/app/core/services/local-repository/l
 import { Municipio, Provincia } from 'src/app/models/common';
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-import { trashOutline } from 'ionicons/icons';
+import { trashOutline, closeCircleOutline } from 'ionicons/icons';
 
 
 
@@ -31,13 +31,13 @@ export class FiltroComponent  implements OnInit {
   public provinciasList: Provincia[] = [];
   public municipiosList: Municipio[] = [];
   private municipiosListAll: Municipio[] = [];
-  public selectedProvincia: string = "";
+  public selectedProvincia: string = "**";
   public selectedMunicipio: string = "";
   @Input() patterName:string = "";
 
 
   constructor() {
-    addIcons({ trashOutline });
+    addIcons({ trashOutline, closeCircleOutline });
   }
 
   ngOnInit() {
@@ -118,7 +118,7 @@ export class FiltroComponent  implements OnInit {
   }
 
   public resetFiltros() {
-    this.selectedProvincia = "";
+    this.selectedProvincia = "**";
     this.selectedMunicipio = "";
     this.patterName = "";
     this.emitFiltros();
