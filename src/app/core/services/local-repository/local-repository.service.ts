@@ -77,6 +77,11 @@ export class LocalRepositoryService {
     this.guardarFavoritas(nuevasFavoritas);
   }
 
+  reordenarFavoritas(nuevasFavoritas: Playa[]): void {
+    this.favoritasSubject.next(nuevasFavoritas);
+    this.guardarFavoritas(nuevasFavoritas);
+  }
+
   toggleFavorita(playa: Playa): void {
     if (this.esFavorita(playa)) {
       this.quitarFavorita(playa);

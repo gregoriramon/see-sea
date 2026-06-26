@@ -24,10 +24,11 @@
         </ion-button>
       </div>
     } @else {
-      <ion-grid fixed>
-        <ion-row>
+      <ion-grid [fixed]="true">
+        <ion-reorder-group class="favoritas-reorder" [disabled]="false" (ionItemReorder)="handleReorder($event)">
           @for (item of favoritas; track item.cod_playa; let i = $index) {
-          <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding favorita-wrapper">
+            <ion-reorder class="reorder-strip"><span class="reorder-hint"></span></ion-reorder>
             <app-playa
               [conDetalle]=false
               [playa]="item"
@@ -38,7 +39,7 @@
             </app-playa>
           </ion-col>
           }
-        </ion-row>
+        </ion-reorder-group>
       </ion-grid>
     }
   </section>

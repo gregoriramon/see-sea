@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonContent, IonGrid, IonRow, IonCol, IonButton, IonRefresher, IonRefresherContent } from '@ionic/angular/standalone';
+import { IonContent, IonGrid, IonRow, IonCol, IonButton, IonRefresher, IonRefresherContent, IonReorderGroup, IonReorder } from '@ionic/angular/standalone';
+import { ItemReorderEventDetail } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
 import { Playa } from 'src/app/models/playa';
@@ -13,7 +14,7 @@ import { RefresherCustomEvent } from '@ionic/angular';
   selector: 'app-favoritas',
   templateUrl: 'favoritas.page.html',
   styleUrls: ['favoritas.page.scss'],
-  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonRow, IonCol, PlayaComponent, IonButton],
+  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonRow, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder],
 })
 export class FavoritasPage implements OnInit {
   private localRepositoryService = inject(LocalRepositoryService);
@@ -58,6 +59,11 @@ export class FavoritasPage implements OnInit {
         });
       }
     this.localRepositoryService.toggleFavorita(playa);
+  }
+
+  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+    const nuevas = ev.detail.complete([...this.favoritas]);
+    this.localRepositoryService.reordenarFavoritas(nuevas);
   }
 
   irABuscar() {

@@ -22,3 +22,40 @@
   color: var(--ion-color-medium);
 }
 
+.favoritas-reorder {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.favorita-wrapper {
+  position: relative;
+}
+
+.favorita-wrapper .reorder-strip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 18px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.favorita-wrapper .reorder-strip:active {
+  cursor: grabbing;
+}
+
+.favorita-wrapper .reorder-hint {
+  display: block;
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.18);
+}
+
