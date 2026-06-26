@@ -14,7 +14,7 @@ import { RefresherCustomEvent } from '@ionic/angular';
   selector: 'app-favoritas',
   templateUrl: 'favoritas.page.html',
   styleUrls: ['favoritas.page.scss'],
-  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonRow, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder],
+  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder],
 })
 export class FavoritasPage implements OnInit {
   private localRepositoryService = inject(LocalRepositoryService);

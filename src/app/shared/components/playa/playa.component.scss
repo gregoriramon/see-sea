@@ -15,11 +15,6 @@
   &.con-prediccion .playa-compact-item {
     --inner-padding-bottom: 0;
   }
-
-  .toggle-prediccion-row {
-    border-top: 1px dashed var(--ion-color-step-150, rgba(0, 0, 0, 0.08));
-    margin-top: 4px;
-  }
 }
 
 .playa-compact-item {
@@ -27,12 +22,9 @@
   --padding-start: 8px;
   --padding-end: 0;
   --inner-padding-end: 0;
-
   align-items: flex-start;
 
-  ion-label {
-    margin: 4px 0;
-  }
+  ion-label { margin: 4px 0; }
 
   [slot="start"] {
     flex: 1 1 auto;
@@ -50,14 +42,11 @@
   min-width: auto;
   min-height: auto;
   align-self: flex-end;
-}
 
-.location-start-button ion-icon { font-size: 1.5rem; }
-
-.favorita-button {
-  height: auto;
   ion-icon { font-size: 1.5rem; }
 }
+
+.favorita-button { height: auto; }
 
 .playa-nombre {
   font-size: 1.1rem;
@@ -86,14 +75,11 @@
   line-height: 1.15;
 }
 
-.playa-oleaje {
-  font-size: 1rem;
-}
+.playa-oleaje { font-size: 1rem; }
 
 .vertical-buttons {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: flex-end;
   text-align: right;
   gap: 2px;
@@ -107,17 +93,17 @@
 
 .toggle-prediccion-row {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 4px;
   padding: 4px 8px;
   width: 100%;
   box-sizing: border-box;
+  border-top: 1px dashed var(--ion-color-step-150, rgba(0, 0, 0, 0.08));
+  margin-top: 4px;
 }
 
 .dias-resumen {
   display: flex;
-  flex-direction: row;
   gap: 2px;
   flex: 0 0 auto;
   min-width: 0;

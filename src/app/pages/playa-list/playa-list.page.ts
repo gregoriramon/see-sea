@@ -97,10 +97,21 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
 
   onFiltroChange(filtro: { provincia: string; municipio: string; patterName: string; }) {
+    const esReset = !!this.patterName && !filtro.patterName;
+    const pocosElementosPrevios = this.playas.length > 0 && this.playas.length <= 25;
+
     this.selectedProvincia = filtro.provincia;
     this.selectedMunicipio = filtro.municipio;
     this.patterName = filtro.patterName;
-    this.refrescarPlayas();
+
+    if (esReset && pocosElementosPrevios) {
+      // Mostrar spinner para que el usuario perciba el refresco al pasar de pocos a muchos resultados
+      this.isLoading = true;
+      this.playas = [];
+      setTimeout(() => this.refrescarPlayas(), 50);
+    } else {
+      this.refrescarPlayas();
+    }
   }
 
   private refrescarPlayas() {
