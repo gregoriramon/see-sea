@@ -8,13 +8,14 @@ import { Playa } from 'src/app/models/playa';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { RefresherCustomEvent } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-favoritas',
   templateUrl: 'favoritas.page.html',
   styleUrls: ['favoritas.page.scss'],
-  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder],
+  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder, TranslatePipe],
 })
 export class FavoritasPage implements OnInit {
   private localRepositoryService = inject(LocalRepositoryService);

@@ -1,28 +1,28 @@
 @if (visible) {
   <div class="ios-install-banner" role="dialog" aria-live="polite">
-    <button type="button" class="close-btn" (click)="dismiss()" aria-label="Cerrar">
+    <button type="button" class="close-btn" (click)="dismiss()" [attr.aria-label]="'components.iosInstall.closeAria' | translate">
       <ion-icon name="close"></ion-icon>
     </button>
-    <div class="title">Instala SiSi (SeeSea) en tu pantalla de inicio</div>
+    <div class="title">{{ 'components.iosInstall.title' | translate }}</div>
     <ol class="steps">
       <li>
-        Pulsa el botón <strong>Compartir</strong>
-        <ion-icon name="share-outline" aria-label="Compartir"></ion-icon>
-        en la barra de Safari.
+        {{ 'components.iosInstall.step1Before' | translate }}<strong>{{ 'components.iosInstall.step1Bold' | translate }}</strong>
+        <ion-icon name="share-outline" [attr.aria-label]="'components.iosInstall.shareAria' | translate"></ion-icon>
+        {{ 'components.iosInstall.step1After' | translate }}
       </li>
       <li>
-        Elige <strong>«Añadir a pantalla de inicio»</strong>
-        <ion-icon name="add-outline" aria-label="Añadir"></ion-icon>
-        en el menú.
+        {{ 'components.iosInstall.step2Before' | translate }}<strong>{{ 'components.iosInstall.step2Bold' | translate }}</strong>
+        <ion-icon name="add-outline" [attr.aria-label]="'components.iosInstall.addAria' | translate"></ion-icon>
+        {{ 'components.iosInstall.step2After' | translate }}
       </li>
       <li>
-        Pulsa <strong>«Añadir»</strong> arriba a la derecha.
+        {{ 'components.iosInstall.step3Before' | translate }}<strong>{{ 'components.iosInstall.step3Bold' | translate }}</strong>{{ 'components.iosInstall.step3After' | translate }}
       </li>
     </ol>
     <div class="actions">
       <button type="button" class="action-btn primary" (click)="yaInstalada()">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
-        Ya la tengo instalada
+        {{ 'components.iosInstall.installed' | translate }}
       </button>
     </div>
   </div>

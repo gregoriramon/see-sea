@@ -12,5 +12,120 @@
     "home": "Home",
     "settings": "Settings",
     "about": "About..."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "reload": "Reload",
+    "notNow": "Not now",
+    "add": "Add",
+    "share": "Share"
+  },
+  "tabs": {
+    "prevision": "Forecast ",
+    "playas": "Beaches",
+    "travesias": "Swims",
+    "calendario": "My Calendar",
+    "tips": "Tips"
+  },
+  "alerts": {
+    "about": {
+      "header": "About SiSi",
+      "subHeader": "See Sea",
+      "message": "\n        <div class=\"acerca-de-contenido\">\n          <p><strong>Development:</strong></p>\n          <p>Created with <span style=\"color:#1e90ff\">💙</span> by <strong>rgregori</strong> for <strong>OWS Lovers</strong>.</p>\n          <p><strong>Beach data:</strong></p>\n          <p>Data provided by the <strong>Spanish State Meteorological Agency (AEMET)</strong>.</p>\n        </div>\n      "
+    },
+    "removeFavorita": {
+      "header": "Remove from favorites",
+      "message": "Remove beach '{{name}}' from favorites?"
+    },
+    "removeEvento": {
+      "header": "Remove from calendar",
+      "message": "Remove swim '{{name}}' from the calendar?"
+    }
+  },
+  "toasts": {
+    "updateAvailable": "A new version is available",
+    "reloadRequired": "The app needs to reload to continue",
+    "favoritaRemoved": "Beach {{name}} removed from favorites",
+    "favoritaAdded": "Beach {{name}} added to favorites",
+    "eventoRemoved": "Swim {{name}} removed from calendar",
+    "eventoAdded": "Swim {{name}} added to calendar"
+  },
+  "loading": {
+    "favoritas": "Loading your favorites..."
+  },
+  "pages": {
+    "playaList": {
+      "title": "Back to favorites",
+      "showMore": "Show more ({{count}} remaining)",
+      "showAll": "Show all"
+    },
+    "favoritas": {
+      "title": "My Favorites",
+      "empty": "You have no favorite beaches yet",
+      "searchBeaches": "Search beaches",
+      "loadingAlt": "Loading favorites"
+    },
+    "calendario": {
+      "title": "My Calendar",
+      "empty": "You have no favorite swims yet.",
+      "searchEvents": "Search swims"
+    },
+    "eventoList": {
+      "title": "Events",
+      "empty": "No events to show"
+    },
+    "playaView": {
+      "detail": "Beach detail"
+    },
+    "tips": {
+      "title": "Tips",
+      "content": "Tips"
+    }
+  },
+  "components": {
+    "playa": {
+      "removeFav": "Remove from Favorites",
+      "addFav": "Add to Favorites"
+    },
+    "evento": {
+      "removeFav": "Remove from Favorites",
+      "addFav": "Add to Favorites",
+      "distance": "Distance:",
+      "price": "Price:"
+    },
+    "filtro": {
+      "provincia": "Province",
+      "all": "All",
+      "searchPlaceholder": "Municipality, Beach, Cove ..."
+    },
+    "filtroEventos": {
+      "provincia": "Province",
+      "all": "All",
+      "fechas": "Dates",
+      "next3m": "Next 3 months",
+      "next6m": "Next 6 months",
+      "next12m": "Next 12 months",
+      "searchPlaceholder": "Description, place, municipality or organizer",
+      "distMin": "Min dist. (m)",
+      "distMax": "Max dist. (m)"
+    },
+    "iosInstall": {
+      "closeAria": "Close",
+      "title": "Install SiSi (SeeSea) on your home screen",
+      "step1Before": "Tap the ",
+      "step1Bold": "Share",
+      "step1After": " button in the Safari bar.",
+      "step2Before": "Choose ",
+      "step2Bold": "«Add to Home Screen»",
+      "step2After": " in the menu.",
+      "step3Before": "Tap ",
+      "step3Bold": "«Add»",
+      "step3After": " at the top right.",
+      "shareAria": "Share",
+      "addAria": "Add",
+      "installed": "I already have it installed"
+    }
   }
 }

@@ -78,7 +78,7 @@
           slot="start"
           [name]="esParticularFavorita ? 'heart' : 'heart-outline'">
         </ion-icon>
-        {{ esParticularFavorita ? 'Eliminar de Favoritas' : 'Añadir a Favoritas' }}
+        {{ (esParticularFavorita ? 'components.playa.removeFav' : 'components.playa.addFav') | translate }}
       </ion-button>
     </div>
   }

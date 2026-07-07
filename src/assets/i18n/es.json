@@ -12,5 +12,120 @@
     "home": "Inicio",
     "settings": "Configuración",
     "about": "Acerca de..."
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "reload": "Recargar",
+    "notNow": "Ahora no",
+    "add": "Añadir",
+    "share": "Compartir"
+  },
+  "tabs": {
+    "prevision": "Prevision ",
+    "playas": "Playas",
+    "travesias": "Travesias",
+    "calendario": "Mi Calendario",
+    "tips": "Tips"
+  },
+  "alerts": {
+    "about": {
+      "header": "Acerca de SiSi",
+      "subHeader": "See Sea",
+      "message": "\n        <div class=\"acerca-de-contenido\">\n          <p><strong>Desarrollo:</strong></p>\n          <p>Creado con <span style=\"color:#1e90ff\">💙</span> por <strong>rgregori</strong> para <strong>OWS Lovers</strong>.</p>\n          <p><strong>Datos playas:</strong></p>\n          <p>Datos proporcionados por la <strong>Agencia Estatal de Meteorología (AEMET)</strong>.</p>\n        </div>\n      "
+    },
+    "removeFavorita": {
+      "header": "Eliminar de favoritas",
+      "message": "¿Eliminar la playa '{{name}}' de favoritas?"
+    },
+    "removeEvento": {
+      "header": "Eliminar del calendario",
+      "message": "¿Eliminar la travesia '{{name}}' del calendario ?"
+    }
+  },
+  "toasts": {
+    "updateAvailable": "Hay una nueva versión disponible",
+    "reloadRequired": "La aplicación necesita recargarse para continuar",
+    "favoritaRemoved": "Playa {{name}} eliminada de favoritas",
+    "favoritaAdded": "Playa {{name}} añadida a favoritas",
+    "eventoRemoved": "Travesia {{name}} eliminada del calendario",
+    "eventoAdded": "Travesía {{name}} añadido al calendario"
+  },
+  "loading": {
+    "favoritas": "Cargando tus favoritas..."
+  },
+  "pages": {
+    "playaList": {
+      "title": "Volver a favoritas",
+      "showMore": "Mostrar más ({{count}} restantes)",
+      "showAll": "Mostrar todas"
+    },
+    "favoritas": {
+      "title": "Mis Favoritas",
+      "empty": "No tienes playas favoritas aún",
+      "searchBeaches": "Buscar playas",
+      "loadingAlt": "Cargando favoritas"
+    },
+    "calendario": {
+      "title": "Mi Calendario",
+      "empty": "No tienes travesias favoritas aún.",
+      "searchEvents": "Buscar travesías"
+    },
+    "eventoList": {
+      "title": "Eventos",
+      "empty": "No hay eventos para mostrar"
+    },
+    "playaView": {
+      "detail": "Detalle de playa"
+    },
+    "tips": {
+      "title": "Tips",
+      "content": "Tips"
+    }
+  },
+  "components": {
+    "playa": {
+      "removeFav": "Eliminar de Favoritas",
+      "addFav": "Añadir a Favoritas"
+    },
+    "evento": {
+      "removeFav": "Eliminar de Favoritos",
+      "addFav": "Añadir a Favoritos",
+      "distance": "Distancia:",
+      "price": "Precio:"
+    },
+    "filtro": {
+      "provincia": "Provincia",
+      "all": "Todas",
+      "searchPlaceholder": "Municipo, Playa , Cala ..."
+    },
+    "filtroEventos": {
+      "provincia": "Provincia",
+      "all": "Todas",
+      "fechas": "Fechas",
+      "next3m": "Próximos 3 meses",
+      "next6m": "Próximos 6 meses",
+      "next12m": "Próximos 12 meses",
+      "searchPlaceholder": "Descripción, lugar, municipio u organizador",
+      "distMin": "Dist. mín (m)",
+      "distMax": "Dist. máx (m)"
+    },
+    "iosInstall": {
+      "closeAria": "Cerrar",
+      "title": "Instala SiSi (SeeSea) en tu pantalla de inicio",
+      "step1Before": "Pulsa el botón ",
+      "step1Bold": "Compartir",
+      "step1After": " en la barra de Safari.",
+      "step2Before": "Elige ",
+      "step2Bold": "«Añadir a pantalla de inicio»",
+      "step2After": " en el menú.",
+      "step3Before": "Pulsa ",
+      "step3Bold": "«Añadir»",
+      "step3After": " arriba a la derecha.",
+      "shareAria": "Compartir",
+      "addAria": "Añadir",
+      "installed": "Ya la tengo instalada"
+    }
   }
 }

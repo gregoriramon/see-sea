@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/favoritas"></ion-back-button>
     </ion-buttons>
-    <ion-title>Volver a favoritas</ion-title>
+    <ion-title>{{ 'pages.playaList.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -60,10 +60,10 @@
           @if (hayMasPlayas) {
           <ion-col size="12" class="ion-text-center ion-padding-vertical">
             <ion-button fill="clear" size="small" (click)="mostrarMas()">
-              Mostrar más ({{ restantes }} restantes)
+              {{ 'pages.playaList.showMore' | translate:{ count: restantes } }}
             </ion-button>
             <ion-button fill="clear" size="small" color="medium" (click)="mostrarTodas()">
-              Mostrar todas
+              {{ 'pages.playaList.showAll' | translate }}
             </ion-button>
           </ion-col>
           }

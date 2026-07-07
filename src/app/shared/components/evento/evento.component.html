@@ -15,13 +15,13 @@
 
       <div class="evento-extras">
         @if (evento.distancia) {
-          <p class="extra-text"><strong>Distancia:</strong> {{ evento.distancia }}</p>
+          <p class="extra-text"><strong>{{ 'components.evento.distance' | translate }}</strong> {{ evento.distancia }}</p>
         }
 <!--        @if (evento.organizador) {-->
 <!--          <p class="extra-text"><strong>Organizador:</strong> {{ evento.organizador }}</p>-->
 <!--        }-->
         @if (evento.precio !== null && evento.precio !== undefined) {
-          <p class="extra-text"><strong>Precio:</strong> {{ evento.precio }} €</p>
+          <p class="extra-text"><strong>{{ 'components.evento.price' | translate }}</strong> {{ evento.precio }} €</p>
         }
       </div>
     </ion-label>
@@ -50,7 +50,7 @@
         slot="start"
         [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'">
       </ion-icon>
-      {{ esParticularFavorito ? 'Eliminar de Favoritos' : 'Añadir a Favoritos' }}
+      {{ (esParticularFavorito ? 'components.evento.removeFav' : 'components.evento.addFav') | translate }}
     </ion-button>
   </div>
 }

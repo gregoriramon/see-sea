@@ -4,11 +4,11 @@
       @if (showProvincias) {
         <ion-row>
           <ion-col size="12">
-            <ion-select label="Provincia" label-placement="stacked" fill="outline"
+            <ion-select [label]="'components.filtroEventos.provincia' | translate" label-placement="stacked" fill="outline"
               [(ngModel)]="selectedProvincia"
               (ionChange)="onProvinciaChange($event.detail.value)"
               class="compact-select">
-              <ion-select-option value="**">Todas</ion-select-option>
+              <ion-select-option value="**">{{ 'components.filtroEventos.all' | translate }}</ion-select-option>
               @for (provincia of provinciasList; track provincia.cod_provincia) {
                 <ion-select-option [value]="provincia.cod_provincia">{{ provincia.provincia }}</ion-select-option>
               }
@@ -20,13 +20,13 @@
       @if (showRangoFecha) {
         <ion-row>
           <ion-col size="12">
-            <ion-select label="Fechas" label-placement="stacked" fill="outline"
+            <ion-select [label]="'components.filtroEventos.fechas' | translate" label-placement="stacked" fill="outline"
               [(ngModel)]="selectedRango"
               (ionChange)="onRangoChange($event.detail.value)"
               class="compact-select">
-              <ion-select-option value="3m">Próximos 3 meses</ion-select-option>
-              <ion-select-option value="6m">Próximos 6 meses</ion-select-option>
-              <ion-select-option value="12m">Próximos 12 meses</ion-select-option>
+              <ion-select-option value="3m">{{ 'components.filtroEventos.next3m' | translate }}</ion-select-option>
+              <ion-select-option value="6m">{{ 'components.filtroEventos.next6m' | translate }}</ion-select-option>
+              <ion-select-option value="12m">{{ 'components.filtroEventos.next12m' | translate }}</ion-select-option>
             </ion-select>
           </ion-col>
         </ion-row>
@@ -36,7 +36,7 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="12">
             <ion-searchbar
-              placeholder="Descripción, lugar, municipio u organizador"
+              [placeholder]="'components.filtroEventos.searchPlaceholder' | translate"
               [(ngModel)]="patterName"
               [debounce]="500"
               (ionInput)="onPatterNameChange()"
@@ -49,14 +49,14 @@
       @if (showDistancia) {
         <ion-row class="ion-align-items-center">
           <ion-col size="6">
-            <ion-input type="number" label="Dist. mín (m)" label-placement="stacked" fill="outline"
+            <ion-input type="number" [label]="'components.filtroEventos.distMin' | translate" label-placement="stacked" fill="outline"
               [(ngModel)]="distanciaMin"
               (ionChange)="onDistanciaChange()"
               class="compact-input">
             </ion-input>
           </ion-col>
           <ion-col size="6">
-            <ion-input type="number" label="Dist. máx (m)" label-placement="stacked" fill="outline"
+            <ion-input type="number" [label]="'components.filtroEventos.distMax' | translate" label-placement="stacked" fill="outline"
               [(ngModel)]="distanciaMax"
               (ionChange)="onDistanciaChange()"
               class="compact-input">

@@ -14,6 +14,7 @@ import { HeaderComponent } from 'src/app/shared/components/header/header.compone
 import { EventoComponent } from 'src/app/shared/components/evento/evento.component';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Evento } from 'src/app/models/evento';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 interface GrupoMes {
   clave: string;
@@ -35,11 +36,13 @@ interface GrupoMes {
     IonItem,
     IonLabel,
     IonButton,
+    TranslatePipe,
   ],
 })
 export class CalendarioPage implements OnInit, OnDestroy {
   private localRepository = inject(LocalRepositoryService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
 
   irABuscar(): void {
     this.router.navigate(['/tabs/eventos']);
@@ -58,6 +61,11 @@ export class CalendarioPage implements OnInit, OnDestroy {
 
     this.sub = this.localRepository.favoritosEventos$.subscribe((eventos) => {
       this.grupos = this.agrupar(eventos, hoy);
+    });
+
+    this.translate.onLangChange.subscribe(() => {
+      const eventos = this.grupos.reduce<Evento[]>((acc, g) => acc.concat(g.eventos), []);
+      this.grupos = this.agrupar(eventos, new Date());
     });
   }
 
@@ -103,7 +111,7 @@ export class CalendarioPage implements OnInit, OnDestroy {
       if (!grupo) {
         grupo = {
           clave,
-          titulo: fecha.toLocaleDateString('es-ES', {
+          titulo: fecha.toLocaleDateString(this.getLocale(), {
             month: 'long',
             year: 'numeric',
           }),
@@ -115,6 +123,11 @@ export class CalendarioPage implements OnInit, OnDestroy {
     }
 
     return Array.from(mapa.values());
+  }
+
+  private getLocale(): string {
+    const lang = this.translate.getCurrentLang() || 'es';
+    return lang === 'en' ? 'en-US' : 'es-ES';
   }
 
   private claveMes(anio: number, mes: number): string {

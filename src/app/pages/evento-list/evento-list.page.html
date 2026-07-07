@@ -1,4 +1,4 @@
-<app-header tituloPagina="Eventos"/>
+<app-header [tituloPagina]="'pages.eventoList.title' | translate"/>
 
 <ion-content [fullscreen]="true">
   <section
@@ -27,7 +27,7 @@
     <section style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
       <div style="text-align: center; color: var(--ion-color-medium);">
         <ion-icon name="calendar-outline" style="font-size: 48px; margin-bottom: 16px;"></ion-icon>
-        <p style="font-size: 16px; margin: 0;">No hay eventos para mostrar</p>
+        <p style="font-size: 16px; margin: 0;">{{ 'pages.eventoList.empty' | translate }}</p>
       </div>
     </section>
   }

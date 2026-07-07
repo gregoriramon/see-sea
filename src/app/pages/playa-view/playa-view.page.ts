@@ -9,6 +9,7 @@ import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Playa } from 'src/app/models/playa';
 import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-playa-view',
@@ -19,6 +20,7 @@ import { PlayaComponent } from 'src/app/shared/components/playa/playa.component'
     CommonModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonSpinner,
     PlayaComponent,
+    TranslatePipe,
   ],
 })
 export class PlayaViewPage implements OnInit, OnDestroy {

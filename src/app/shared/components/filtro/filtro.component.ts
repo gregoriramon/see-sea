@@ -7,6 +7,7 @@ import { Municipio, Provincia } from 'src/app/models/common';
 import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { trashOutline, closeCircleOutline } from 'ionicons/icons';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 
@@ -15,7 +16,7 @@ import { trashOutline, closeCircleOutline } from 'ionicons/icons';
   templateUrl: './filtro.component.html',
   styleUrls: ['./filtro.component.scss'],
   standalone: true,
-  imports: [IonSelect,IonSearchbar,FormsModule, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption],
+  imports: [IonSelect,IonSearchbar,FormsModule, IonHeader, IonToolbar, IonGrid, IonRow, IonCol, IonSelectOption, TranslatePipe],
 })
 export class FiltroComponent  implements OnInit {
   private supabaseService = inject(Supabase);

@@ -5,9 +5,9 @@
       @if(showProvincias){
       <ion-row>
         <ion-col size="12">
-          <ion-select label="Provincia" label-placement="stacked" fill="outline" [(ngModel)]="selectedProvincia"
+          <ion-select [label]="'components.filtro.provincia' | translate" label-placement="stacked" fill="outline" [(ngModel)]="selectedProvincia"
             (ionChange)="onProvinciaChange($event.detail.value)" class="compact-select">
-            <ion-select-option value="**">Todas</ion-select-option>
+            <ion-select-option value="**">{{ 'components.filtro.all' | translate }}</ion-select-option>
             @for (provincia of provinciasList; track provincia.cod_provincia) {
             <ion-select-option [value]="provincia.cod_provincia">{{ provincia.provincia }}</ion-select-option>
             }
@@ -19,7 +19,7 @@
       <ion-row class="ion-align-items-center">
         <!-- Búsqueda -->
         <ion-col size="12">
-          <ion-searchbar placeholder="Municipo, Playa , Cala ..." [(ngModel)]="patterName"
+          <ion-searchbar [placeholder]="'components.filtro.searchPlaceholder' | translate" [(ngModel)]="patterName"
             [debounce]="500"
             (ionInput)="onPatterNameChange()" class="compact-search">
           </ion-searchbar>

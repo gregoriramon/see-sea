@@ -14,6 +14,7 @@ import {
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Provincia } from 'src/app/models/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export type RangoFecha = '3m' | '6m' | '12m';
 
@@ -41,6 +42,7 @@ export interface FiltroEventos {
     IonSelectOption,
     IonSearchbar,
     IonInput,
+    TranslatePipe,
   ],
 })
 export class FiltroEventosComponent implements OnInit {

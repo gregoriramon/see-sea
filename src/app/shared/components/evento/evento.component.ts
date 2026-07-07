@@ -7,17 +7,19 @@ import { ColorFechaPipe } from '../../pipes/color-fecha-pipe';
 import { fechaEsPasada } from '../../utils/templateUtils';
 import { addIcons } from 'ionicons';
 import { calendar, calendarOutline, informationCircleOutline } from 'ionicons/icons';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.component.html',
   styleUrls: ['./evento.component.scss'],
   standalone: true,
-  imports: [IonicModule, FechaPipe, ColorFechaPipe],
+  imports: [IonicModule, FechaPipe, ColorFechaPipe, TranslatePipe],
 })
 export class EventoComponent {
   private toastController = inject(ToastController);
   private alertController = inject(AlertController);
+  private translate = inject(TranslateService);
 
   @Input() evento!: Evento;
   @Input() esParticularFavorito: boolean = false;
@@ -38,16 +40,16 @@ export class EventoComponent {
 
     if (this.esParticularFavorito) {
       const alert = await this.alertController.create({
-        header: 'Eliminar del calendario',
-        message: `¿Eliminar la travesia '${this.evento.descripcion}' del calendario ?`,
+        header: this.translate.instant('alerts.removeEvento.header'),
+        message: this.translate.instant('alerts.removeEvento.message', { name: this.evento.descripcion }),
         buttons: [
-          { text: 'Cancelar', role: 'cancel', handler: () => { } },
+          { text: this.translate.instant('common.cancel'), role: 'cancel', handler: () => { } },
           {
-            text: 'Eliminar',
+            text: this.translate.instant('common.delete'),
             role: 'destructive',
             handler: () => {
               this.toggleFavorito.emit(this.evento);
-              this.presentToast(`Travesia ${this.evento.descripcion} eliminada del calendario`);
+              this.presentToast(this.translate.instant('toasts.eventoRemoved', { name: this.evento.descripcion }));
             }
           }
         ]
@@ -56,7 +58,7 @@ export class EventoComponent {
       await alert.present();
     } else {
       this.toggleFavorito.emit(this.evento);
-      this.presentToast(`Travesía ${this.evento.descripcion} añadido al calendario`);
+      this.presentToast(this.translate.instant('toasts.eventoAdded', { name: this.evento.descripcion }));
     }
   }
 

@@ -14,17 +14,19 @@ import { OleajePipe } from "../../pipes/oleaje-pipe";
 import { TemperaturaPipe } from "../../pipes/temperatura-pipe";
 import { DiasPrevisonComponent } from "../dias-previson/dias-previson.component";
 import { Capacitor } from '@capacitor/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-playa',
   templateUrl: './playa.component.html',
   styleUrls: ['./playa.component.scss'],
   standalone:true,
-  imports: [FontAwesomeModule, IonicModule, TablaPronosticoComponent,  OleajePipe, DiaSemanaPipe],
+  imports: [FontAwesomeModule, IonicModule, TablaPronosticoComponent,  OleajePipe, DiaSemanaPipe, TranslatePipe],
 })
 export class PlayaComponent implements OnInit {
   private toastController = inject(ToastController);
   private alertController = inject(AlertController);
+  private translate = inject(TranslateService);
 
 
   faWater = faWater;
@@ -68,22 +70,22 @@ export class PlayaComponent implements OnInit {
 
     if (this.esParticularFavorita) {
       const alert = await this.alertController.create({
-        header: 'Eliminar de favoritas',
-        message: `¿Eliminar la playa '${this.playa.playa}' de favoritas?`,
+        header: this.translate.instant('alerts.removeFavorita.header'),
+        message: this.translate.instant('alerts.removeFavorita.message', { name: this.playa.playa }),
         buttons: [
           {
-            text: 'Cancelar',
+            text: this.translate.instant('common.cancel'),
             role: 'cancel',
             handler: () => {
               // No hacer nada si cancela
             }
           },
           {
-            text: 'Eliminar',
+            text: this.translate.instant('common.delete'),
             role: 'destructive',
             handler: () => {
               this.toggleFavorita.emit(this.playa);
-              this.presentToast(`Playa ${this.playa.playa} eliminada de favoritas`);
+              this.presentToast(this.translate.instant('toasts.favoritaRemoved', { name: this.playa.playa }));
             }
           }
         ]
@@ -92,7 +94,7 @@ export class PlayaComponent implements OnInit {
       await alert.present();
     } else {
       this.toggleFavorita.emit(this.playa);
-      this.presentToast(`Playa ${this.playa.playa} añadida a favoritas`);
+      this.presentToast(this.translate.instant('toasts.favoritaAdded', { name: this.playa.playa }));
     }
   }
 

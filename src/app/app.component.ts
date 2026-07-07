@@ -26,17 +26,10 @@ export class AppComponent implements OnInit  {
 
   async mostrarAcercaDe() {
     const alert = await this.alertController.create({
-      header: 'Acerca de SiSi',
-      subHeader: 'See Sea',
-      message: `
-        <div class="acerca-de-contenido">
-          <p><strong>Desarrollo:</strong></p>
-          <p>Creado con <span style="color:#1e90ff">💙</span> por <strong>rgregori</strong> para <strong>OWS Lovers</strong>.</p>
-          <p><strong>Datos playas:</strong></p>
-          <p>Datos proporcionados por la <strong>Agencia Estatal de Meteorología (AEMET)</strong>.</p>
-        </div>
-      `,
-      buttons: [{ text: 'Cerrar', role: 'cancel' }],
+      header: this.translate.instant('alerts.about.header'),
+      subHeader: this.translate.instant('alerts.about.subHeader'),
+      message: this.translate.instant('alerts.about.message'),
+      buttons: [{ text: this.translate.instant('common.close'), role: 'cancel' }],
       cssClass: 'acerca-de-alert',
     });
     await alert.present();
@@ -83,19 +76,19 @@ export class AppComponent implements OnInit  {
 
   private async mostrarToastActualizacion() {
     const toast = await this.toastController.create({
-      message: 'Hay una nueva versión disponible',
+      message: this.translate.instant('toasts.updateAvailable'),
       duration: 0,
       position: 'bottom',
       color: 'primary',
       buttons: [
         {
-          text: 'Recargar',
+          text: this.translate.instant('common.reload'),
           role: 'info',
           handler: () => {
             this.swUpdate.activateUpdate().then(() => document.location.reload());
           },
         },
-        { text: 'Ahora no', role: 'cancel' },
+        { text: this.translate.instant('common.notNow'), role: 'cancel' },
       ],
     });
     await toast.present();
@@ -103,13 +96,13 @@ export class AppComponent implements OnInit  {
 
   private async mostrarToastRecargaForzada() {
     const toast = await this.toastController.create({
-      message: 'La aplicación necesita recargarse para continuar',
+      message: this.translate.instant('toasts.reloadRequired'),
       duration: 0,
       position: 'bottom',
       color: 'danger',
       buttons: [
         {
-          text: 'Recargar',
+          text: this.translate.instant('common.reload'),
           role: 'info',
           handler: () => document.location.reload(),
         },

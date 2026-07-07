@@ -4,11 +4,12 @@ import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { shareOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
 import { Capacitor } from '@capacitor/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-ios-install-banner',
   standalone: true,
-  imports: [CommonModule, IonIcon],
+  imports: [CommonModule, IonIcon, TranslatePipe],
   templateUrl: './ios-install-banner.component.html',
   styleUrls: ['./ios-install-banner.component.scss'],
 })

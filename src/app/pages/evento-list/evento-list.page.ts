@@ -20,6 +20,7 @@ import {
   RangoFecha,
 } from 'src/app/shared/components/filtro-eventos/filtro-eventos.component';
 import { normalizeSearch } from 'src/app/shared/utils/templateUtils';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-evento-list',
@@ -37,6 +38,7 @@ import { normalizeSearch } from 'src/app/shared/utils/templateUtils';
     EventoComponent,
     HeaderComponent,
     FiltroEventosComponent,
+    TranslatePipe,
   ],
 })
 export class EventoListPage implements OnInit, OnDestroy {

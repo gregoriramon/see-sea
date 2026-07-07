@@ -11,13 +11,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FiltroComponent } from "src/app/shared/components/filtro/filtro.component";
 import { normalizeSearch } from "src/app/shared/utils/templateUtils";
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-buscar',
   templateUrl: 'playa-list.page.html',
   styleUrls: ['playa-list.page.scss'],
-  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent, IonButton, PlayaComponent, FiltroComponent, IonTitle],
+  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent, IonButton, PlayaComponent, FiltroComponent, IonTitle, TranslatePipe],
 })
 export class PlayaListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
