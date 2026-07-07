@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "HybridOrchestrator",
+      "request": "launch",
+      "mainClass": "com.pruebas.orchestrator.HybridOrchestrator",
+      "projectName": "deportivas-scraper"
+    },
+    {
+      "type": "java",
+      "name": "HybridOrchestrator (Debug)",
+      "request": "launch",
+      "mainClass": "com.pruebas.orchestrator.HybridOrchestrator",
+      "projectName": "pruebas-deportivas-scraper",
+      "cwd": "${workspaceFolder}/pruebas-deportivas-scraper",
+      "args": "",
+      "console": "integratedTerminal"
+    }
+  ]
+}

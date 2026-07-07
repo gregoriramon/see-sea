@@ -1,0 +1,76 @@
+.filtro-toolbar {
+  --background: transparent;
+  --border-width: 0;
+  --padding-top: 2px;
+  --padding-bottom: 2px;
+  --min-height: auto;
+  height: auto;
+}
+
+.compact-select {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  height: 38px;
+  min-height: 38px;
+  margin: 2px 4px;
+  width: calc(100% - 8px);
+  font-size: 0.7rem;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.06);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.compact-select::part(label) {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}
+
+.compact-search {
+  padding: 0;
+  margin: 2px 4px;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.06);
+  --box-shadow: none;
+  --border-radius: 12px;
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 0.7;
+  --icon-color: var(--ion-color-medium);
+  --color: var(--ion-text-color);
+  font-size: 0.7rem;
+  height: 38px;
+  min-height: 38px;
+  width: calc(100% - 8px);
+  box-sizing: border-box;
+}
+
+.compact-search .searchbar-input {
+  font-size: 0.7rem !important;
+  height: 38px !important;
+  min-height: 38px !important;
+}
+
+.compact-search::part(placeholder),
+.compact-search::part(native) {
+  font-size: 0.7rem;
+}
+
+.compact-input {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  height: 38px;
+  min-height: 38px;
+  margin: 2px 4px;
+  width: calc(100% - 8px);
+  font-size: 0.7rem;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.06);
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.compact-input::part(label) {
+  font-size: 0.7rem;
+  opacity: 0.75;
+}

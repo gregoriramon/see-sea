@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Allow notifications",
+    "lang": {
+      "es": "Spanish",
+      "en": "English"
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "settings": "Settings",
+    "about": "About..."
+  }
+}

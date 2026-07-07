@@ -4,6 +4,7 @@ import { AuthChangeEvent, createClient, Session, SupabaseClient } from '@supabas
 
 import { Dispositivo } from 'src/app/models/dispositivo';
 import { Playa } from 'src/app/models/playa';
+import { Evento } from 'src/app/models/evento';
 import { Municipio, Provincia } from 'src/app/models/common';
 
 import { environment } from 'src/environments/environment';
@@ -385,6 +386,186 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     }
 
     return data as Playa[];
+  }
+
+  private readonly SELECT_EVENTO = "id,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,organizador,precio,url_info,url_inscripcion";
+
+  private normalizaPatron(pattern: string): string {
+    return (pattern ?? '')
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
+  async getEventoAll(): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener lista de eventos:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByFecha(fechaIni: string, fechaFin: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por fecha:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByLugar(pattern: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .ilike('lugar_evento', '%'+this.normalizaPatron(pattern)+'%')
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por lugar:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventosByDistancia(distanciaIni: number, distanciaFin: number): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('distancia', distanciaIni)
+      .lte('distancia', distanciaFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por distancia:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventosByPrecio(precioIni: number, precioFin: number): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('precio', precioIni)
+      .lte('precio', precioFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por precio:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByDescripcion(pattern: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por descripcion:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por descripcion y fecha:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByDescripcionAndLugar(descPattern: string, lugarPattern: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .ilike('descripcion', '%'+this.normalizaPatron(descPattern)+'%')
+      .ilike('lugar_evento', '%'+this.normalizaPatron(lugarPattern)+'%')
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por descripcion y lugar:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByFechaAndLugar(fechaIni: string, fechaFin: string, lugarPattern: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .ilike('lugar_evento', '%'+this.normalizaPatron(lugarPattern)+'%')
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por fecha y lugar:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByDistanciaAndLugarAndFecha(distanciaIni: number, distanciaFin: number, lugarPattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('distancia', distanciaIni)
+      .lte('distancia', distanciaFin)
+      .ilike('lugar_evento', '%'+this.normalizaPatron(lugarPattern)+'%')
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por distancia, lugar y fecha:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
+  async getEventoByFechaAndDistanciaAndPrecio(fechaIni: string, fechaFin: string, distanciaIni: number, distanciaFin: number, precioIni: number, precioFin: number): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('eventos')
+      .select(this.SELECT_EVENTO)
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .gte('distancia', distanciaIni)
+      .lte('distancia', distanciaFin)
+      .gte('precio', precioIni)
+      .lte('precio', precioFin)
+      .order('fecha_evento', { ascending: true });
+
+    if (error) {
+      console.error('Error al obtener eventos por fecha, distancia y precio:', error);
+      return [];
+    }
+    return data as Evento[];
   }
 
 }

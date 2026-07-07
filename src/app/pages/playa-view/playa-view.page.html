@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/buscar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ playa?.playa || 'Detalle de playa' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (isLoading) {
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
+      <ion-spinner name="circular"></ion-spinner>
+    </section>
+  }
+
+  @if (playa) {
+    <app-playa
+      [playa]="playa"
+      [esParticularFavorita]="esFav"
+      [prediccionColapsable]="true"
+      [prediccionExpandidaInicial]="true"
+      [mostrarBotonFavorita]="true"
+      (toggleFavorita)="onToggleFavorita($event)">
+    </app-playa>
+  }
+</ion-content>

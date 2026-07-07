@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma",
+    "notifications": "Permitir notificaciones",
+    "lang": {
+      "es": "Español",
+      "en": "Inglés"
+    }
+  },
+  "menu": {
+    "home": "Inicio",
+    "settings": "Configuración",
+    "about": "Acerca de..."
+  }
+}

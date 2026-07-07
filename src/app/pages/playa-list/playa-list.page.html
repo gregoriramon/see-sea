@@ -57,6 +57,16 @@
             </app-playa>
           </ion-col>
           }
+          @if (hayMasPlayas) {
+          <ion-col size="12" class="ion-text-center ion-padding-vertical">
+            <ion-button fill="clear" size="small" (click)="mostrarMas()">
+              Mostrar más ({{ restantes }} restantes)
+            </ion-button>
+            <ion-button fill="clear" size="small" color="medium" (click)="mostrarTodas()">
+              Mostrar todas
+            </ion-button>
+          </ion-col>
+          }
         </ion-row>
       </ion-grid>
     </section>

@@ -119,7 +119,7 @@ export class PlayaComponent implements OnInit {
     async presentToast(message:string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 1500,
+      duration: 2000,
       position: 'middle',
     });
 

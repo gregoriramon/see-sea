@@ -1,0 +1,90 @@
+.ios-install-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  z-index: 99999;
+  background: #ffffff;
+  color: #003e4a;
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+  padding: 20px 22px 18px;
+  border-top: 5px solid #005f73;
+  animation: slide-up 360ms ease-out;
+  font-size: 16px;
+  line-height: 1.45;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  color: #005f73;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 28px 10px 0;
+  color: #005f73;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.steps li {
+  margin-bottom: 6px;
+}
+
+.steps li:last-child {
+  margin-bottom: 0;
+}
+
+.steps ion-icon {
+  vertical-align: -4px;
+  font-size: 20px;
+  margin: 0 2px;
+  color: #005f73;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.action-btn.primary {
+  background: #005f73;
+  color: #fff;
+}
+
+.action-btn ion-icon {
+  font-size: 18px;
+}
+
+@keyframes slide-up {
+  from { transform: translateY(120%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}

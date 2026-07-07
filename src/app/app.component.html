@@ -9,9 +9,9 @@
         <ion-content>
           <ion-list>
             <ion-menu-toggle>
-              <ion-item button routerLink="/tabs/favoritas">Inicio</ion-item>
-              <ion-item button routerLink="/settings">Configuración</ion-item>
-              <ion-item button (click)="mostrarAcercaDe()">Acerca de...</ion-item>
+              <ion-item button routerLink="/tabs/favoritas">{{ 'menu.home' | translate }}</ion-item>
+              <ion-item button routerLink="/settings">{{ 'menu.settings' | translate }}</ion-item>
+              <ion-item button (click)="mostrarAcercaDe()">{{ 'menu.about' | translate }}</ion-item>
             </ion-menu-toggle>
           </ion-list>
         </ion-content>

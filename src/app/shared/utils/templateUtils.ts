@@ -37,20 +37,31 @@ export function getColorTemperatura(temperatura: number, ionicColors?: boolean):
   return 'blue';
 }
 
-export function parseFecha(fechaNum: string): Date {
+export function parseFecha(value: unknown): Date | null {
+  if (value === null || value === undefined || value === '') return null;
+  if (value instanceof Date) return value;
 
-  // 1. Convertimos a string por si viene como número
-  const fechaStr = String(fechaNum);
-
-  // 2. Validamos que tenga la longitud esperada (ej. AAAAMMDD = 8 caracteres)
-  if (!fechaStr || fechaStr.length < 8) {
-    return new Date();
+  if (typeof value === 'number') {
+    const str = String(value);
+    if (str.length === 8) return parseAaaaMmDd(str);
+    return new Date(value);
   }
-  const año = parseInt(fechaStr.substring(0, 4));
-  const mes = parseInt(fechaStr.substring(4, 6)) - 1;
-  const dia = parseInt(fechaStr.substring(6, 8));
 
-  return new Date(año, mes, dia);
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (/^\d{8}$/.test(trimmed)) return parseAaaaMmDd(trimmed);
+    const fecha = new Date(trimmed);
+    return isNaN(fecha.getTime()) ? null : fecha;
+  }
+
+  return null;
+}
+
+function parseAaaaMmDd(str: string): Date {
+  const anio = parseInt(str.substring(0, 4), 10);
+  const mes = parseInt(str.substring(4, 6), 10) - 1;
+  const dia = parseInt(str.substring(6, 8), 10);
+  return new Date(anio, mes, dia);
 }
 
 export function normalizeSearch(value: string | null | undefined): string {
@@ -66,9 +77,16 @@ export function normalizeSearch(value: string | null | undefined): string {
     .replace(/\s+/g, ' ');
 }
 
-export function fechaEsPasada(fechaNum: string): boolean {
-  const fecha = parseFecha(fechaNum);
+export function fechaEsPasada(value: unknown): boolean {
+  const fecha = parseFecha(value);
+  if (!fecha) return false;
+  fecha.setHours(0, 0, 0, 0);
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
   return fecha < hoy;
+}
+
+export function getColorFecha(value: unknown, ionicColors?: boolean): string | null {
+  if (!fechaEsPasada(value)) return null;
+  return ionicColors ? 'danger' : '#c5000f';
 }

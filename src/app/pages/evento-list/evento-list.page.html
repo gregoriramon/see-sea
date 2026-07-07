@@ -1,0 +1,49 @@
+<app-header tituloPagina="Eventos"/>
+
+<ion-content [fullscreen]="true">
+  <section
+    style="position: sticky;
+           top: 0;
+           z-index: 10;
+           background: var(--ion-background-color, #fff);
+           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+           margin-bottom: 12px;">
+    <app-filtro-eventos
+      [showName]="true"
+      [showRangoFecha]="true"
+      [showDistancia]="true"
+      [showProvincias]="true"
+      (filtroChange)="onFiltroChange($event)">
+    </app-filtro-eventos>
+  </section>
+
+  @if (isLoading) {
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
+      <ion-spinner name="circular"></ion-spinner>
+    </section>
+  }
+
+  @if (!isLoading && eventos.length === 0) {
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
+      <div style="text-align: center; color: var(--ion-color-medium);">
+        <ion-icon name="calendar-outline" style="font-size: 48px; margin-bottom: 16px;"></ion-icon>
+        <p style="font-size: 16px; margin: 0;">No hay eventos para mostrar</p>
+      </div>
+    </section>
+  }
+
+  <section>
+    <ion-grid [fixed]="true">
+      <ion-row>
+        @for (item of eventos; track item.id) {
+          <ion-col size="12" class="ion-no-padding">
+            <app-evento
+              [evento]="item"
+              [esParticularFavorito]="esFavorito(item)"
+              (toggleFavorito)="onToggleFavorito(item)"></app-evento>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </section>
+</ion-content>

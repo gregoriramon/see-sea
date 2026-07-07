@@ -1,4 +1,4 @@
-.playa-card {
+.evento-card {
   background: var(--ion-color-step-50, #f7fafc);
   border: 1px solid var(--ion-color-step-150, rgba(0, 0, 0, 0.08));
   border-radius: 12px;
@@ -6,18 +6,14 @@
   box-shadow: 0 4px 12px rgba(42, 130, 153, 0.35), 0 2px 4px rgba(42, 130, 153, 0.25);
   overflow: hidden;
 
-  ion-item.playa-compact-item {
+  ion-item.evento-compact-item {
     --background: transparent;
     --inner-border-width: 0;
     --border-width: 0;
   }
-
-  &.con-prediccion .playa-compact-item {
-    --inner-padding-bottom: 0;
-  }
 }
 
-.playa-compact-item {
+.evento-compact-item {
   --min-height: 70px;
   --padding-start: 8px;
   --padding-end: 0;
@@ -34,8 +30,8 @@
   }
 }
 
-.location-start-button,
-.favorita-button {
+.link-button,
+.favorito-button {
   --padding-start: 0;
   --padding-end: 0;
   margin: 0;
@@ -46,9 +42,18 @@
   ion-icon { font-size: 1.5rem; }
 }
 
-.favorita-button { height: auto; }
+.favorito-button { height: auto; }
 
-.playa-nombre {
+ion-icon.ion-color-success,
+ion-button.ion-color-success {
+  --ion-color-success: #4fa373;
+  --ion-color-success-rgb: 79, 163, 115;
+  --ion-color-success-shade: #468f66;
+  --ion-color-success-tint: #61ac81;
+  --ion-color-base: #4fa373 !important;
+}
+
+.evento-titulo {
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 2px 0;
@@ -59,7 +64,7 @@
   max-width: 100%;
 }
 
-.municipio-text {
+.lugar-text {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--ion-color-step-600);
@@ -67,7 +72,7 @@
   line-height: 1.15;
 }
 
-.provincia-text {
+.fecha-text {
   font-size: 0.72rem;
   color: var(--ion-color-medium);
   margin: 2px 0 0 0;
@@ -75,7 +80,19 @@
   line-height: 1.15;
 }
 
-.playa-oleaje { font-size: 1rem; }
+.evento-extras {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.extra-text {
+  font-size: 0.7rem;
+  color: var(--ion-color-step-700);
+  margin: 0;
+  line-height: 1.2;
+}
 
 .vertical-buttons {
   display: flex;
@@ -89,34 +106,6 @@
   flex-shrink: 0;
   margin: 4px 0 0 0;
   padding-right: 12px;
-}
-
-.toggle-prediccion-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  width: 100%;
-  box-sizing: border-box;
-  border-top: 1px dashed #2a8299;
-  margin-top: 4px;
-}
-
-.dias-resumen {
-  display: flex;
-  gap: 2px;
-  flex: 0 0 auto;
-  min-width: 0;
-}
-
-.dia-chip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 5px;
-  border-radius: 4px;
-  font-size: 0.78rem;
-  color: #fff;
 }
 
 .boton-favorita-row {

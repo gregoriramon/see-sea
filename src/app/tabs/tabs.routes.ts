@@ -17,6 +17,11 @@ export const routes: Routes = [
           import('../pages/playa-list/playa-list.page').then((m) => m.PlayaListPage),
       },
       {
+        path: 'eventos',
+        loadComponent: () =>
+          import('../pages/evento-list/evento-list.page').then((m) => m.EventoListPage),
+      },
+      {
         path: 'calendario',
         loadComponent: () =>
           import('../pages/calendario/calendario.page').then((m) => m.CalendarioPage),

@@ -1,15 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonTitle, IonList, IonItem, IonMenuToggle, AlertController, ToastController } from '@ionic/angular/standalone';
+import { RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { LocalRepositoryService } from './core/services/local-repository/local-repository.service';
 import { filter, take } from 'rxjs/operators';
 import { Supabase } from './core/services/supabase/supabase';
 import { IosInstallBannerComponent } from './shared/components/ios-install-banner/ios-install-banner.component';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent],
+  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent, TranslatePipe, RouterLink],
 })
 export class AppComponent implements OnInit  {
   private localRepository = inject(LocalRepositoryService);
@@ -17,20 +19,34 @@ export class AppComponent implements OnInit  {
   private alertController = inject(AlertController);
   private toastController = inject(ToastController);
   private swUpdate = inject(SwUpdate);
+  private translate = inject(TranslateService);
 
   private readonly INTERVALO_COMPROBACION_MS = 6 * 60 * 60 * 1000;
 
 
   async mostrarAcercaDe() {
     const alert = await this.alertController.create({
-      header: 'Acerca de',
-      message: 'Esto es al acerca de',
+      header: 'Acerca de SiSi',
+      subHeader: 'See Sea',
+      message: `
+        <div class="acerca-de-contenido">
+          <p><strong>Desarrollo:</strong></p>
+          <p>Creado con <span style="color:#1e90ff">💙</span> por <strong>rgregori</strong> para <strong>OWS Lovers</strong>.</p>
+          <p><strong>Datos playas:</strong></p>
+          <p>Datos proporcionados por la <strong>Agencia Estatal de Meteorología (AEMET)</strong>.</p>
+        </div>
+      `,
       buttons: [{ text: 'Cerrar', role: 'cancel' }],
+      cssClass: 'acerca-de-alert',
     });
     await alert.present();
   }
 
   ngOnInit() {
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setFallbackLang('es');
+    this.localRepository.lang$.subscribe((lang) => this.translate.use(lang));
+
     this.localRepository.deviceId$.pipe(take(1)).subscribe((deviceId) => {
       try {
         this.supabaseService.registraDispositivo({id_dispositivo: deviceId, accion: 'LOGIN'})

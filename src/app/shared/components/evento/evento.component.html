@@ -1,0 +1,57 @@
+<div class="evento-card">
+<ion-item lines="none" class="evento-compact-item" detail="false">
+
+  <div slot="start">
+    <ion-label style="min-width: 0;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; min-width: 0;">
+        <h2 class="evento-titulo" style="margin: 0;" [title]="evento.descripcion">{{ evento.descripcion }}</h2>
+      </div>
+      @if (evento.municipio) {
+        <p class="lugar-text">{{ evento.municipio }}@if (evento.provincia) { ({{ evento.provincia }})}</p>
+      } @else if (evento.lugar_evento) {
+        <p class="lugar-text">{{ evento.lugar_evento }}</p>
+      }
+      <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">{{ evento.fecha_evento | fecha }}</p>
+
+      <div class="evento-extras">
+        @if (evento.distancia) {
+          <p class="extra-text"><strong>Distancia:</strong> {{ evento.distancia }}</p>
+        }
+<!--        @if (evento.organizador) {-->
+<!--          <p class="extra-text"><strong>Organizador:</strong> {{ evento.organizador }}</p>-->
+<!--        }-->
+        @if (evento.precio !== null && evento.precio !== undefined) {
+          <p class="extra-text"><strong>Precio:</strong> {{ evento.precio }} €</p>
+        }
+      </div>
+    </ion-label>
+  </div>
+
+  <div slot="end" class="vertical-buttons">
+    <ion-button fill="clear" size="small" (click)="abrirInfo($event)" [disabled]="!evento.url_info && !evento.url_inscripcion" class="link-button">
+      <ion-icon slot="icon-only" name="information-circle-outline" color="primary"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="small" (click)="onToggleFavorito($event)" class="favorito-button">
+      <ion-icon slot="icon-only" [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'"
+        [color]="getColorCalendario()">
+      </ion-icon>
+    </ion-button>
+  </div>
+
+</ion-item>
+
+@if (mostrarBotonFavorito) {
+  <div class="boton-favorita-row">
+    <ion-button
+      fill="outline"
+      [color]="esParticularFavorito ? 'success' : 'primary'"
+      (click)="onToggleFavorito($event)">
+      <ion-icon
+        slot="start"
+        [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'">
+      </ion-icon>
+      {{ esParticularFavorito ? 'Eliminar de Favoritos' : 'Añadir a Favoritos' }}
+    </ion-button>
+  </div>
+}
+</div>

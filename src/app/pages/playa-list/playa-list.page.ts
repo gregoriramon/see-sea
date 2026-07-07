@@ -17,20 +17,41 @@ import { normalizeSearch } from "src/app/shared/utils/templateUtils";
   selector: 'app-buscar',
   templateUrl: 'playa-list.page.html',
   styleUrls: ['playa-list.page.scss'],
-  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent,  PlayaComponent, FiltroComponent, IonTitle],
+  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonSpinner, FormsModule, IonCol, IonRow, IonGrid, IonContent, IonButton, PlayaComponent, FiltroComponent, IonTitle],
 })
 export class PlayaListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   localRepositoryService = inject(LocalRepositoryService);
   private router = inject(Router);
 
+  private readonly PAGE_SIZE = 25;
   public patterName: string = "";
   public playas: Playa[] = [];
   private playasAll: Playa[] = [];
   public selectedProvincia: string = "**";
   public selectedMunicipio: string = "";
   public isLoading: boolean = false;
+  public isPaginated: boolean = false;
+  public visibleCount: number = this.PAGE_SIZE;
   private destroy$ = new Subject<void>();
+
+  get hayMasPlayas(): boolean {
+    return this.isPaginated && this.playas.length < this.playasAll.length;
+  }
+
+  get restantes(): number {
+    return Math.max(0, this.playasAll.length - this.playas.length);
+  }
+
+  mostrarMas() {
+    this.visibleCount += this.PAGE_SIZE;
+    this.playas = this.playasAll.slice(0, this.visibleCount);
+  }
+
+  mostrarTodas() {
+    this.playas = this.playasAll;
+    this.isPaginated = false;
+  }
 
   ngOnInit() {
     console.log("Inicializando PlayaListPage, obteniendo playas...");
@@ -73,10 +94,10 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
   getPlayasAllSinFiltro() {
     this.isLoading = true;
-    //this.playas = this.playasAll.slice(0, 25);
-    this.playas = this.playasAll;
-    console.log("Mostrando todas las playas sin filtro" + this.playasAll.length);
-    console.log(`Total de playas sin filtro: ${this.playas.length}`);
+    this.isPaginated = true;
+    this.visibleCount = this.PAGE_SIZE;
+    this.playas = this.playasAll.slice(0, this.visibleCount);
+    console.log(`Mostrando ${this.playas.length} de ${this.playasAll.length} playas (paginado)`);
     this.isLoading = false;
   }
 
@@ -119,12 +140,15 @@ export class PlayaListPage implements OnInit, OnDestroy {
     // Si solo hay provincia, filtrar por provincia
     // Si no hay nada, mostrar playas por nombre
     if (this.selectedMunicipio) {
+      this.isPaginated = false;
       this.getPlayaByNameAndCodMunicipio(this.patterName, this.selectedMunicipio);
     } else if (this.selectedProvincia) {
       console.log("Provincia seleccionada:" + this.selectedProvincia + " con length:" + this.selectedProvincia.length + ", filtrando por provincia y nombre");
+      this.isPaginated = false;
       this.getPlayaByNameAndCodProvincia(this.patterName, this.selectedProvincia);
     } else if (this.patterName) {
       console.log("No hay provincia ni municipio seleccionados, filtrando por nombre");
+      this.isPaginated = false;
       this.getPlayasByName();
     } else {
       console.log("No hay filtros seleccionados, mostrando todas las playas");

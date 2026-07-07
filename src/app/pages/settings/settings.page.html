@@ -1,0 +1,24 @@
+<app-header [tituloPagina]="'settings.title' | translate"></app-header>
+
+<ion-content>
+  <ion-list inset="true">
+    <ion-item>
+      <ion-select
+        [label]="'settings.language' | translate"
+        [value]="lang"
+        (ionChange)="onLangChange($event)"
+        interface="popover">
+        <ion-select-option value="es">{{ 'settings.lang.es' | translate }}</ion-select-option>
+        <ion-select-option value="en">{{ 'settings.lang.en' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-toggle
+        [checked]="notificaciones"
+        (ionChange)="onNotificacionesChange($event)">
+        {{ 'settings.notifications' | translate }}
+      </ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>
