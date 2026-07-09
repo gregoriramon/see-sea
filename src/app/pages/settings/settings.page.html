@@ -26,6 +26,20 @@
     </ion-item>
 
     <ion-item>
+      <ion-input
+        [label]="'settings.email' | translate"
+        labelPlacement="stacked"
+        type="email"
+        inputmode="email"
+        [value]="email"
+        (ionInput)="onEmailChange($event)">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="emailInvalido" lines="none">
+      <ion-note color="danger">{{ 'settings.emailInvalido' | translate }}</ion-note>
+    </ion-item>
+
+    <ion-item>
       <ion-toggle
         [checked]="notificaciones"
         (ionChange)="onNotificacionesChange($event)">

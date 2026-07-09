@@ -5,8 +5,8 @@ import { Evento } from 'src/app/models/evento';
 import { Municipio, Provincia } from 'src/app/models/common';
 import { Device } from '@capacitor/device';
 
-export type TabInicial = 'favoritas' | 'buscar' | 'eventos' | 'calendario' | 'tips';
-const TABS_VALIDAS: TabInicial[] = ['favoritas', 'buscar', 'eventos', 'calendario', 'tips'];
+export type TabInicial = 'favoritas' | 'buscar' | 'eventos' | 'calendario' | 'feedback';
+const TABS_VALIDAS: TabInicial[] = ['favoritas', 'buscar', 'eventos', 'calendario', 'feedback'];
 
 @Injectable({
   providedIn: 'root',
@@ -32,14 +32,17 @@ export class LocalRepositoryService {
   private readonly LANG_KEY = 'pref_lang';
   private readonly NOTIFICATIONS_KEY = 'pref_notifications';
   private readonly TAB_INICIAL_KEY = 'pref_tab_inicial';
+  private readonly EMAIL_KEY = 'pref_email';
 
   // ===== PREFERENCIAS =====
   private langSubject = new BehaviorSubject<'es' | 'en'>('es');
   public lang$ = this.langSubject.asObservable();
   private notificacionesSubject = new BehaviorSubject<boolean>(false);
   public notificaciones$ = this.notificacionesSubject.asObservable();
-  private tabInicialSubject = new BehaviorSubject<TabInicial>('favoritas');
+  private tabInicialSubject = new BehaviorSubject<TabInicial>('calendario');
   public tabInicial$ = this.tabInicialSubject.asObservable();
+  private emailSubject = new BehaviorSubject<string>('');
+  public email$ = this.emailSubject.asObservable();
 
   constructor() {
     this.cargarFavoritas();
@@ -66,6 +69,24 @@ export class LocalRepositoryService {
     if (tab && TABS_VALIDAS.includes(tab)) {
       this.tabInicialSubject.next(tab);
     }
+    const email = localStorage.getItem(this.EMAIL_KEY);
+    if (email) {
+      this.emailSubject.next(email);
+    }
+  }
+
+  obtenerEmail(): string {
+    return this.emailSubject.value;
+  }
+
+  guardarEmail(email: string): void {
+    const valor = (email ?? '').trim();
+    if (valor) {
+      localStorage.setItem(this.EMAIL_KEY, valor);
+    } else {
+      localStorage.removeItem(this.EMAIL_KEY);
+    }
+    this.emailSubject.next(valor);
   }
 
   obtenerTabInicial(): TabInicial {

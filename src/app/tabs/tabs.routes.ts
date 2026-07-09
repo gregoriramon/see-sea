@@ -27,9 +27,9 @@ export const routes: Routes = [
           import('../pages/calendario/calendario.page').then((m) => m.CalendarioPage),
       },
       {
-        path: 'tips',
+        path: 'feedback',
         loadComponent: () =>
-          import('../pages/tips/tips.page').then((m) => m.TipsPage),
+          import('../pages/feedback/feedback.page').then((m) => m.FeedbackPage),
       },
       {
         path: 'playa/:codPlaya',
@@ -38,14 +38,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/favoritas',
+        redirectTo: '/tabs/calendario',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/favoritas',
+    redirectTo: '/tabs/calendario',
     pathMatch: 'full',
   },
 ];

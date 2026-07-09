@@ -4,6 +4,8 @@
     "language": "Language",
     "notifications": "Allow notifications",
     "tabInicial": "Home page",
+    "email": "Your email",
+    "emailInvalido": "Invalid email",
     "lang": {
       "es": "Spanish",
       "en": "English"
@@ -28,7 +30,7 @@
     "playas": "Beaches",
     "travesias": "Swims",
     "calendario": "My Calendar",
-    "tips": "Tips"
+    "feedback": "Give me back"
   },
   "alerts": {
     "about": {
@@ -64,13 +66,19 @@
     },
     "favoritas": {
       "title": "My Favorites",
-      "empty": "You have no favorite beaches yet",
+      "emptyLine1Part1": "You have no favorite beaches ",
+      "emptyLine1Part2": " for the forecast.",
+      "emptyLine2Part1": "Search beaches and tap ",
+      "emptyLine2Part2": " to add it.",
       "searchBeaches": "Search beaches",
       "loadingAlt": "Loading favorites"
     },
     "calendario": {
       "title": "My Calendar",
-      "empty": "You have no favorite swims yet.",
+      "emptyLine1Part1": "You have no swims ",
+      "emptyLine1Part2": " in your calendar.",
+      "emptyLine2Part1": "Look for swims and tap ",
+      "emptyLine2Part2": " to add it.",
       "searchEvents": "Search swims"
     },
     "eventoList": {
@@ -79,11 +87,30 @@
     },
     "playaView": {
       "detail": "Beach detail"
-    },
-    "tips": {
-      "title": "Tips",
-      "content": "Tips"
     }
+  },
+  "feedback": {
+    "title": "Give me back",
+    "intro": {
+      "heading": "Your feedback makes this app better",
+      "p1": "We want SiSi to be an app that truly adds value to people who enjoy the sea.",
+      "p2": "And the best way to achieve that is by listening to you: your ideas, issues and comments are the most valuable source for improvement.",
+      "p3": "Thanks in advance for helping us make SiSi one more tool for open water lovers."
+    },
+    "tipo": {
+      "label": "Type",
+      "bug": "Bug",
+      "mejora": "Improvement",
+      "comentario": "Comment"
+    },
+    "titulo": "Title (optional)",
+    "contenido": "Description",
+    "contenidoPlaceholder": "Tell us what happens or what you'd like to see...",
+    "email": "Your email (optional, so we can reply)",
+    "enviar": "Send",
+    "exito": "Thanks! Feedback sent.",
+    "error": "Could not send. Try again later.",
+    "privacidad": "Technical device info is attached for diagnostics. We never share your data."
   },
   "components": {
     "playa": {

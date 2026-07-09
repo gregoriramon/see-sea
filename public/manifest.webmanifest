@@ -3,7 +3,7 @@
   "short_name": "SiSi",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/tabs/favoritas",
+  "start_url": "/tabs/calendario",
   "theme_color": "#005f73",
   "background_color": "#005f73",
   "orientation": "portrait",

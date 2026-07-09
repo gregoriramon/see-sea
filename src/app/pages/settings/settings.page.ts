@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonList, IonItem, IonSelect, IonSelectOption, IonToggle, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonList, IonItem, IonSelect, IonSelectOption, IonToggle, IonButton, IonInput, IonNote } from '@ionic/angular/standalone';
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 import { TranslatePipe } from '@ngx-translate/core';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { LocalRepositoryService, TabInicial } from 'src/app/core/services/local-repository/local-repository.service';
@@ -22,6 +24,8 @@ import { LocalRepositoryService, TabInicial } from 'src/app/core/services/local-
     IonSelectOption,
     IonToggle,
     IonButton,
+    IonInput,
+    IonNote,
     HeaderComponent,
   ],
 })
@@ -32,13 +36,15 @@ export class SettingsPage {
   lang: 'es' | 'en' = this.localRepository.obtenerIdioma();
   notificaciones: boolean = this.localRepository.obtenerNotificaciones();
   tabInicial: TabInicial = this.localRepository.obtenerTabInicial();
+  email: string = this.localRepository.obtenerEmail();
+  emailInvalido = false;
 
   readonly tabsDisponibles: { value: TabInicial; labelKey: string }[] = [
     { value: 'favoritas', labelKey: 'tabs.prevision' },
     { value: 'buscar', labelKey: 'tabs.playas' },
     { value: 'eventos', labelKey: 'tabs.travesias' },
     { value: 'calendario', labelKey: 'tabs.calendario' },
-    { value: 'tips', labelKey: 'tabs.tips' },
+    { value: 'feedback', labelKey: 'tabs.feedback' },
   ];
 
   onLangChange(event: CustomEvent) {
@@ -52,6 +58,22 @@ export class SettingsPage {
 
   onTabInicialChange(event: CustomEvent) {
     this.localRepository.guardarTabInicial(event.detail.value as TabInicial);
+  }
+
+  onEmailChange(event: CustomEvent) {
+    const value = ((event.detail.value as string) ?? '').trim();
+    this.email = value;
+    if (!value) {
+      this.emailInvalido = false;
+      this.localRepository.guardarEmail('');
+      return;
+    }
+    if (!EMAIL_REGEX.test(value)) {
+      this.emailInvalido = true;
+      return;
+    }
+    this.emailInvalido = false;
+    this.localRepository.guardarEmail(value);
   }
 
   cerrar() {

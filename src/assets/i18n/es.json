@@ -4,6 +4,8 @@
     "language": "Idioma",
     "notifications": "Permitir notificaciones",
     "tabInicial": "Página de inicio",
+    "email": "Tu email",
+    "emailInvalido": "Email no válido",
     "lang": {
       "es": "Español",
       "en": "Inglés"
@@ -28,7 +30,7 @@
     "playas": "Playas",
     "travesias": "Travesias",
     "calendario": "Mi Calendario",
-    "tips": "Tips"
+    "feedback": "Dame opinión"
   },
   "alerts": {
     "about": {
@@ -64,13 +66,19 @@
     },
     "favoritas": {
       "title": "Mis Favoritas",
-      "empty": "No tienes playas favoritas aún",
+      "emptyLine1Part1": "No tienes playas ",
+      "emptyLine1Part2": " favoritas para previsión.",
+      "emptyLine2Part1": "Busca playas y pulsa ",
+      "emptyLine2Part2": " para agregarla.",
       "searchBeaches": "Buscar playas",
       "loadingAlt": "Cargando favoritas"
     },
     "calendario": {
       "title": "Mi Calendario",
-      "empty": "No tienes travesias favoritas aún.",
+      "emptyLine1Part1": "No tienes travesías ",
+      "emptyLine1Part2": " en tu calendario.",
+      "emptyLine2Part1": "Busca travesías y pulsa ",
+      "emptyLine2Part2": " para agregarla.",
       "searchEvents": "Buscar travesías"
     },
     "eventoList": {
@@ -79,11 +87,30 @@
     },
     "playaView": {
       "detail": "Detalle de playa"
-    },
-    "tips": {
-      "title": "Tips",
-      "content": "Tips"
     }
+  },
+  "feedback": {
+    "title": "Dame tu opinión",
+    "intro": {
+      "heading": "Tu opinión hace mejor esta app",
+      "p1": "Queremos que SiSi sea una aplicación que realmente aporte valor a quienes disfrutan del mar.",
+      "p2": "Y la mejor forma de conseguirlo es escuchándote: tus ideas, incidencias y comentarios son la fuente más valiosa para mejorar.",
+      "p3": "Gracias por anticipado por colaborar y ayudarnos a que SiSi sea una herramienta más para los amantes de las aguas abiertas."
+    },
+    "tipo": {
+      "label": "Tipo",
+      "bug": "Incidencia",
+      "mejora": "Mejora",
+      "comentario": "Comentario"
+    },
+    "titulo": "Título (opcional)",
+    "contenido": "Descripción",
+    "contenidoPlaceholder": "Cuéntanos qué ocurre o qué te gustaría ver...",
+    "email": "Tu email (opcional, para responderte)",
+    "enviar": "Enviar",
+    "exito": "¡Gracias! Feedback enviado.",
+    "error": "No se pudo enviar. Inténtalo más tarde.",
+    "privacidad": "Se adjunta información técnica del dispositivo para diagnóstico. Nunca compartimos tus datos."
   },
   "components": {
     "playa": {

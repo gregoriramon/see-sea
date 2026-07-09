@@ -5,6 +5,7 @@ import { AuthChangeEvent, createClient, Session, SupabaseClient } from '@supabas
 import { Dispositivo } from 'src/app/models/dispositivo';
 import { Playa } from 'src/app/models/playa';
 import { Evento } from 'src/app/models/evento';
+import { Feedback } from 'src/app/models/feedback';
 import { Municipio, Provincia } from 'src/app/models/common';
 
 import { environment } from 'src/environments/environment';
@@ -89,6 +90,14 @@ export class Supabase {
     if (error) {
       console.error('Error al registrar dispositivo:', error);
     }
+  }
+
+  async enviaFeedback(feedback: Feedback): Promise<{ error: any }> {
+    const { error } = await this.supabase.from('tb_feedback').insert(feedback);
+    if (error) {
+      console.error('Error al enviar feedback:', error);
+    }
+    return { error };
   }
 
   async getPlayasByName(name: string, conPrevison: boolean | undefined = false): Promise<Playa[]> {

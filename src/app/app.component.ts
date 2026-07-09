@@ -42,9 +42,9 @@ export class AppComponent implements OnInit  {
     this.localRepository.lang$.subscribe((lang) => this.translate.use(lang));
 
     const tabInicial = this.localRepository.obtenerTabInicial();
-    if (tabInicial !== 'favoritas') {
+    if (tabInicial !== 'calendario') {
       const path = window.location.pathname;
-      if (path === '/' || path === '/tabs' || path === '/tabs/' || path === '/tabs/favoritas') {
+      if (path === '/' || path === '/tabs' || path === '/tabs/' || path === '/tabs/calendario') {
         this.router.navigateByUrl(`/tabs/${tabInicial}`, { replaceUrl: true });
       }
     }

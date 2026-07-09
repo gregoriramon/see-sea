@@ -8,6 +8,7 @@ import {
   IonItem,
   IonLabel,
   IonButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -36,6 +37,7 @@ interface GrupoMes {
     IonItem,
     IonLabel,
     IonButton,
+    IonIcon,
     TranslatePipe,
   ],
 })
