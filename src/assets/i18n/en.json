@@ -3,6 +3,7 @@
     "title": "Settings",
     "language": "Language",
     "notifications": "Allow notifications",
+    "tabInicial": "Home page",
     "lang": {
       "es": "Spanish",
       "en": "English"
@@ -93,7 +94,15 @@
       "removeFav": "Remove from Favorites",
       "addFav": "Add to Favorites",
       "distance": "Distance:",
-      "price": "Price:"
+      "price": "Price:",
+      "share": {
+        "title": "Share Swim",
+        "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Shared from SiSi (See-Sea)",
+        "whatsapp": "WhatsApp",
+        "email": "Email",
+        "copy": "Copy link",
+        "copied": "Copied to clipboard"
+      }
     },
     "filtro": {
       "provincia": "Province",
@@ -107,7 +116,7 @@
       "next3m": "Next 3 months",
       "next6m": "Next 6 months",
       "next12m": "Next 12 months",
-      "searchPlaceholder": "Description, place, municipality or organizer",
+      "searchPlaceholder": "Description, place, municipality or province",
       "distMin": "Min dist. (m)",
       "distMax": "Max dist. (m)"
     },

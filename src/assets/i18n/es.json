@@ -3,6 +3,7 @@
     "title": "Configuración",
     "language": "Idioma",
     "notifications": "Permitir notificaciones",
+    "tabInicial": "Página de inicio",
     "lang": {
       "es": "Español",
       "en": "Inglés"
@@ -93,7 +94,15 @@
       "removeFav": "Eliminar de Favoritos",
       "addFav": "Añadir a Favoritos",
       "distance": "Distancia:",
-      "price": "Precio:"
+      "price": "Precio:",
+      "share": {
+        "title": "Compartir Travesía",
+        "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Compartido desde SiSi (See-Sea)",
+        "whatsapp": "WhatsApp",
+        "email": "Correo",
+        "copy": "Copiar enlace",
+        "copied": "Copiado al portapapeles"
+      }
     },
     "filtro": {
       "provincia": "Provincia",
@@ -107,7 +116,7 @@
       "next3m": "Próximos 3 meses",
       "next6m": "Próximos 6 meses",
       "next12m": "Próximos 12 meses",
-      "searchPlaceholder": "Descripción, lugar, municipio u organizador",
+      "searchPlaceholder": "Descripción, lugar, municipio o provincia",
       "distMin": "Dist. mín (m)",
       "distMax": "Dist. máx (m)"
     },

@@ -78,6 +78,15 @@ ion-button.ion-color-success {
   margin: 2px 0 0 0;
   text-transform: uppercase;
   line-height: 1.15;
+
+  .dia-semana {
+    text-transform: none;
+  }
+
+  .dia-finde {
+    font-weight: bold;
+    color: #4fa373;
+  }
 }
 
 .evento-extras {

@@ -5,6 +5,9 @@ import { Evento } from 'src/app/models/evento';
 import { Municipio, Provincia } from 'src/app/models/common';
 import { Device } from '@capacitor/device';
 
+export type TabInicial = 'favoritas' | 'buscar' | 'eventos' | 'calendario' | 'tips';
+const TABS_VALIDAS: TabInicial[] = ['favoritas', 'buscar', 'eventos', 'calendario', 'tips'];
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,12 +31,15 @@ export class LocalRepositoryService {
   private readonly DEVICE_ID_KEY = 'my_app_device_id';
   private readonly LANG_KEY = 'pref_lang';
   private readonly NOTIFICATIONS_KEY = 'pref_notifications';
+  private readonly TAB_INICIAL_KEY = 'pref_tab_inicial';
 
   // ===== PREFERENCIAS =====
   private langSubject = new BehaviorSubject<'es' | 'en'>('es');
   public lang$ = this.langSubject.asObservable();
   private notificacionesSubject = new BehaviorSubject<boolean>(false);
   public notificaciones$ = this.notificacionesSubject.asObservable();
+  private tabInicialSubject = new BehaviorSubject<TabInicial>('favoritas');
+  public tabInicial$ = this.tabInicialSubject.asObservable();
 
   constructor() {
     this.cargarFavoritas();
@@ -48,11 +54,27 @@ export class LocalRepositoryService {
     const lang = localStorage.getItem(this.LANG_KEY);
     if (lang === 'es' || lang === 'en') {
       this.langSubject.next(lang);
+    } else {
+      localStorage.setItem(this.LANG_KEY, 'es');
+      this.langSubject.next('es');
     }
     const notif = localStorage.getItem(this.NOTIFICATIONS_KEY);
     if (notif !== null) {
       this.notificacionesSubject.next(notif === 'true');
     }
+    const tab = localStorage.getItem(this.TAB_INICIAL_KEY) as TabInicial | null;
+    if (tab && TABS_VALIDAS.includes(tab)) {
+      this.tabInicialSubject.next(tab);
+    }
+  }
+
+  obtenerTabInicial(): TabInicial {
+    return this.tabInicialSubject.value;
+  }
+
+  guardarTabInicial(tab: TabInicial): void {
+    localStorage.setItem(this.TAB_INICIAL_KEY, tab);
+    this.tabInicialSubject.next(tab);
   }
 
   obtenerIdioma(): 'es' | 'en' {

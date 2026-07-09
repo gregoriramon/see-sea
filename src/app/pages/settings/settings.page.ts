@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonList, IonItem, IonSelect, IonSelectOption, IonToggle, IonButton } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
-import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { LocalRepositoryService, TabInicial } from 'src/app/core/services/local-repository/local-repository.service';
 
 @Component({
   selector: 'app-settings',
@@ -31,6 +31,15 @@ export class SettingsPage {
 
   lang: 'es' | 'en' = this.localRepository.obtenerIdioma();
   notificaciones: boolean = this.localRepository.obtenerNotificaciones();
+  tabInicial: TabInicial = this.localRepository.obtenerTabInicial();
+
+  readonly tabsDisponibles: { value: TabInicial; labelKey: string }[] = [
+    { value: 'favoritas', labelKey: 'tabs.prevision' },
+    { value: 'buscar', labelKey: 'tabs.playas' },
+    { value: 'eventos', labelKey: 'tabs.travesias' },
+    { value: 'calendario', labelKey: 'tabs.calendario' },
+    { value: 'tips', labelKey: 'tabs.tips' },
+  ];
 
   onLangChange(event: CustomEvent) {
     const value = event.detail.value as 'es' | 'en';
@@ -39,6 +48,10 @@ export class SettingsPage {
 
   onNotificacionesChange(event: CustomEvent) {
     this.localRepository.guardarNotificaciones(!!event.detail.checked);
+  }
+
+  onTabInicialChange(event: CustomEvent) {
+    this.localRepository.guardarTabInicial(event.detail.value as TabInicial);
   }
 
   cerrar() {

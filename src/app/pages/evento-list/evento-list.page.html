@@ -18,8 +18,22 @@
   </section>
 
   @if (isLoading) {
-    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
-      <ion-spinner name="circular"></ion-spinner>
+    <section>
+      <ion-grid [fixed]="true">
+        <ion-row>
+          @for (s of skeletonRows; track $index) {
+            <ion-col size="12" class="ion-no-padding">
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-skeleton-text [animated]="true" style="width: 70%; height: 16px;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%; height: 12px;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 55%; height: 12px;"></ion-skeleton-text>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
     </section>
   }
 
@@ -45,5 +59,9 @@
         }
       </ion-row>
     </ion-grid>
+
+    <ion-infinite-scroll [disabled]="!hayMas()" (ionInfinite)="onInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="circular"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </section>
 </ion-content>

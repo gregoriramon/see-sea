@@ -5,9 +5,14 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonSpinner,
   IonIcon,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonSkeletonText,
+  IonItem,
+  IonLabel,
 } from '@ionic/angular/standalone';
+import type { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
@@ -33,8 +38,12 @@ import { TranslatePipe } from '@ngx-translate/core';
     IonGrid,
     IonRow,
     IonCol,
-    IonSpinner,
     IonIcon,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonSkeletonText,
+    IonItem,
+    IonLabel,
     EventoComponent,
     HeaderComponent,
     FiltroEventosComponent,
@@ -47,6 +56,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   public eventos: Evento[] = [];
+  private eventosFiltrados: Evento[] = [];
   private eventosAll: Evento[] = [];
   public patterName: string = '';
   public rangoFecha: RangoFecha = '3m';
@@ -54,6 +64,10 @@ export class EventoListPage implements OnInit, OnDestroy {
   public distanciaMax: number | null = null;
   public codProvincia: string = '**';
   public isLoading: boolean = false;
+
+  private readonly pageSize = 25;
+  public visibleCount = this.pageSize;
+  public skeletonRows: number[] = Array.from({ length: 6 });
 
   ngOnInit() {
     this.cargarEventos(this.rangoFecha);
@@ -108,13 +122,14 @@ export class EventoListPage implements OnInit, OnDestroy {
     const filtraProvincia = this.codProvincia && this.codProvincia !== '**';
     const codProvinciaNorm = this.normalizaCodProvincia(this.codProvincia);
 
-    this.eventos = this.eventosAll.filter((e) => {
+    this.eventosFiltrados = this.eventosAll.filter((e) => {
       if (filtraProvincia && this.normalizaCodProvincia(e.cod_provincia) !== codProvinciaNorm) return false;
       if (q) {
         const coincide =
           normalizeSearch(e.descripcion ?? '').includes(q) ||
           normalizeSearch(e.lugar_evento ?? '').includes(q) ||
-          normalizeSearch(e.organizador ?? '').includes(q);
+          normalizeSearch(e.municipio ?? '').includes(q) ||
+          normalizeSearch(e.provincia ?? '').includes(q);
         if (!coincide) return false;
       }
       if (hayMin || hayMax) {
@@ -127,6 +142,21 @@ export class EventoListPage implements OnInit, OnDestroy {
       }
       return true;
     });
+    this.visibleCount = this.pageSize;
+    this.eventos = this.eventosFiltrados.slice(0, this.visibleCount);
+  }
+
+  public hayMas(): boolean {
+    return this.visibleCount < this.eventosFiltrados.length;
+  }
+
+  public onInfinite(ev: InfiniteScrollCustomEvent) {
+    this.visibleCount = Math.min(
+      this.visibleCount + this.pageSize,
+      this.eventosFiltrados.length,
+    );
+    this.eventos = this.eventosFiltrados.slice(0, this.visibleCount);
+    ev.target.complete();
   }
 
   esFavorito(evento: Evento): boolean {

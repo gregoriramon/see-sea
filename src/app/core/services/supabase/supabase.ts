@@ -400,7 +400,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoAll(): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .order('fecha_evento', { ascending: true });
 
@@ -413,7 +413,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByFecha(fechaIni: string, fechaFin: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)
       .lte('fecha_evento', fechaFin)
@@ -428,7 +428,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByLugar(pattern: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('lugar_evento', '%'+this.normalizaPatron(pattern)+'%')
       .order('fecha_evento', { ascending: true });
@@ -442,7 +442,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventosByDistancia(distanciaIni: number, distanciaFin: number): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('distancia', distanciaIni)
       .lte('distancia', distanciaFin)
@@ -457,7 +457,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventosByPrecio(precioIni: number, precioFin: number): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('precio', precioIni)
       .lte('precio', precioFin)
@@ -472,7 +472,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByDescripcion(pattern: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
       .order('fecha_evento', { ascending: true });
@@ -486,7 +486,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
       .gte('fecha_evento', fechaIni)
@@ -502,7 +502,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByDescripcionAndLugar(descPattern: string, lugarPattern: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(descPattern)+'%')
       .ilike('lugar_evento', '%'+this.normalizaPatron(lugarPattern)+'%')
@@ -517,7 +517,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByFechaAndLugar(fechaIni: string, fechaFin: string, lugarPattern: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)
       .lte('fecha_evento', fechaFin)
@@ -533,7 +533,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByDistanciaAndLugarAndFecha(distanciaIni: number, distanciaFin: number, lugarPattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('distancia', distanciaIni)
       .lte('distancia', distanciaFin)
@@ -551,7 +551,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getEventoByFechaAndDistanciaAndPrecio(fechaIni: string, fechaFin: string, distanciaIni: number, distanciaFin: number, precioIni: number, precioFin: number): Promise<Evento[]> {
     const { data, error } = await this.supabase
-      .from('eventos')
+      .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)
       .lte('fecha_evento', fechaFin)

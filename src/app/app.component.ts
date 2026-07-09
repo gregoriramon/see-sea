@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonTitle, IonList, IonItem, IonMenuToggle, AlertController, ToastController } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { LocalRepositoryService } from './core/services/local-repository/local-repository.service';
 import { filter, take } from 'rxjs/operators';
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit  {
   private toastController = inject(ToastController);
   private swUpdate = inject(SwUpdate);
   private translate = inject(TranslateService);
+  private router = inject(Router);
 
   private readonly INTERVALO_COMPROBACION_MS = 6 * 60 * 60 * 1000;
 
@@ -39,6 +40,14 @@ export class AppComponent implements OnInit  {
     this.translate.addLangs(['es', 'en']);
     this.translate.setFallbackLang('es');
     this.localRepository.lang$.subscribe((lang) => this.translate.use(lang));
+
+    const tabInicial = this.localRepository.obtenerTabInicial();
+    if (tabInicial !== 'favoritas') {
+      const path = window.location.pathname;
+      if (path === '/' || path === '/tabs' || path === '/tabs/' || path === '/tabs/favoritas') {
+        this.router.navigateByUrl(`/tabs/${tabInicial}`, { replaceUrl: true });
+      }
+    }
 
     this.localRepository.deviceId$.pipe(take(1)).subscribe((deviceId) => {
       try {

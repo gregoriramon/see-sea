@@ -11,7 +11,10 @@
       } @else if (evento.lugar_evento) {
         <p class="lugar-text">{{ evento.lugar_evento }}</p>
       }
-      <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">{{ evento.fecha_evento | fecha }}</p>
+      <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">
+        {{ evento.fecha_evento | fecha }} -
+        <span class="dia-semana" [class.dia-finde]="esFinde">{{ diaSemana }}</span>
+      </p>
 
       <div class="evento-extras">
         @if (evento.distancia) {
@@ -31,9 +34,12 @@
     <ion-button fill="clear" size="small" (click)="abrirInfo($event)" [disabled]="!evento.url_info && !evento.url_inscripcion" class="link-button">
       <ion-icon slot="icon-only" name="information-circle-outline" color="primary"></ion-icon>
     </ion-button>
+    <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
+      <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
+    </ion-button>
     <ion-button fill="clear" size="small" (click)="onToggleFavorito($event)" class="favorito-button">
       <ion-icon slot="icon-only" [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'"
-        [color]="getColorCalendario()">
+        [color]="colorCalendario">
       </ion-icon>
     </ion-button>
   </div>

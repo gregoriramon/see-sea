@@ -14,6 +14,18 @@
     </ion-item>
 
     <ion-item>
+      <ion-select
+        [label]="'settings.tabInicial' | translate"
+        [value]="tabInicial"
+        (ionChange)="onTabInicialChange($event)"
+        interface="popover">
+        <ion-select-option *ngFor="let t of tabsDisponibles" [value]="t.value">
+          {{ t.labelKey | translate }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-toggle
         [checked]="notificaciones"
         (ionChange)="onNotificacionesChange($event)">
