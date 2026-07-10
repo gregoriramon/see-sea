@@ -509,6 +509,22 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Evento[];
   }
 
+  async getEventoPasadoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
+    const { data, error } = await this.supabase
+      .from('travesias_pasadas')
+      .select(this.SELECT_EVENTO)
+      .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
+      .gte('fecha_evento', fechaIni)
+      .lte('fecha_evento', fechaFin)
+      .order('fecha_evento', { ascending: false });
+
+    if (error) {
+      console.error('Error al obtener eventos pasados por descripcion y fecha:', error);
+      return [];
+    }
+    return data as Evento[];
+  }
+
   async getEventoByDescripcionAndLugar(descPattern: string, lugarPattern: string): Promise<Evento[]> {
     const { data, error } = await this.supabase
       .from('travesias')

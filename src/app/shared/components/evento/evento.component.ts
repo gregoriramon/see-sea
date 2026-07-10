@@ -38,6 +38,7 @@ export class EventoComponent implements OnChanges {
   public diaSemana: string = '';
   public esFinde: boolean = false;
   public colorCalendario: string = 'medium';
+  public esPasado: boolean = false;
 
   constructor() {
     addIcons({ calendar, calendarOutline, informationCircleOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
@@ -48,6 +49,7 @@ export class EventoComponent implements OnChanges {
       const fecha = this.parsearFecha(this.evento?.fecha_evento);
       this.diaSemana = this.computarDiaSemana(fecha);
       this.esFinde = this.computarEsFinde(fecha);
+      this.esPasado = fechaEsPasada(this.evento?.fecha_evento);
     }
     if (changes['evento'] || changes['esParticularFavorito']) {
       this.colorCalendario = this.computarColorCalendario();

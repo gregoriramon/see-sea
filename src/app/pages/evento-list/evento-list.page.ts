@@ -78,20 +78,28 @@ export class EventoListPage implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private mesesFromRango(r: RangoFecha): number {
-    return r === '3m' ? 3 : r === '6m' ? 6 : 12;
+  private rangoToInterval(r: RangoFecha): { meses: number; esPasado: boolean } {
+    const esPasado = r.startsWith('-');
+    const meses = parseInt(r.replace('-', '').replace('m', ''), 10);
+    return { meses, esPasado };
   }
 
   private cargarEventos(rango: RangoFecha) {
+    const { meses, esPasado } = this.rangoToInterval(rango);
     const hoy = new Date();
-    const fin = new Date();
-    fin.setMonth(fin.getMonth() + this.mesesFromRango(rango));
-    const fechaIni = hoy.toISOString().slice(0, 10);
-    const fechaFin = fin.toISOString().slice(0, 10);
+    const otra = new Date();
+    otra.setMonth(otra.getMonth() + (esPasado ? -meses : meses));
+    const hoyStr = hoy.toISOString().slice(0, 10);
+    const otraStr = otra.toISOString().slice(0, 10);
+    const fechaIni = esPasado ? otraStr : hoyStr;
+    const fechaFin = esPasado ? hoyStr : otraStr;
+
+    const query = esPasado
+      ? this.supabaseService.getEventoPasadoByDescripcionAndFecha('', fechaIni, fechaFin)
+      : this.supabaseService.getEventoByDescripcionAndFecha('', fechaIni, fechaFin);
 
     this.isLoading = true;
-    this.supabaseService
-      .getEventoByDescripcionAndFecha('', fechaIni, fechaFin)
+    query
       .then((eventos) => {
         this.eventosAll = eventos;
         this.refrescarEventos();

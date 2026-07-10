@@ -34,14 +34,16 @@
     <ion-button fill="clear" size="small" (click)="abrirInfo($event)" [disabled]="!evento.url_info && !evento.url_inscripcion" class="link-button">
       <ion-icon slot="icon-only" name="information-circle-outline" color="primary"></ion-icon>
     </ion-button>
-    <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
-      <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
-    </ion-button>
-    <ion-button fill="clear" size="small" (click)="onToggleFavorito($event)" class="favorito-button">
-      <ion-icon slot="icon-only" [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'"
-        [color]="colorCalendario">
-      </ion-icon>
-    </ion-button>
+    @if (!esPasado) {
+      <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
+        <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" (click)="onToggleFavorito($event)" class="favorito-button">
+        <ion-icon slot="icon-only" [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'"
+          [color]="colorCalendario">
+        </ion-icon>
+      </ion-button>
+    }
   </div>
 
 </ion-item>

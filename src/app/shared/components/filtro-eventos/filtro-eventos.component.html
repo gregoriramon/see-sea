@@ -22,6 +22,9 @@
                 [(ngModel)]="selectedRango"
                 (ionChange)="onRangoChange($event.detail.value)"
                 class="compact-select">
+                <ion-select-option value="-12m">{{ 'components.filtroEventos.last12m' | translate }}</ion-select-option>
+                <ion-select-option value="-6m">{{ 'components.filtroEventos.last6m' | translate }}</ion-select-option>
+                <ion-select-option value="-3m">{{ 'components.filtroEventos.last3m' | translate }}</ion-select-option>
                 <ion-select-option value="3m">{{ 'components.filtroEventos.next3m' | translate }}</ion-select-option>
                 <ion-select-option value="6m">{{ 'components.filtroEventos.next6m' | translate }}</ion-select-option>
                 <ion-select-option value="12m">{{ 'components.filtroEventos.next12m' | translate }}</ion-select-option>
