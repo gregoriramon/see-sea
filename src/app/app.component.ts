@@ -6,12 +6,14 @@ import { LocalRepositoryService } from './core/services/local-repository/local-r
 import { filter, take } from 'rxjs/operators';
 import { Supabase } from './core/services/supabase/supabase';
 import { IosInstallBannerComponent } from './shared/components/ios-install-banner/ios-install-banner.component';
+import { OfflineBannerComponent } from './shared/components/offline-banner/offline-banner.component';
+import { NetworkStatusService } from './core/services/network/network-status.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent, TranslatePipe, RouterLink],
+  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent, OfflineBannerComponent, TranslatePipe, RouterLink],
 })
 export class AppComponent implements OnInit  {
   private localRepository = inject(LocalRepositoryService);
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit  {
   private swUpdate = inject(SwUpdate);
   private translate = inject(TranslateService);
   private router = inject(Router);
+  private networkStatus = inject(NetworkStatusService);
 
   private readonly INTERVALO_COMPROBACION_MS = 6 * 60 * 60 * 1000;
 
@@ -59,6 +62,21 @@ export class AppComponent implements OnInit  {
     });
 
     this.inicializarActualizacionPwa();
+    this.inicializarRecargaAlReconectar();
+  }
+
+  private inicializarRecargaAlReconectar() {
+    this.networkStatus.reconnected$.subscribe(() => {
+      const url = this.router.url;
+      const prevReuse = this.router.routeReuseStrategy.shouldReuseRoute;
+      const prevOnSame = this.router.onSameUrlNavigation;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigateByUrl(url, { replaceUrl: true }).finally(() => {
+        this.router.routeReuseStrategy.shouldReuseRoute = prevReuse;
+        this.router.onSameUrlNavigation = prevOnSame;
+      });
+    });
   }
 
   private inicializarActualizacionPwa() {

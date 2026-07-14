@@ -11,4 +11,9 @@ export interface Evento {
   precio: number;
   url_info: string;
   url_inscripcion: string;
+  fecha_inicio_inscripcion: string;
+  fecha_fin_inscripcion: string;
+  url_reglamento:string;
+  url_oficial:string;
+  disciplina:string;
 }

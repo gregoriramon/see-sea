@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonGrid,
@@ -53,6 +54,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class EventoListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   private localRepositoryService = inject(LocalRepositoryService);
+  private router = inject(Router);
   private destroy$ = new Subject<void>();
 
   public eventos: Evento[] = [];
@@ -173,6 +175,10 @@ export class EventoListPage implements OnInit, OnDestroy {
 
   onToggleFavorito(evento: Evento) {
     this.localRepositoryService.toggleFavoritoEvento(evento);
+  }
+
+  onEventoClick(evento: Evento) {
+    this.router.navigate(['/tabs/evento', evento.id]);
   }
 
   onFiltroChange(f: FiltroEventos) {

@@ -29,6 +29,19 @@ export class Supabase {
 
   }
 
+  async ping(timeoutMs: number = 4000): Promise<boolean> {
+    try {
+      const query = this.supabase.from('tb_dispositivos').select('id_dispositivo', { count: 'exact', head: true }).limit(1);
+      const timeout = new Promise<{ error: unknown }>((resolve) =>
+        setTimeout(() => resolve({ error: new Error('timeout') }), timeoutMs)
+      );
+      const result = await Promise.race([query, timeout]) as { error: unknown };
+      return !result.error;
+    } catch {
+      return false;
+    }
+  }
+
   async getDispositivos(): Promise<Dispositivo[]> {
 
     const { data, error } = await this.supabase
@@ -405,6 +418,20 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
       .replace(/[̀-ͯ]/g, '')
       .trim()
       .toLowerCase();
+  }
+
+  async getEventoById(id: number): Promise<Evento | null> {
+    const { data, error } = await this.supabase
+      .from('travesias')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener evento por id:', error);
+      return null;
+    }
+    return data as Evento;
   }
 
   async getEventoAll(): Promise<Evento[]> {

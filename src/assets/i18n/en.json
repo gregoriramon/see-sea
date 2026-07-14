@@ -53,7 +53,11 @@
     "favoritaRemoved": "Beach {{name}} removed from favorites",
     "favoritaAdded": "Beach {{name}} added to favorites",
     "eventoRemoved": "Swim {{name}} removed from calendar",
-    "eventoAdded": "Swim {{name}} added to calendar"
+    "eventoAdded": "Swim {{name}} added to calendar",
+    "offlineNoService": "Offline: couldn't confirm with the service"
+  },
+  "offline": {
+    "bannerText": "Offline — some features are unavailable"
   },
   "loading": {
     "favoritas": "Loading your favorites..."
@@ -87,6 +91,9 @@
     },
     "playaView": {
       "detail": "Beach detail"
+    },
+    "eventoView": {
+      "detail": "Swim detail"
     }
   },
   "feedback": {
@@ -122,6 +129,17 @@
       "addFav": "Add to Favorites",
       "distance": "Distance:",
       "price": "Price:",
+      "disciplina": "Discipline",
+      "organizador": "Organizer",
+      "lugar": "Venue",
+      "municipio": "Municipality",
+      "provincia": "Province",
+      "inicioInscripcion": "Registration start",
+      "finInscripcion": "Registration end",
+      "urlInfo": "Info",
+      "urlInscripcion": "Registration",
+      "urlReglamento": "Rules",
+      "urlOficial": "Official website",
       "share": {
         "title": "Share Swim",
         "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Shared from SiSi (See-Sea)",

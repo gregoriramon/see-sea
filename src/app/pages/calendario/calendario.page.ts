@@ -79,6 +79,10 @@ export class CalendarioPage implements OnInit, OnDestroy {
     this.localRepository.toggleFavoritoEvento(evento);
   }
 
+  onEventoClick(evento: Evento): void {
+    this.router.navigate(['/tabs/evento', evento.id]);
+  }
+
   trackByClave(_: number, g: GrupoMes): string {
     return g.clave;
   }

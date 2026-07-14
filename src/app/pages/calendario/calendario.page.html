@@ -2,7 +2,7 @@
 <ion-content>
   <div *ngIf="grupos.length === 0" class="calendario-vacio" style="padding: 24px; text-align: center; color: var(--ion-color-medium);">
     <p>
-      {{ 'pages.calendario.emptyLine1Part1' | translate }}<ion-icon name="trophy" color="warning" style="vertical-align: middle;"></ion-icon>{{ 'pages.calendario.emptyLine1Part2' | translate }}
+      {{ 'pages.calendario.emptyLine1Part1' | translate }}<ion-icon src="assets/icon/evento-cabeza-brazos.svg" color="primary" style="vertical-align: middle;"></ion-icon>{{ 'pages.calendario.emptyLine1Part2' | translate }}
     </p>
     <p>
       {{ 'pages.calendario.emptyLine2Part1' | translate }}<ion-icon name="calendar" color="primary" style="vertical-align: middle;"></ion-icon>{{ 'pages.calendario.emptyLine2Part2' | translate }}
@@ -25,7 +25,8 @@
           [evento]="ev"
           [esParticularFavorito]="true"
           [mostrarBotonFavorito]="false"
-          (toggleFavorito)="onToggleFavorito(ev)">
+          (toggleFavorito)="onToggleFavorito(ev)"
+          (itemClick)="onEventoClick(ev)">
         </app-evento>
       </div>
     </ion-accordion>

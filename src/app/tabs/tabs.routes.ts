@@ -37,6 +37,11 @@ export const routes: Routes = [
           import('../pages/playa-view/playa-view.page').then((m) => m.PlayaViewPage),
       },
       {
+        path: 'evento/:id',
+        loadComponent: () =>
+          import('../pages/evento-view/evento-view.page').then((m) => m.EventoViewPage),
+      },
+      {
         path: '',
         redirectTo: '/tabs/calendario',
         pathMatch: 'full',

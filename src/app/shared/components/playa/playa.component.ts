@@ -15,6 +15,7 @@ import { TemperaturaPipe } from "../../pipes/temperatura-pipe";
 import { DiasPrevisonComponent } from "../dias-previson/dias-previson.component";
 import { Capacitor } from '@capacitor/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { NetworkStatusService } from 'src/app/core/services/network/network-status.service';
 
 @Component({
   selector: 'app-playa',
@@ -27,6 +28,7 @@ export class PlayaComponent implements OnInit {
   private toastController = inject(ToastController);
   private alertController = inject(AlertController);
   private translate = inject(TranslateService);
+  private networkStatus = inject(NetworkStatusService);
 
 
   faWater = faWater;
@@ -94,7 +96,12 @@ export class PlayaComponent implements OnInit {
       await alert.present();
     } else {
       this.toggleFavorita.emit(this.playa);
-      this.presentToast(this.translate.instant('toasts.favoritaAdded', { name: this.playa.playa }));
+      const online = await this.networkStatus.checkSupabase();
+      if (online) {
+        this.presentToast(this.translate.instant('toasts.favoritaAdded', { name: this.playa.playa }));
+      } else {
+        this.presentToast(this.translate.instant('toasts.offlineNoService'), 'danger');
+      }
     }
   }
 
@@ -107,7 +114,7 @@ export class PlayaComponent implements OnInit {
     } else if (platform === 'android') {
       window.location.href = `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(playa)})`;
     } else {
-      window.open(`https://www.google.com/maps/?q=${lat},${lon}`, '_blank');
+      window.location.href = `https://www.google.com/maps/?q=${lat},${lon}`;
     }
   }
 
@@ -118,11 +125,12 @@ export class PlayaComponent implements OnInit {
   getColorTemperatura(temperatura: number, ionicColors: boolean): string {
     return getColorTemperatura(temperatura, ionicColors);
   }
-    async presentToast(message:string) {
+    async presentToast(message: string, color?: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
       position: 'middle',
+      color:'primary'
     });
 
     await toast.present();

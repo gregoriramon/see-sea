@@ -54,7 +54,8 @@
             <app-evento
               [evento]="item"
               [esParticularFavorito]="esFavorito(item)"
-              (toggleFavorito)="onToggleFavorito(item)"></app-evento>
+              (toggleFavorito)="onToggleFavorito(item)"
+              (itemClick)="onEventoClick(item)"></app-evento>
           </ion-col>
         }
       </ion-row>

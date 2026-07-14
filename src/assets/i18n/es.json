@@ -53,7 +53,11 @@
     "favoritaRemoved": "Playa {{name}} eliminada de favoritas",
     "favoritaAdded": "Playa {{name}} añadida a favoritas",
     "eventoRemoved": "Travesia {{name}} eliminada del calendario",
-    "eventoAdded": "Travesía {{name}} añadido al calendario"
+    "eventoAdded": "Travesía {{name}} añadido al calendario",
+    "offlineNoService": "Sin conexión: no se pudo confirmar con el servicio"
+  },
+  "offline": {
+    "bannerText": "Sin conexión — algunas funciones no están disponibles"
   },
   "loading": {
     "favoritas": "Cargando tus favoritas..."
@@ -87,6 +91,9 @@
     },
     "playaView": {
       "detail": "Detalle de playa"
+    },
+    "eventoView": {
+      "detail": "Detalle de travesía"
     }
   },
   "feedback": {
@@ -122,6 +129,17 @@
       "addFav": "Añadir a Favoritos",
       "distance": "Distancia:",
       "price": "Precio:",
+      "disciplina": "Disciplina",
+      "organizador": "Organizador",
+      "lugar": "Lugar",
+      "municipio": "Municipio",
+      "provincia": "Provincia",
+      "inicioInscripcion": "Inicio de inscripción",
+      "finInscripcion": "Fin de inscripción",
+      "urlInfo": "Información",
+      "urlInscripcion": "Inscripción",
+      "urlReglamento": "Reglamento",
+      "urlOficial": "Web oficial",
       "share": {
         "title": "Compartir Travesía",
         "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Compartido desde SiSi (See-Sea)",

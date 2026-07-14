@@ -33,7 +33,22 @@ export class EventoComponent implements OnChanges {
   @Input() evento!: Evento;
   @Input() esParticularFavorito: boolean = false;
   @Input() mostrarBotonFavorito: boolean = false;
+  @Input() detalleCompleto: boolean = false;
   @Output() toggleFavorito = new EventEmitter<Evento>();
+  @Output() itemClick = new EventEmitter<Evento>();
+
+  onItemClick(): void {
+    if (!this.detalleCompleto) {
+      this.itemClick.emit(this.evento);
+    }
+  }
+
+  abrirUrl(event: Event, url: string | undefined | null): void {
+    event.stopPropagation();
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
 
   public diaSemana: string = '';
   public esFinde: boolean = false;
@@ -202,6 +217,7 @@ export class EventoComponent implements OnChanges {
       message: message,
       duration: 2000,
       position: 'middle',
+      color: 'primary',
     });
 
     await toast.present();
