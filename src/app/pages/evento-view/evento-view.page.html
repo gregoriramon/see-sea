@@ -15,12 +15,11 @@
   }
 
   @if (evento) {
-    <app-evento
+    <app-evento-detalle
       [evento]="evento"
-      [detalleCompleto]="true"
       [esParticularFavorito]="esFav"
       [mostrarBotonFavorito]="true"
       (toggleFavorito)="onToggleFavorito($event)">
-    </app-evento>
+    </app-evento-detalle>
   }
 </ion-content>

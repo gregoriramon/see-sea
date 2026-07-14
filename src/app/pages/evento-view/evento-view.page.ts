@@ -8,7 +8,7 @@ import {
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
 import { Evento } from 'src/app/models/evento';
-import { EventoComponent } from 'src/app/shared/components/evento/evento.component';
+import { EventoDetalleComponent } from 'src/app/shared/components/evento-detalle/evento-detalle.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -19,7 +19,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [
     CommonModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonSpinner,
-    EventoComponent,
+    EventoDetalleComponent,
     TranslatePipe,
   ],
 })
