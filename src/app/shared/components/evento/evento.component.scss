@@ -48,6 +48,16 @@
 
 .favorito-button { height: auto; }
 
+.resultados-button ion-icon {
+  color: var(--ion-color-medium);
+}
+
+.resultados-activo ion-icon {
+  color: #d4a017;
+  filter: drop-shadow(0 0 3px rgba(212, 160, 23, 0.6));
+  font-size: 1.7rem;
+}
+
 ion-icon.ion-color-success,
 ion-button.ion-color-success {
   --ion-color-success: #4fa373;
@@ -90,6 +100,15 @@ ion-button.ion-color-success {
   .dia-finde {
     font-weight: bold;
     color: #4fa373;
+  }
+
+  .badge-pasada {
+    margin-left: 6px;
+    font-weight: 700;
+    padding: 0 4px;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    font-size: 0.65rem;
   }
 }
 

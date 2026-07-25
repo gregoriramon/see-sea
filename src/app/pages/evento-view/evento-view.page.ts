@@ -31,6 +31,7 @@ export class EventoViewPage implements OnInit, OnDestroy {
   public evento?: Evento;
   public isLoading: boolean = false;
   public esFav: boolean = false;
+  public backHref: string = '/tabs/eventos';
 
   private favoritosSub?: Subscription;
 
@@ -40,8 +41,17 @@ export class EventoViewPage implements OnInit, OnDestroy {
     if (!id || isNaN(id)) {
       return;
     }
+    const fechaParam = this.route.snapshot.queryParamMap.get('fecha');
+    const origen = this.route.snapshot.queryParamMap.get('origen');
+    this.backHref = origen === 'calendario' ? '/tabs/calendario' : '/tabs/eventos';
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    const esPasado = fechaParam ? new Date(fechaParam) < hoy : false;
     this.isLoading = true;
-    this.supabaseService.getEventoById(id)
+    const promesa = esPasado
+      ? this.supabaseService.getEventoPasadoById(id)
+      : this.supabaseService.getEventoById(id);
+    promesa
       .then((evento) => {
         if (evento) {
           this.evento = evento;

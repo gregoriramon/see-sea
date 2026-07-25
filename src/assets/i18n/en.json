@@ -16,6 +16,11 @@
     "settings": "Settings",
     "about": "About..."
   },
+  "header": {
+    "shareApp": "Share app",
+    "shareTitle": "SiSi — See-Sea",
+    "shareBody": "Check the sea conditions and open water swims on Spanish beaches with SiSi 🌊\n{{url}}"
+  },
   "common": {
     "cancel": "Cancel",
     "close": "Close",
@@ -125,8 +130,8 @@
       "addFav": "Add to Favorites"
     },
     "evento": {
-      "removeFav": "Remove from Favorites",
-      "addFav": "Add to Favorites",
+      "removeCal": "Remove from Calendar",
+      "addCal": "Add to Calendar",
       "distance": "Distance:",
       "price": "Price:",
       "disciplina": "Discipline",
@@ -140,6 +145,8 @@
       "urlInscripcion": "Registration",
       "urlReglamento": "Rules",
       "urlOficial": "Official website",
+      "urlResultados": "Results",
+      "pasada": "PAST",
       "share": {
         "title": "Share Swim",
         "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Shared from SiSi (See-Sea)",

@@ -1,14 +1,22 @@
 <div class="evento-detalle-card">
   <header class="cabecera">
-    <h1 class="titulo">{{ evento.descripcion }}</h1>
+    <div class="cabecera-top">
+      <h1 class="titulo">{{ evento.descripcion }}</h1>
+      <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
+        <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
+      </ion-button>
+    </div>
     <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">
       {{ evento.fecha_evento | fecha }} -
       <span class="dia-semana" [class.dia-finde]="esFinde">{{ diaSemana }}</span>
+      @if (esPasado) {
+        <span class="badge-pasada" [style.color]="evento.fecha_evento | colorFecha">{{ 'components.evento.pasada' | translate }}</span>
+      }
     </p>
   </header>
 
   <div class="detalle-grid">
-    @if (evento.disciplina) {
+    @if (!esPasado && evento.disciplina) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.disciplina' | translate }}</span>
         <span class="detalle-value">{{ evento.disciplina }}</span>
@@ -20,7 +28,7 @@
         <span class="detalle-value">{{ evento.distancia }}</span>
       </div>
     }
-    @if (evento.precio !== null && evento.precio !== undefined) {
+    @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.price' | translate }}</span>
         <span class="detalle-value">{{ evento.precio }} €</span>
@@ -50,31 +58,37 @@
         <span class="detalle-value">{{ evento.provincia }}</span>
       </div>
     }
-    @if (evento.fecha_inicio_inscripcion) {
+    @if (!esPasado && evento.fecha_inicio_inscripcion) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.inicioInscripcion' | translate }}</span>
         <span class="detalle-value">{{ evento.fecha_inicio_inscripcion | fecha }}</span>
       </div>
     }
-    @if (evento.fecha_fin_inscripcion) {
+    @if (!esPasado && evento.fecha_fin_inscripcion) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.finInscripcion' | translate }}</span>
         <span class="detalle-value">{{ evento.fecha_fin_inscripcion | fecha }}</span>
       </div>
     }
-    @if (evento.url_info) {
+    @if (!esPasado && evento.url_info) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.urlInfo' | translate }}</span>
         <a class="detalle-link" (click)="abrirUrl($event, evento.url_info)">{{ evento.url_info }}</a>
       </div>
     }
-    @if (evento.url_inscripcion) {
+    @if (esPasado && evento.url_resultados) {
+      <div class="detalle-row">
+        <span class="detalle-label">{{ 'components.evento.urlResultados' | translate }}</span>
+        <a class="detalle-link" (click)="abrirUrl($event, evento.url_resultados)">{{ evento.url_resultados }}</a>
+      </div>
+    }
+    @if (!esPasado && evento.url_inscripcion) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.urlInscripcion' | translate }}</span>
         <a class="detalle-link" (click)="abrirUrl($event, evento.url_inscripcion)">{{ evento.url_inscripcion }}</a>
       </div>
     }
-    @if (evento.url_reglamento) {
+    @if (!esPasado && evento.url_reglamento) {
       <div class="detalle-row">
         <span class="detalle-label">{{ 'components.evento.urlReglamento' | translate }}</span>
         <a class="detalle-link" (click)="abrirUrl($event, evento.url_reglamento)">{{ evento.url_reglamento }}</a>
@@ -92,13 +106,13 @@
     <div class="boton-favorita-row">
       <ion-button
         fill="outline"
-        [color]="esParticularFavorito ? 'success' : 'primary'"
+        [color]="colorCalendario"
         (click)="onToggleFavorito($event)">
         <ion-icon
           slot="start"
           [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'">
         </ion-icon>
-        {{ (esParticularFavorito ? 'components.evento.removeFav' : 'components.evento.addFav') | translate }}
+        {{ (esParticularFavorito ? 'components.evento.removeCal' : 'components.evento.addCal/') | translate }}
       </ion-button>
     </div>
   }

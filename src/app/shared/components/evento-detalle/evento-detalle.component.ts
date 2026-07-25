@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnChan
 import {
   AlertController,
   ToastController,
+  ActionSheetController,
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
@@ -10,7 +11,7 @@ import { FechaPipe } from '../../pipes/fecha-pipe';
 import { ColorFechaPipe } from '../../pipes/color-fecha-pipe';
 import { fechaEsPasada } from '../../utils/templateUtils';
 import { addIcons } from 'ionicons';
-import { calendar, calendarOutline, openOutline } from 'ionicons/icons';
+import { calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -24,6 +25,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 export class EventoDetalleComponent implements OnChanges {
   private alertController = inject(AlertController);
   private toastController = inject(ToastController);
+  private actionSheetController = inject(ActionSheetController);
   private translate = inject(TranslateService);
 
   @Input() evento!: Evento;
@@ -37,7 +39,7 @@ export class EventoDetalleComponent implements OnChanges {
   public esPasado: boolean = false;
 
   constructor() {
-    addIcons({ calendar, calendarOutline, openOutline });
+    addIcons({ calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -123,6 +125,73 @@ export class EventoDetalleComponent implements OnChanges {
       this.toggleFavorito.emit(this.evento);
       this.presentToast(this.translate.instant('toasts.eventoAdded', { name: this.evento.descripcion }));
     }
+  }
+
+  async compartir(event: Event): Promise<void> {
+    event.stopPropagation();
+
+    const url = this.evento.url_info || this.evento.url_inscripcion || '';
+    const fecha = new FechaPipe().transform(this.evento.fecha_evento);
+    const lugar = this.evento.municipio
+      ? `${this.evento.municipio}${this.evento.provincia ? ' (' + this.evento.provincia + ')' : ''}`
+      : (this.evento.lugar_evento ?? '');
+
+    const title = this.translate.instant('components.evento.share.title');
+    const text = this.translate.instant('components.evento.share.body', {
+      descripcion: this.evento.descripcion ?? '',
+      fecha,
+      lugar,
+      url,
+    });
+
+    const appUrl = typeof window !== 'undefined' ? window.location.origin : undefined;
+
+    if (typeof navigator !== 'undefined' && (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share) {
+      try {
+        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text, url: appUrl });
+        return;
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name === 'AbortError') return;
+      }
+    }
+
+    const sheet = await this.actionSheetController.create({
+      header: title,
+      buttons: [
+        {
+          text: this.translate.instant('components.evento.share.whatsapp'),
+          icon: 'logo-whatsapp',
+          handler: () => {
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+          },
+        },
+        {
+          text: this.translate.instant('components.evento.share.email'),
+          icon: 'mail-outline',
+          handler: () => {
+            window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+          },
+        },
+        {
+          text: this.translate.instant('components.evento.share.copy'),
+          icon: 'copy-outline',
+          handler: async () => {
+            try {
+              await navigator.clipboard.writeText(text);
+              this.presentToast(this.translate.instant('components.evento.share.copied'));
+            } catch {
+              // ignore
+            }
+          },
+        },
+        {
+          text: this.translate.instant('common.cancel'),
+          role: 'cancel',
+        },
+      ],
+    });
+
+    await sheet.present();
   }
 
   private async presentToast(message: string) {

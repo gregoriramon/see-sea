@@ -72,7 +72,14 @@ export class EventoListPage implements OnInit, OnDestroy {
   public skeletonRows: number[] = Array.from({ length: 6 });
 
   ngOnInit() {
-    this.cargarEventos(this.rangoFecha);
+    // Carga inicial diferida a ionViewDidEnter para evitar race con la
+    // navegación inicial de AppComponent y la hidratación del cliente Supabase.
+  }
+
+  ionViewDidEnter() {
+    if (this.eventosAll.length === 0 && !this.isLoading) {
+      this.cargarEventos(this.rangoFecha);
+    }
   }
 
   ngOnDestroy() {
@@ -100,15 +107,17 @@ export class EventoListPage implements OnInit, OnDestroy {
       ? this.supabaseService.getEventoPasadoByDescripcionAndFecha('', fechaIni, fechaFin)
       : this.supabaseService.getEventoByDescripcionAndFecha('', fechaIni, fechaFin);
 
+    console.log('[evento-list] cargarEventos', { rango, fechaIni, fechaFin, esPasado, t: Date.now() });
     this.isLoading = true;
     query
       .then((eventos) => {
+        console.log('[evento-list] cargarEventos OK', { rango, count: eventos.length, t: Date.now() });
         this.eventosAll = eventos;
         this.refrescarEventos();
         this.isLoading = false;
       })
       .catch((reason) => {
-        console.log(reason);
+        console.log('[evento-list] cargarEventos ERROR', reason);
         this.isLoading = false;
       });
   }
@@ -178,7 +187,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   }
 
   onEventoClick(evento: Evento) {
-    this.router.navigate(['/tabs/evento', evento.id]);
+    this.router.navigate(['/tabs/evento', evento.id], { queryParams: { fecha: evento.fecha_evento, origen: 'eventos' } });
   }
 
   onFiltroChange(f: FiltroEventos) {

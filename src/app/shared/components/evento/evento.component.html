@@ -14,6 +14,9 @@
       <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">
         {{ evento.fecha_evento | fecha }} -
         <span class="dia-semana" [class.dia-finde]="esFinde">{{ diaSemana }}</span>
+        @if (esPasado) {
+          <span class="badge-pasada" [style.color]="evento.fecha_evento | colorFecha">{{ 'components.evento.pasada' | translate }}</span>
+        }
       </p>
 
       <div class="evento-extras">
@@ -23,7 +26,7 @@
 <!--        @if (evento.organizador) {-->
 <!--          <p class="extra-text"><strong>Organizador:</strong> {{ evento.organizador }}</p>-->
 <!--        }-->
-        @if (evento.precio !== null && evento.precio !== undefined) {
+        @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
           <p class="extra-text"><strong>{{ 'components.evento.price' | translate }}</strong> {{ evento.precio }} €</p>
         }
       </div>
@@ -31,9 +34,19 @@
   </div>
 
   <div slot="end" class="vertical-buttons">
-    <ion-button fill="clear" size="small" (click)="abrirInfo($event)" [disabled]="!evento.url_info && !evento.url_inscripcion" class="link-button">
+    <ion-button fill="clear" size="small" (click)="abrirInfo($event)"
+                [disabled]="!evento.url_info && !evento.url_inscripcion"
+                class="link-button">
       <ion-icon slot="icon-only" name="information-circle-outline" color="primary"></ion-icon>
     </ion-button>
+    @if (esPasado) {
+      <ion-button fill="clear" size="small" (click)="abrirResultados($event)"
+                  [disabled]="!evento.url_resultados"
+                  class="link-button resultados-button"
+                  [class.resultados-activo]="!!evento.url_resultados">
+        <ion-icon slot="icon-only" [name]="evento.url_resultados ? 'trophy' : 'trophy-outline'"></ion-icon>
+      </ion-button>
+    }
     @if (!esPasado) {
       <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
         <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
@@ -60,7 +73,7 @@
         slot="start"
         [name]="esParticularFavorito ? 'calendar' : 'calendar-outline'">
       </ion-icon>
-      {{ (esParticularFavorito ? 'components.evento.removeFav' : 'components.evento.addFav') | translate }}
+      {{ (esParticularFavorito ? 'components.evento.removeCal' : 'components.evento.addCal') | translate }}
     </ion-button>
   </div>
 }

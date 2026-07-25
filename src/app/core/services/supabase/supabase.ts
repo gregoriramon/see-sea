@@ -410,7 +410,9 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Playa[];
   }
 
-  private readonly SELECT_EVENTO = "id,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,organizador,precio,url_info,url_inscripcion";
+  private readonly SELECT_EVENTO = "id,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados";
+  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,descripcion,fecha_evento,disciplina,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_reglamento,url_oficial";
+  private readonly SELECT_EVENTO_BY_ID_PASADO = "id,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial";
 
   private normalizaPatron(pattern: string): string {
     return (pattern ?? '')
@@ -423,12 +425,26 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   async getEventoById(id: number): Promise<Evento | null> {
     const { data, error } = await this.supabase
       .from('travesias')
-      .select('*')
+      .select(this.SELECT_EVENTO_BY_ID_ACTIVO)
       .eq('id', id)
       .single();
 
     if (error) {
       console.error('Error al obtener evento por id:', error);
+      return null;
+    }
+    return data as Evento;
+  }
+
+  async getEventoPasadoById(id: number): Promise<Evento | null> {
+    const { data, error } = await this.supabase
+      .from('travesias_pasadas')
+      .select(this.SELECT_EVENTO_BY_ID_PASADO)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error al obtener evento pasado por id:', error);
       return null;
     }
     return data as Evento;

@@ -80,7 +80,7 @@ export class CalendarioPage implements OnInit, OnDestroy {
   }
 
   onEventoClick(evento: Evento): void {
-    this.router.navigate(['/tabs/evento', evento.id]);
+    this.router.navigate(['/tabs/evento', evento.id], { queryParams: { fecha: evento.fecha_evento, origen: 'calendario' } });
   }
 
   trackByClave(_: number, g: GrupoMes): string {

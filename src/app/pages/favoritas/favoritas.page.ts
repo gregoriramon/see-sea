@@ -25,22 +25,26 @@ export class FavoritasPage implements OnInit {
   public favoritas: Playa[] = [];
   public isLoading = true;
 
-  async ngOnInit() {
-    // Suscribirse a cambios en favoritas
+  ngOnInit() {
     this.localRepositoryService.favoritas$.subscribe((favoritas) => {
       this.favoritas = favoritas;
     });
+  }
 
-    await this.loadFavoritas();
+  ionViewWillEnter() {
+    this.loadFavoritas();
   }
 
   async loadFavoritas() {
     this.isLoading = true;
     this.cargarFavoritas();
-    await this.refreshFavoritas().then(() => {
+    try {
+      await this.refreshFavoritas();
+    } catch (error) {
+      console.error('Error refrescando favoritas:', error);
+    } finally {
       this.isLoading = false;
-    });
-
+    }
   }
 
   cargarFavoritas() {
@@ -80,9 +84,10 @@ export class FavoritasPage implements OnInit {
     const updates: Promise<void>[] = [];
 
     this.favoritas.forEach((playa) => {
-      const fechaAComparar = this.getFecha(playa.aemet_date).setHours(0, 0, 0, 0);
-      if (fechaAComparar < fechaActual) {
-        console.log(`La playa ${playa.playa} tiene datos desactualizados, actualizando...`);
+      const primerDia = playa.prediccion?.dia?.[0]?.fecha;
+      const fechaAComparar = primerDia ? this.getFecha(primerDia).setHours(0, 0, 0, 0) : NaN;
+      if (!primerDia || isNaN(fechaAComparar) || fechaAComparar !== fechaActual) {
+        console.log(`La playa ${playa.playa} tiene datos desactualizados (dia[0]=${primerDia}), actualizando...`);
         const updatePromise = this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
           if (playaDetails) {
             if (!Array.isArray(playaDetails)) {

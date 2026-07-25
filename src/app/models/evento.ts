@@ -16,4 +16,7 @@ export interface Evento {
   url_reglamento:string;
   url_oficial:string;
   disciplina:string;
+  url_resultados?: string;
+  inscripciones_abiertas?: boolean;
+  url_inscritos?: string;
 }

@@ -11,12 +11,27 @@
   padding: 16px 16px 8px;
 }
 
+.cabecera-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.share-button {
+  margin: 0;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  flex-shrink: 0;
+}
+
 .titulo {
   font-size: 1.3rem;
   font-weight: 700;
   margin: 0 0 6px 0;
   line-height: 1.2;
   word-break: break-word;
+  flex: 1;
 }
 
 .fecha-text {
@@ -28,6 +43,14 @@
 
   .dia-semana { text-transform: none; }
   .dia-finde { font-weight: bold; color: #4fa373; }
+  .badge-pasada {
+    margin-left: 8px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
 }
 
 .detalle-grid {

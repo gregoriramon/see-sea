@@ -16,6 +16,11 @@
     "settings": "Configuración",
     "about": "Acerca de..."
   },
+  "header": {
+    "shareApp": "Compartir aplicación",
+    "shareTitle": "SiSi — See-Sea",
+    "shareBody": "Consulta el estado del mar y las travesías de las playas de España con SiSi 🌊\n{{url}}"
+  },
   "common": {
     "cancel": "Cancelar",
     "close": "Cerrar",
@@ -125,8 +130,8 @@
       "addFav": "Añadir a Favoritas"
     },
     "evento": {
-      "removeFav": "Eliminar de Favoritos",
-      "addFav": "Añadir a Favoritos",
+      "removeCal": "Eliminar de Calendario",
+      "addCal": "Añadir a Calendario",
       "distance": "Distancia:",
       "price": "Precio:",
       "disciplina": "Disciplina",
@@ -140,6 +145,8 @@
       "urlInscripcion": "Inscripción",
       "urlReglamento": "Reglamento",
       "urlOficial": "Web oficial",
+      "urlResultados": "Resultados",
+      "pasada": "PASADA",
       "share": {
         "title": "Compartir Travesía",
         "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Compartido desde SiSi (See-Sea)",
