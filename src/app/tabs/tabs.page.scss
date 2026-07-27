@@ -25,13 +25,13 @@ ion-tab-button {
     background: rgba(var(--ion-color-primary-rgb), 0.1);
 
     ion-icon {
-      font-size: 30px;
+      font-size: 27px;
       transform: translateY(-1px);
       filter: drop-shadow(0 1px 2px rgba(var(--ion-color-primary-rgb), 0.35));
     }
 
     ion-label {
-      font-weight: 700;
+      font-weight: 400;
       font-size: 12px;
     }
 
@@ -41,8 +41,8 @@ ion-tab-button {
       top: 0;
       left: 15%;
       right: 15%;
-      height: 3px;
-      border-radius: 0 0 3px 3px;
+      height: 2px;
+      border-radius: 0 0 2px 2px;
       background: var(--ion-color-primary);
     }
   }

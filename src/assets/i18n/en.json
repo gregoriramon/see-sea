@@ -19,7 +19,7 @@
   "header": {
     "shareApp": "Share app",
     "shareTitle": "SiSi — See-Sea",
-    "shareBody": "Check the sea conditions and open water swims on Spanish beaches with SiSi 🌊\n{{url}}"
+    "shareBody": "Check upcoming open water swims and add them to your calendar, results of past ones, as well as the marine forecast of your favourite beaches in Spain with SiSi 🌊"
   },
   "common": {
     "cancel": "Cancel",
@@ -35,7 +35,7 @@
     "playas": "Beaches",
     "travesias": "Swims",
     "calendario": "My Calendar",
-    "feedback": "Give me back"
+    "feedback": "Feedback"
   },
   "alerts": {
     "about": {

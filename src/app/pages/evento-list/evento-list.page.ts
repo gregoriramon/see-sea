@@ -78,7 +78,7 @@ export class EventoListPage implements OnInit, OnDestroy {
 
   ionViewDidEnter() {
     if (this.eventosAll.length === 0 && !this.isLoading) {
-      this.cargarEventos(this.rangoFecha);
+      this.cargarEventos(this.rangoFecha, 1);
     }
   }
 
@@ -93,7 +93,7 @@ export class EventoListPage implements OnInit, OnDestroy {
     return { meses, esPasado };
   }
 
-  private cargarEventos(rango: RangoFecha) {
+  private cargarEventos(rango: RangoFecha, reintentos: number = 0) {
     const { meses, esPasado } = this.rangoToInterval(rango);
     const hoy = new Date();
     const otra = new Date();
@@ -111,14 +111,22 @@ export class EventoListPage implements OnInit, OnDestroy {
     this.isLoading = true;
     query
       .then((eventos) => {
-        console.log('[evento-list] cargarEventos OK', { rango, count: eventos.length, t: Date.now() });
+        console.log('[evento-list] cargarEventos OK', { rango, count: eventos.length, reintentos, t: Date.now() });
+        if (eventos.length === 0 && reintentos > 0) {
+          setTimeout(() => this.cargarEventos(rango, reintentos - 1), 500);
+          return;
+        }
         this.eventosAll = eventos;
         this.refrescarEventos();
         this.isLoading = false;
       })
       .catch((reason) => {
-        console.log('[evento-list] cargarEventos ERROR', reason);
-        this.isLoading = false;
+        console.log('[evento-list] cargarEventos ERROR', reason, { reintentos });
+        if (reintentos > 0) {
+          setTimeout(() => this.cargarEventos(rango, reintentos - 1), 500);
+        } else {
+          this.isLoading = false;
+        }
       });
   }
 

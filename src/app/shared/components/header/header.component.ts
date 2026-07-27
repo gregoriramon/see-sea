@@ -37,7 +37,8 @@ export class HeaderComponent {
   async compartirApp(): Promise<void> {
     const appUrl = typeof window !== 'undefined' ? window.location.origin : '';
     const title = this.translate.instant('header.shareTitle');
-    const text = this.translate.instant('header.shareBody', { url: appUrl });
+    const text = this.translate.instant('header.shareBody');
+    const textWithUrl = `${text}\n${appUrl}`;
 
     if (typeof navigator !== 'undefined' && (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share) {
       try {
@@ -55,14 +56,14 @@ export class HeaderComponent {
           text: this.translate.instant('components.evento.share.whatsapp'),
           icon: 'logo-whatsapp',
           handler: () => {
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent(textWithUrl)}`, '_blank');
           },
         },
         {
           text: this.translate.instant('components.evento.share.email'),
           icon: 'mail-outline',
           handler: () => {
-            window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+            window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(textWithUrl)}`;
           },
         },
         {

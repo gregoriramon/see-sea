@@ -19,7 +19,7 @@
   "header": {
     "shareApp": "Compartir aplicación",
     "shareTitle": "SiSi — See-Sea",
-    "shareBody": "Consulta el estado del mar y las travesías de las playas de España con SiSi 🌊\n{{url}}"
+    "shareBody": "Consulta proximas travesias y anotalas en tu calendario, resultados de pasadas, así como la previsión maritima de tus playas favoritas de España con SiSi 🌊"
   },
   "common": {
     "cancel": "Cancelar",
@@ -35,7 +35,7 @@
     "playas": "Playas",
     "travesias": "Travesias",
     "calendario": "Mi Calendario",
-    "feedback": "Dame opinión"
+    "feedback": "Opina"
   },
   "alerts": {
     "about": {
