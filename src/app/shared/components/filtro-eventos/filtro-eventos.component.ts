@@ -16,7 +16,7 @@ import { LocalRepositoryService } from 'src/app/core/services/local-repository/l
 import { Provincia } from 'src/app/models/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
-export type RangoFecha = '-12m' | '-6m' | '-3m' | '3m' | '6m' | '12m';
+export type RangoFecha = '-12m' | '-6m' | '-3m' | '1m' | '2m' | '3m' | '6m' | '12m';
 
 export interface FiltroEventos {
   patterName: string;
@@ -55,7 +55,7 @@ export class FiltroEventosComponent implements OnInit {
   @Input() showProvincias: boolean = false;
   @Input() patterName: string = '';
 
-  public selectedRango: RangoFecha = '3m';
+  public selectedRango: RangoFecha = '1m';
   public distanciaMin: number | null = null;
   public distanciaMax: number | null = null;
   public selectedProvincia: string = '**';

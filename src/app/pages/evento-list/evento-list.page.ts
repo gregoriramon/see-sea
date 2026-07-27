@@ -61,7 +61,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   private eventosFiltrados: Evento[] = [];
   private eventosAll: Evento[] = [];
   public patterName: string = '';
-  public rangoFecha: RangoFecha = '3m';
+  public rangoFecha: RangoFecha = '1m';
   public distanciaMin: number | null = null;
   public distanciaMax: number | null = null;
   public codProvincia: string = '**';

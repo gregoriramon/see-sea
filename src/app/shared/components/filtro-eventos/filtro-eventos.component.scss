@@ -12,19 +12,33 @@
   --padding-end: 8px;
   --padding-top: 0;
   --padding-bottom: 0;
+  --highlight-color: var(--ion-color-primary);
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color-valid: var(--ion-color-primary);
+  --border-color: var(--ion-color-primary);
+  --color: var(--ion-color-primary);
   height: 38px;
   min-height: 38px;
   margin: 2px 4px;
   width: calc(100% - 8px);
-  font-size: 0.7rem;
-  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.06);
+  font-size: 0.75rem;
+  font-weight: 600;
+  --background: rgba(var(--ion-color-primary-rgb, 56, 128, 255), 0.15);
   border-radius: 12px;
+  box-shadow: inset 0 0 0 1.5px var(--ion-color-primary);
   box-sizing: border-box;
 }
 
 .compact-select::part(label) {
   font-size: 0.7rem;
-  opacity: 0.75;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  opacity: 1;
+}
+
+.compact-select::part(text) {
+  font-weight: 600;
+  color: var(--ion-color-primary);
 }
 
 .compact-search {
