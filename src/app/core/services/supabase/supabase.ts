@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular'
-import { AuthChangeEvent, createClient, Session, SupabaseClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 import { Dispositivo } from 'src/app/models/dispositivo';
 import { Playa } from 'src/app/models/playa';
@@ -19,19 +19,22 @@ import { environment } from 'src/environments/environment';
 
 export class Supabase {
 
-  private supabase: SupabaseClient
+  private clientPromise?: Promise<SupabaseClient>;
 
+  constructor() {}
 
-  constructor() {
-    this.supabase = createClient(
-      environment.supabaseUrl, environment.supabaseKey
-    );
-
+  private getClient(): Promise<SupabaseClient> {
+    if (!this.clientPromise) {
+      this.clientPromise = import('@supabase/supabase-js').then(({ createClient }) =>
+        createClient(environment.supabaseUrl, environment.supabaseKey)
+      );
+    }
+    return this.clientPromise;
   }
 
   async ping(timeoutMs: number = 4000): Promise<boolean> {
     try {
-      const query = this.supabase.from('tb_dispositivos').select('id_dispositivo', { count: 'exact', head: true }).limit(1);
+      const query = (await this.getClient()).from('tb_dispositivos').select('id_dispositivo', { count: 'exact', head: true }).limit(1);
       const timeout = new Promise<{ error: unknown }>((resolve) =>
         setTimeout(() => resolve({ error: new Error('timeout') }), timeoutMs)
       );
@@ -44,7 +47,7 @@ export class Supabase {
 
   async getDispositivos(): Promise<Dispositivo[]> {
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('tb_dispositivos')
       .select('id_dispositivo, register_at');
 
@@ -57,7 +60,7 @@ export class Supabase {
   }
 
   async getDispositivo(id: number = 0): Promise<Dispositivo> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('tb_dispositivos').
       select('id_dispositivo, register_at').eq("id_dispositivo", id).single();
 
@@ -70,7 +73,7 @@ export class Supabase {
 
   async getDispositivosByName(name: string): Promise<Dispositivo[]> {
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('tb_dispositivos')
       .select('id_dispositivo, register_at')
       .ilike('nombre', name);
@@ -86,7 +89,7 @@ export class Supabase {
   async updateDispositivo(dispositivo: Dispositivo) {
     console.log("insert on service");
 
-      const { data, error } = await this.supabase
+      const { data, error } = await (await this.getClient())
         .from('tb_dispositivos')
         .update(dispositivo)
         .eq('id', dispositivo.id_dispositivo)
@@ -99,14 +102,14 @@ export class Supabase {
 
   async registraDispositivo(dispositivo: Dispositivo) {
     console.log("insert on service: " + dispositivo.id_dispositivo + " - " + dispositivo.accion);
-    const {data,error} = await this.supabase.from('tb_dispositivos').insert(dispositivo);
+    const {data,error} = await (await this.getClient()).from('tb_dispositivos').insert(dispositivo);
     if (error) {
       console.error('Error al registrar dispositivo:', error);
     }
   }
 
   async enviaFeedback(feedback: Feedback): Promise<{ error: any }> {
-    const { error } = await this.supabase.from('tb_feedback').insert(feedback);
+    const { error } = await (await this.getClient()).from('tb_feedback').insert(feedback);
     if (error) {
       console.error('Error al enviar feedback:', error);
     }
@@ -115,7 +118,7 @@ export class Supabase {
 
   async getPlayasByName(name: string, conPrevison: boolean | undefined = false): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
       .ilike('playa', "%".concat(name).concat('%'))
@@ -131,7 +134,7 @@ export class Supabase {
 
   async getPlayaAll(): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select);
 
@@ -146,7 +149,7 @@ export class Supabase {
 
   async getPlayaByCodPlaya(codPlaya: string): Promise<Playa> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('playa')
       .select(select)
       .eq('cod_playa', codPlaya)
@@ -165,7 +168,7 @@ export class Supabase {
 
 async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('playa')
       .select(select)
       .eq('cod_playa', codPlaya)
@@ -183,7 +186,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getMunicipioByNameAndCodMunicipio(name: string, codMunicipio: string | string[]): Promise<Municipio[]> {
 
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('municipio')
       .select('*')
       .ilike('municipio', "%".concat(name).concat('%'));
@@ -207,7 +210,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getMunicipioByNameAndCodProvincia(name: string, codProvincia: string | string[]): Promise<Municipio[]> {
 
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('municipio')
       .select('*');
 
@@ -242,7 +245,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
       return this.getProvinciaAll();
     }
 
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('provincia')
       .select('*');
 
@@ -265,7 +268,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getProvinciaAll(): Promise<Provincia[]> {
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('provincia')
       .select('*');
 
@@ -279,7 +282,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getMunicipioAll(): Promise<Municipio[]> {
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('municipio')
       .select('*');
 
@@ -301,7 +304,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
       return this.getProvinciaAll();
     }
 
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('provincia')
       .select('*');
 
@@ -333,7 +336,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   async getPlayasByProvincia(codProvincia: string): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
       .eq('cod_provincia', codProvincia);
@@ -349,7 +352,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   async getPlayasByMunicipio(codMunicipio: string): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
 
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
       .eq('cod_municipio', codMunicipio);
@@ -364,7 +367,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getPlayaByNameAndCodProvincia(name: string, codProvincia: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('playa')
       .select(select)
       .ilike('playa', "%".concat(name).concat('%'));
@@ -388,7 +391,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
   async getPlayaByNameAndCodMunicipio(name: string, codMunicipio: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
     const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
-    let query = this.supabase
+    let query = (await this.getClient())
       .from('playa')
       .select(select)
       .ilike('playa', "%".concat(name).concat('%'));
@@ -423,7 +426,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoById(id: number): Promise<Evento | null> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO_BY_ID_ACTIVO)
       .eq('id', id)
@@ -437,7 +440,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoPasadoById(id: number): Promise<Evento | null> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias_pasadas')
       .select(this.SELECT_EVENTO_BY_ID_PASADO)
       .eq('id', id)
@@ -451,7 +454,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoAll(): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .order('fecha_evento', { ascending: true });
@@ -464,7 +467,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByFecha(fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)
@@ -479,7 +482,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByLugar(pattern: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('lugar_evento', '%'+this.normalizaPatron(pattern)+'%')
@@ -493,7 +496,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventosByDistancia(distanciaIni: number, distanciaFin: number): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('distancia', distanciaIni)
@@ -508,7 +511,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventosByPrecio(precioIni: number, precioFin: number): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('precio', precioIni)
@@ -523,7 +526,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByDescripcion(pattern: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
@@ -537,7 +540,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
@@ -553,7 +556,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoPasadoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias_pasadas')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
@@ -569,7 +572,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByDescripcionAndLugar(descPattern: string, lugarPattern: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(descPattern)+'%')
@@ -584,7 +587,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByFechaAndLugar(fechaIni: string, fechaFin: string, lugarPattern: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)
@@ -600,7 +603,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByDistanciaAndLugarAndFecha(distanciaIni: number, distanciaFin: number, lugarPattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('distancia', distanciaIni)
@@ -618,7 +621,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getEventoByFechaAndDistanciaAndPrecio(fechaIni: string, fechaFin: string, distanciaIni: number, distanciaFin: number, precioIni: number, precioFin: number): Promise<Evento[]> {
-    const { data, error } = await this.supabase
+    const { data, error } = await (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .gte('fecha_evento', fechaIni)

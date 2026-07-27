@@ -12,7 +12,9 @@
           "/favicon.ico",
           "/index.html",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/**/*.css",
+          "/**/*.js"
         ]
       }
     },

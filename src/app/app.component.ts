@@ -51,18 +51,31 @@ export class AppComponent implements OnInit  {
       this.router.navigateByUrl(`/tabs/${tabInicial}`, { replaceUrl: true });
     }
 
-    this.localRepository.deviceId$.pipe(take(1)).subscribe((deviceId) => {
-      try {
-        this.supabaseService.registraDispositivo({id_dispositivo: deviceId, accion: 'LOGIN'})
-          .then(() => console.log('Dispositivo registrado en Supabase'))
-          .catch((error) => console.error('Error al registrar dispositivo en Supabase:', error));
-      } catch (error) {
-        console.error('Error inesperado registrando dispositivo:', error);
-      }
-    });
+    this.runWhenIdle(() => {
+      this.localRepository.deviceId$.pipe(take(1)).subscribe((deviceId) => {
+        try {
+          this.supabaseService.registraDispositivo({id_dispositivo: deviceId, accion: 'LOGIN'})
+            .then(() => console.log('Dispositivo registrado en Supabase'))
+            .catch((error) => console.error('Error al registrar dispositivo en Supabase:', error));
+        } catch (error) {
+          console.error('Error inesperado registrando dispositivo:', error);
+        }
+      });
 
-    this.inicializarActualizacionPwa();
-    this.inicializarRecargaAlReconectar();
+      this.inicializarActualizacionPwa();
+      this.inicializarRecargaAlReconectar();
+    });
+  }
+
+  private runWhenIdle(cb: () => void) {
+    const ric = (window as any).requestIdleCallback as
+      | ((cb: () => void, opts?: { timeout: number }) => number)
+      | undefined;
+    if (typeof ric === 'function') {
+      ric(cb, { timeout: 2000 });
+    } else {
+      setTimeout(cb, 0);
+    }
   }
 
   private inicializarRecargaAlReconectar() {
