@@ -59,15 +59,16 @@ export class CalendarioPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     const hoy = new Date();
     this.mesActualClave = this.claveMes(hoy.getFullYear(), hoy.getMonth() + 1);
-    this.mesesAbiertos = [this.mesActualClave];
 
     this.sub = this.localRepository.favoritosEventos$.subscribe((eventos) => {
       this.grupos = this.agrupar(eventos, hoy);
+      this.mesesAbiertos = this.grupos.map((g) => g.clave);
     });
 
     this.translate.onLangChange.subscribe(() => {
       const eventos = this.grupos.reduce<Evento[]>((acc, g) => acc.concat(g.eventos), []);
       this.grupos = this.agrupar(eventos, new Date());
+      this.mesesAbiertos = this.grupos.map((g) => g.clave);
     });
   }
 

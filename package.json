@@ -6,7 +6,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:cons": "ng serve --configuration consolidation",
+    "start:prod": "ng serve --configuration production",
     "build": "ng build",
+    "build:dev": "ng build --configuration development",
+    "build:cons": "ng build --configuration consolidation",
+    "build:prod": "ng build --configuration production",
+    "deploy:cons": "ng build --configuration consolidation && firebase deploy --only hosting:cons",
+    "deploy:prod": "ng build --configuration production && firebase deploy --only hosting:prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"

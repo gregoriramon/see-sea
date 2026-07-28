@@ -106,14 +106,28 @@ export class FavoritasPage implements OnInit {
 
     await Promise.all(updates);
   }
-  private getFecha(fechaStr: string): Date {
-    const anio = parseInt(fechaStr.substring(0, 4));
-    const mes = parseInt(fechaStr.substring(4, 6)) - 1; // Restamos 1 porque los meses van de 0 a 11
-    const dia = parseInt(fechaStr.substring(6, 8));
+  private getFecha(fecha: unknown): Date {
+    if (fecha instanceof Date) {
+      return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+    }
 
-    const fechaAComparar = new Date(anio, mes, dia);
-    return fechaAComparar;
+    const str = String(fecha ?? '').trim();
 
+    // Formato AAAAMMDD (8 dígitos)
+    if (/^\d{8}$/.test(str)) {
+      const anio = parseInt(str.substring(0, 4), 10);
+      const mes = parseInt(str.substring(4, 6), 10) - 1;
+      const dia = parseInt(str.substring(6, 8), 10);
+      return new Date(anio, mes, dia);
+    }
+
+    // Formato ISO (AAAA-MM-DD o con hora)
+    const iso = new Date(str);
+    if (!isNaN(iso.getTime())) {
+      return new Date(iso.getFullYear(), iso.getMonth(), iso.getDate());
+    }
+
+    return new Date(NaN);
   }
 
     handleRefresh(event: RefresherCustomEvent) {

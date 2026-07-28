@@ -1,0 +1,32 @@
+.offline-banner-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20000;
+  animation: offline-banner-slide-down 220ms ease;
+}
+
+.offline-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 12px;
+  padding-top: calc(4px + env(safe-area-inset-top, 0px));
+  min-height: 26px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--ion-color-danger, #eb445a);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+  ion-icon {
+    font-size: 1rem;
+  }
+}
+
+@keyframes offline-banner-slide-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}

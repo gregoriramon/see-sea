@@ -1,5 +1,17 @@
 {
   "projects": {
-    "default": "sisi-929f8"
+    "default": "sisi-c7ece"
+  },
+  "targets": {
+    "sisi-c7ece": {
+      "hosting": {
+        "prod": [
+          "sisi-prod"
+        ],
+        "cons": [
+          "sisi-cons"
+        ]
+      }
+    }
   }
 }

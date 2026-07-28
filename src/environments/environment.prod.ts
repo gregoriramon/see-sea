@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
-  supabaseUrl: 'https://peojsedikxvmbirvlgmi.supabase.co',
-  supabaseKey: 'sb_publishable_cQUPa0x3FF5UIL6_S9xngg_20E9fLfi',
+  envName: 'production',
+  supabaseUrl: 'https://alchktnrwblnwnwrnxim.supabase.co',
+  supabaseKey: 'sb_publishable_vVuk_xQYxXpNBTbNLorC-Q_g3QhpoDJ',
   // PostgreSQL Connection (Session Pooler - IPv4)
  /*  postgresConnection: {
     host: 'aws-0-eu-west-1.pooler.supabase.com',

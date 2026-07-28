@@ -76,6 +76,28 @@
               "sourceMap": true,
               "namedChunks": true
             },
+            "consolidation": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.cons.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
+            },
             "ci": {
               "progress": false
             }
@@ -90,6 +112,9 @@
             },
             "development": {
               "buildTarget": "app:build:development"
+            },
+            "consolidation": {
+              "buildTarget": "app:build:consolidation"
             },
             "ci": {
               "progress": false

@@ -1,0 +1,8 @@
+@if ((online$ | async) === false) {
+  <div class="offline-banner-wrap" aria-live="polite">
+    <div class="offline-banner" role="status">
+      <ion-icon name="cloud-offline-outline" aria-hidden="true"></ion-icon>
+      <span>{{ 'offline.bannerText' | translate }}</span>
+    </div>
+  </div>
+}
