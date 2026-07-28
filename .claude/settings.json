@@ -28,9 +28,7 @@
       "Bash(node \".claude/skills/search-events/scripts/diagnose-crono4sports-v2.js\" \"https://www.crono4sports.es/eventos/1/\")",
       "Bash(node \".claude/skills/search-events/scripts/diagnose-crono4sports.js\" \"https://www.crono4sports.es/eventos/1/\")",
       "Bash(node \".claude/skills/search-events/scripts/search-crono4sports-v4-detallado.js\" \"https://www.crono4sports.es/eventos/1/\")",
-      "WebSearch",
-      "Bash(node scripts/search-events-sites-cataluna.js)",
-      "Bash(node scripts/search-events-sites-improved.js)"
+      "WebSearch"
     ]
   },
   "enableAllProjectMcpServers": true

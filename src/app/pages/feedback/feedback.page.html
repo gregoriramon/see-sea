@@ -1,0 +1,66 @@
+<app-header [tituloPagina]="'feedback.title' | translate"></app-header>
+
+<ion-content>
+  <div class="ion-padding intro">
+    <h2>{{ 'feedback.intro.heading' | translate }}</h2>
+    <p>{{ 'feedback.intro.p1' | translate }}</p>
+    <p>{{ 'feedback.intro.p2' | translate }}</p>
+    <p>{{ 'feedback.intro.p3' | translate }}</p>
+  </div>
+
+  <ion-list inset="true">
+    <ion-item>
+      <ion-select
+        [label]="'feedback.tipo.label' | translate"
+        [(ngModel)]="tipo"
+        interface="popover">
+        <ion-select-option value="bug">{{ 'feedback.tipo.bug' | translate }}</ion-select-option>
+        <ion-select-option value="mejora">{{ 'feedback.tipo.mejora' | translate }}</ion-select-option>
+        <ion-select-option value="comentario">{{ 'feedback.tipo.comentario' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        [label]="'feedback.titulo' | translate"
+        labelPlacement="stacked"
+        [(ngModel)]="titulo"
+        maxlength="120">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea
+        [label]="'feedback.contenido' | translate"
+        labelPlacement="stacked"
+        [placeholder]="'feedback.contenidoPlaceholder' | translate"
+        [(ngModel)]="contenido"
+        [autoGrow]="true"
+        rows="5"
+        maxlength="2000">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        [label]="'feedback.email' | translate"
+        labelPlacement="stacked"
+        type="email"
+        inputmode="email"
+        [(ngModel)]="email">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div class="acciones">
+    <ion-button
+      expand="block"
+      [disabled]="!puedeEnviar()"
+      (click)="enviar()">
+      {{ 'feedback.enviar' | translate }}
+    </ion-button>
+    <ion-note class="privacidad">
+      {{ 'feedback.privacidad' | translate }}
+    </ion-note>
+  </div>
+</ion-content>
