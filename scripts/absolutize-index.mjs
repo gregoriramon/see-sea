@@ -15,7 +15,11 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const INDEX = resolve(__dirname, '..', 'www', 'index.html');
+// Angular SSR usa www/browser/index.html. Fallback a www/index.html si no existe (setup no-SSR).
+import { existsSync } from 'node:fs';
+const WWW_BROWSER_INDEX = resolve(__dirname, '..', 'www', 'browser', 'index.html');
+const WWW_INDEX = resolve(__dirname, '..', 'www', 'index.html');
+const INDEX = existsSync(WWW_BROWSER_INDEX) ? WWW_BROWSER_INDEX : WWW_INDEX;
 
 const html = readFileSync(INDEX, 'utf8');
 

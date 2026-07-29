@@ -1,9 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Playa } from 'src/app/models/playa';
 import { Evento } from 'src/app/models/evento';
 import { Municipio, Provincia } from 'src/app/models/common';
 import { Device } from '@capacitor/device';
+
+// Shim para SSR: window.localStorage no existe en el servidor.
+const noopStorage: Storage = {
+  length: 0,
+  clear: () => {},
+  getItem: () => null,
+  key: () => null,
+  removeItem: () => {},
+  setItem: () => {},
+};
+const ls: Storage = (typeof globalThis !== 'undefined' && (globalThis as any).localStorage)
+  ? (globalThis as any).localStorage
+  : noopStorage;
 
 export type TabInicial = 'favoritas' | 'buscar' | 'eventos' | 'calendario' | 'feedback';
 const TABS_VALIDAS: TabInicial[] = ['favoritas', 'buscar', 'eventos', 'calendario', 'feedback'];
@@ -44,7 +58,10 @@ export class LocalRepositoryService {
   private emailSubject = new BehaviorSubject<string>('');
   public email$ = this.emailSubject.asObservable();
 
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
   constructor() {
+    if (!this.isBrowser) return;
     this.cargarFavoritas();
     this.cargarFavoritosEventos();
     this.cargarPreferencias();
@@ -54,22 +71,22 @@ export class LocalRepositoryService {
   // ===== PREFERENCIAS METHODS =====
 
   private cargarPreferencias(): void {
-    const lang = localStorage.getItem(this.LANG_KEY);
+    const lang = ls.getItem(this.LANG_KEY);
     if (lang === 'es' || lang === 'en') {
       this.langSubject.next(lang);
     } else {
-      localStorage.setItem(this.LANG_KEY, 'es');
+      ls.setItem(this.LANG_KEY, 'es');
       this.langSubject.next('es');
     }
-    const notif = localStorage.getItem(this.NOTIFICATIONS_KEY);
+    const notif = ls.getItem(this.NOTIFICATIONS_KEY);
     if (notif !== null) {
       this.notificacionesSubject.next(notif === 'true');
     }
-    const tab = localStorage.getItem(this.TAB_INICIAL_KEY) as TabInicial | null;
+    const tab = ls.getItem(this.TAB_INICIAL_KEY) as TabInicial | null;
     if (tab && TABS_VALIDAS.includes(tab)) {
       this.tabInicialSubject.next(tab);
     }
-    const email = localStorage.getItem(this.EMAIL_KEY);
+    const email = ls.getItem(this.EMAIL_KEY);
     if (email) {
       this.emailSubject.next(email);
     }
@@ -82,9 +99,9 @@ export class LocalRepositoryService {
   guardarEmail(email: string): void {
     const valor = (email ?? '').trim();
     if (valor) {
-      localStorage.setItem(this.EMAIL_KEY, valor);
+      ls.setItem(this.EMAIL_KEY, valor);
     } else {
-      localStorage.removeItem(this.EMAIL_KEY);
+      ls.removeItem(this.EMAIL_KEY);
     }
     this.emailSubject.next(valor);
   }
@@ -94,7 +111,7 @@ export class LocalRepositoryService {
   }
 
   guardarTabInicial(tab: TabInicial): void {
-    localStorage.setItem(this.TAB_INICIAL_KEY, tab);
+    ls.setItem(this.TAB_INICIAL_KEY, tab);
     this.tabInicialSubject.next(tab);
   }
 
@@ -103,7 +120,7 @@ export class LocalRepositoryService {
   }
 
   guardarIdioma(lang: 'es' | 'en'): void {
-    localStorage.setItem(this.LANG_KEY, lang);
+    ls.setItem(this.LANG_KEY, lang);
     this.langSubject.next(lang);
   }
 
@@ -112,14 +129,14 @@ export class LocalRepositoryService {
   }
 
   guardarNotificaciones(activadas: boolean): void {
-    localStorage.setItem(this.NOTIFICATIONS_KEY, String(activadas));
+    ls.setItem(this.NOTIFICATIONS_KEY, String(activadas));
     this.notificacionesSubject.next(activadas);
   }
 
   // ===== FAVORITAS METHODS =====
 
   private cargarFavoritas(): void {
-    const favoritasGuardadas = localStorage.getItem(this.FAVORITAS_KEY);
+    const favoritasGuardadas = ls.getItem(this.FAVORITAS_KEY);
     if (favoritasGuardadas) {
       try {
         this.favoritasSubject.next(JSON.parse(favoritasGuardadas));
@@ -181,7 +198,7 @@ export class LocalRepositoryService {
   // ===== FAVORITOS EVENTOS METHODS =====
 
   private cargarFavoritosEventos(): void {
-    const guardados = localStorage.getItem(this.FAVORITOS_EVENTOS_KEY);
+    const guardados = ls.getItem(this.FAVORITOS_EVENTOS_KEY);
     if (guardados) {
       try {
         this.favoritosEventosSubject.next(JSON.parse(guardados));
@@ -225,29 +242,29 @@ export class LocalRepositoryService {
   }
 
   private guardarFavoritosEventos(favoritos: Evento[]): void {
-    localStorage.setItem(this.FAVORITOS_EVENTOS_KEY, JSON.stringify(favoritos));
+    ls.setItem(this.FAVORITOS_EVENTOS_KEY, JSON.stringify(favoritos));
   }
 
 
   private async inicializarDeviceId() {
-    let id = localStorage.getItem(this.DEVICE_ID_KEY);
+    let id = ls.getItem(this.DEVICE_ID_KEY);
     if (!id) {
       const info = await Device.getId();
       id = info.identifier;
-      localStorage.setItem(this.DEVICE_ID_KEY, id);
+      ls.setItem(this.DEVICE_ID_KEY, id);
     }
     this.deviceIdSubject.next(id);
   }
 
 
   private guardarFavoritas(favoritas: Playa[]): void {
-    localStorage.setItem(this.FAVORITAS_KEY, JSON.stringify(favoritas));
+    ls.setItem(this.FAVORITAS_KEY, JSON.stringify(favoritas));
   }
 
   // ===== PLAYAS METHODS =====
 
   obtenerPlayas(): Playa[] {
-    const playasGuardadas = localStorage.getItem(this.PLAYAS_KEY);
+    const playasGuardadas = ls.getItem(this.PLAYAS_KEY);
     if (playasGuardadas) {
       try {
         return JSON.parse(playasGuardadas);
@@ -260,17 +277,17 @@ export class LocalRepositoryService {
   }
 
   existenPlayas(): boolean {
-    return localStorage.getItem(this.PLAYAS_KEY) !== null;
+    return ls.getItem(this.PLAYAS_KEY) !== null;
   }
 
   guardarPlayas(playas: Playa[]): void {
-    localStorage.setItem(this.PLAYAS_KEY, JSON.stringify(playas));
+    ls.setItem(this.PLAYAS_KEY, JSON.stringify(playas));
   }
 
   // ===== MUNICIPIOS METHODS =====
 
   obtenerMunicipios(): Municipio[] {
-    const municipiosGuardados = localStorage.getItem(this.MUNICIPIOS_KEY);
+    const municipiosGuardados = ls.getItem(this.MUNICIPIOS_KEY);
     if (municipiosGuardados) {
       try {
         return JSON.parse(municipiosGuardados);
@@ -283,17 +300,17 @@ export class LocalRepositoryService {
   }
 
   existenMunicipios(): boolean {
-    return localStorage.getItem(this.MUNICIPIOS_KEY) !== null;
+    return ls.getItem(this.MUNICIPIOS_KEY) !== null;
   }
 
   guardarMunicipios(municipios: Municipio[]): void {
-    localStorage.setItem(this.MUNICIPIOS_KEY, JSON.stringify(municipios));
+    ls.setItem(this.MUNICIPIOS_KEY, JSON.stringify(municipios));
   }
 
   // ===== PROVINCIAS METHODS =====
 
   obtenerProvincias(): Provincia[] {
-    const provinciasGuardadas = localStorage.getItem(this.PROVINCIAS_KEY);
+    const provinciasGuardadas = ls.getItem(this.PROVINCIAS_KEY);
     if (provinciasGuardadas) {
       try {
         return JSON.parse(provinciasGuardadas);
@@ -306,21 +323,21 @@ export class LocalRepositoryService {
   }
 
   existenProvincias(): boolean {
-    return localStorage.getItem(this.PROVINCIAS_KEY) !== null;
+    return ls.getItem(this.PROVINCIAS_KEY) !== null;
   }
 
   guardarProvincias(provincias: Provincia[]): void {
-    localStorage.setItem(this.PROVINCIAS_KEY, JSON.stringify(provincias));
+    ls.setItem(this.PROVINCIAS_KEY, JSON.stringify(provincias));
   }
 
   // ===== UTILIDADES =====
 
   limpiarTodos(): void {
-    localStorage.removeItem(this.PLAYAS_KEY);
-    localStorage.removeItem(this.MUNICIPIOS_KEY);
-    localStorage.removeItem(this.PROVINCIAS_KEY);
-    localStorage.removeItem(this.FAVORITAS_KEY);
-    localStorage.removeItem(this.FAVORITOS_EVENTOS_KEY);
+    ls.removeItem(this.PLAYAS_KEY);
+    ls.removeItem(this.MUNICIPIOS_KEY);
+    ls.removeItem(this.PROVINCIAS_KEY);
+    ls.removeItem(this.FAVORITAS_KEY);
+    ls.removeItem(this.FAVORITOS_EVENTOS_KEY);
     this.favoritasSubject.next([]);
     this.favoritosEventosSubject.next([]);
   }

@@ -1,4 +1,5 @@
-import { Injectable, Injector, inject, NgZone } from '@angular/core';
+import { Injectable, Injector, PLATFORM_ID, inject, NgZone } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable, distinctUntilChanged, filter, map, pairwise } from 'rxjs';
 import { Network } from '@capacitor/network';
 import type { Supabase } from '../supabase/supabase';
@@ -7,6 +8,7 @@ import type { Supabase } from '../supabase/supabase';
 export class NetworkStatusService {
   private readonly injector = inject(Injector);
   private readonly zone = inject(NgZone);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private supabaseCache?: Supabase;
 
   private online$$ = new BehaviorSubject<boolean>(
@@ -22,7 +24,7 @@ export class NetworkStatusService {
   );
 
   constructor() {
-    this.init();
+    if (this.isBrowser) this.init();
   }
 
   private async init(): Promise<void> {

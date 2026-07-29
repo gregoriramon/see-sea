@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { shareOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
@@ -17,6 +17,7 @@ export class IosInstallBannerComponent implements OnInit {
   private readonly INSTALLED_KEY = 'ios_install_done';
   private readonly DISMISSED_AT_KEY = 'ios_install_dismissed_at';
   private readonly COOLDOWN_DAYS = 7;
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   visible = false;
 
@@ -25,6 +26,7 @@ export class IosInstallBannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     if (this.shouldShow()) {
       setTimeout(() => (this.visible = true), 1500);
     }

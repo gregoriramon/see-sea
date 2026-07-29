@@ -2,6 +2,18 @@ import { Injectable } from '@angular/core';
 import { Playa } from 'src/app/models/playa';
 import { Municipio, Provincia } from 'src/app/models/common';
 
+const noopStorage: Storage = {
+  length: 0,
+  clear: () => {},
+  getItem: () => null,
+  key: () => null,
+  removeItem: () => {},
+  setItem: () => {},
+};
+const ls: Storage = (typeof globalThis !== 'undefined' && (globalThis as any).localStorage)
+  ? (globalThis as any).localStorage
+  : noopStorage;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +29,7 @@ export class CommonLocalService {
   // ===== PLAYAS =====
 
   obtenerPlayas(): Playa[] {
-    const playasGuardadas = localStorage.getItem(this.PLAYAS_KEY);
+    const playasGuardadas = ls.getItem(this.PLAYAS_KEY);
     if (playasGuardadas) {
       try {
         return JSON.parse(playasGuardadas);
@@ -30,17 +42,17 @@ export class CommonLocalService {
   }
 
   existenPlayas(): boolean {
-    return localStorage.getItem(this.PLAYAS_KEY) !== null;
+    return ls.getItem(this.PLAYAS_KEY) !== null;
   }
 
   guardarPlayas(playas: Playa[]): void {
-    localStorage.setItem(this.PLAYAS_KEY, JSON.stringify(playas));
+    ls.setItem(this.PLAYAS_KEY, JSON.stringify(playas));
   }
 
   // ===== MUNICIPIOS =====
 
   obtenerMunicipios(): Municipio[] {
-    const municipiosGuardados = localStorage.getItem(this.MUNICIPIOS_KEY);
+    const municipiosGuardados = ls.getItem(this.MUNICIPIOS_KEY);
     if (municipiosGuardados) {
       try {
         return JSON.parse(municipiosGuardados);
@@ -53,17 +65,17 @@ export class CommonLocalService {
   }
 
   existenMunicipios(): boolean {
-    return localStorage.getItem(this.MUNICIPIOS_KEY) !== null;
+    return ls.getItem(this.MUNICIPIOS_KEY) !== null;
   }
 
   guardarMunicipios(municipios: Municipio[]): void {
-    localStorage.setItem(this.MUNICIPIOS_KEY, JSON.stringify(municipios));
+    ls.setItem(this.MUNICIPIOS_KEY, JSON.stringify(municipios));
   }
 
   // ===== PROVINCIAS =====
 
   obtenerProvincias(): Provincia[] {
-    const provinciasGuardadas = localStorage.getItem(this.PROVINCIAS_KEY);
+    const provinciasGuardadas = ls.getItem(this.PROVINCIAS_KEY);
     if (provinciasGuardadas) {
       try {
         return JSON.parse(provinciasGuardadas);
@@ -76,11 +88,11 @@ export class CommonLocalService {
   }
 
   existenProvincias(): boolean {
-    return localStorage.getItem(this.PROVINCIAS_KEY) !== null;
+    return ls.getItem(this.PROVINCIAS_KEY) !== null;
   }
 
   guardarProvincias(provincias: Provincia[]): void {
-    localStorage.setItem(this.PROVINCIAS_KEY, JSON.stringify(provincias));
+    ls.setItem(this.PROVINCIAS_KEY, JSON.stringify(provincias));
   }
 
   // ===== UTILIDADES =====
@@ -91,8 +103,8 @@ export class CommonLocalService {
   }
 
   limpiarTodos(): void {
-    localStorage.removeItem(this.PLAYAS_KEY);
-    localStorage.removeItem(this.MUNICIPIOS_KEY);
-    localStorage.removeItem(this.PROVINCIAS_KEY);
+    ls.removeItem(this.PLAYAS_KEY);
+    ls.removeItem(this.MUNICIPIOS_KEY);
+    ls.removeItem(this.PROVINCIAS_KEY);
   }
 }

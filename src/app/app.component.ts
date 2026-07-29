@@ -1,4 +1,5 @@
-import { Component, Injector, OnInit, inject } from '@angular/core';
+import { Component, Injector, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonTitle, IonList, IonItem, IonMenuToggle, AlertController, ToastController } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit  {
   private translate = inject(TranslateService);
   private router = inject(Router);
   private networkStatus = inject(NetworkStatusService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly INTERVALO_COMPROBACION_MS = 6 * 60 * 60 * 1000;
 
@@ -42,6 +44,8 @@ export class AppComponent implements OnInit  {
     this.translate.addLangs(['es', 'en']);
     this.translate.setFallbackLang('es');
     this.localRepository.lang$.subscribe((lang) => this.translate.use(lang));
+
+    if (!this.isBrowser) return;
 
     const tabInicial = this.localRepository.obtenerTabInicial();
     const path = window.location.pathname;
