@@ -2,10 +2,9 @@
 
 <ion-content [fullscreen]="true">
   @if (isLoading) {
-    <div class="loading-screen">
-      <img src="/assets/sisi.svg" [alt]="'pages.favoritas.loadingAlt' | translate" />
-      <p class="loading-text">{{ 'loading.favoritas' | translate }}</p>
-    </div>
+    <section style="display: flex; justify-content: center; align-items: center; padding: 40px 0;">
+      <ion-spinner name="circular"></ion-spinner>
+    </section>
   } @else {
 <!--     <div style="padding: 16px; display: flex; justify-content: flex-end;">
       <ion-button color="secondary" shape="round" fill="solid" size="small" (click)="irABuscar()">

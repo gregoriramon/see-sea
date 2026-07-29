@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonContent, IonGrid, IonRow, IonCol, IonButton, IonRefresher, IonRefresherContent, IonReorderGroup, IonReorder, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonGrid, IonRow, IonCol, IonButton, IonRefresher, IonRefresherContent, IonReorderGroup, IonReorder, IonIcon, IonSpinner } from '@ionic/angular/standalone';
 import { ItemReorderEventDetail } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
@@ -16,7 +16,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-favoritas',
   templateUrl: 'favoritas.page.html',
   styleUrls: ['favoritas.page.scss'],
-  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder, IonIcon, TranslatePipe],
+  imports: [IonRefresherContent, IonRefresher, IonContent, HeaderComponent, IonGrid, IonCol, PlayaComponent, IonButton, IonReorderGroup, IonReorder, IonIcon, IonSpinner, TranslatePipe],
 })
 export class FavoritasPage implements OnInit {
   private localRepositoryService = inject(LocalRepositoryService);
