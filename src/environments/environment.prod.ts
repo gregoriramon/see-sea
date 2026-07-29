@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   envName: 'production',
+  siteUrl: 'https://sisi-prod.pages.dev',
   supabaseUrl: 'https://alchktnrwblnwnwrnxim.supabase.co',
   supabaseKey: 'sb_publishable_vVuk_xQYxXpNBTbNLorC-Q_g3QhpoDJ',
   // PostgreSQL Connection (Session Pooler - IPv4)

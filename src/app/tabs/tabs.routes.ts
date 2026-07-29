@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { playaResolver } from '../pages/playa-view/playa.resolver';
+import { eventoResolver } from '../pages/evento-view/evento.resolver';
 
 export const routes: Routes = [
   {
@@ -38,16 +40,19 @@ export const routes: Routes = [
         path: 'playa/:slug',
         loadComponent: () =>
           import('../pages/playa-view/playa-view.page').then((m) => m.PlayaViewPage),
+        resolve: { playa: playaResolver },
       },
       {
         path: 'travesia/:slug',
         loadComponent: () =>
           import('../pages/evento-view/evento-view.page').then((m) => m.EventoViewPage),
+        resolve: { evento: eventoResolver },
       },
       {
         path: 'evento/:id',
         loadComponent: () =>
           import('../pages/evento-view/evento-view.page').then((m) => m.EventoViewPage),
+        resolve: { evento: eventoResolver },
       },
       {
         path: '',

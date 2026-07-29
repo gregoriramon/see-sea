@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonInput, IonButton, IonSearchbar, IonSpinner } from '@ionic/angular/standalone';
@@ -26,6 +27,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
   localRepositoryService = inject(LocalRepositoryService);
   private router = inject(Router);
   private seo = inject(SeoService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly PAGE_SIZE = 25;
   public patterName: string = "";
@@ -56,7 +58,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
     this.isPaginated = false;
   }
 
-  ionViewWillEnter() {
+  private applySeo(): void {
     this.seo.setPage({
       title: 'Buscar playas de España',
       description: 'Explora las playas de España con previsión marítima detallada: viento, oleaje, temperatura del agua, UV y sensación térmica.',
@@ -64,7 +66,13 @@ export class PlayaListPage implements OnInit, OnDestroy {
     });
   }
 
+  ionViewWillEnter() {
+    this.applySeo();
+  }
+
   ngOnInit() {
+    this.applySeo();
+    if (!this.isBrowser) return;
     console.log("Inicializando PlayaListPage, obteniendo playas...");
     this.getPlayasAll();
 

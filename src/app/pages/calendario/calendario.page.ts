@@ -58,7 +58,7 @@ export class CalendarioPage implements OnInit, OnDestroy {
 
   private sub?: Subscription;
 
-  ionViewWillEnter(): void {
+  private applySeo(): void {
     this.seo.setPage({
       title: 'Mi calendario de travesías a nado',
       description: 'Tus travesías a nado guardadas, agrupadas por mes. Consulta próximas fechas y no te pierdas ninguna.',
@@ -66,7 +66,12 @@ export class CalendarioPage implements OnInit, OnDestroy {
     });
   }
 
+  ionViewWillEnter(): void {
+    this.applySeo();
+  }
+
   ngOnInit(): void {
+    this.applySeo();
     const hoy = new Date();
     this.mesActualClave = this.claveMes(hoy.getFullYear(), hoy.getMonth() + 1);
 

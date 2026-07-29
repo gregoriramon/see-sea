@@ -73,17 +73,22 @@ export class EventoListPage implements OnInit, OnDestroy {
   public visibleCount = this.pageSize;
   public skeletonRows: number[] = Array.from({ length: 6 });
 
-  ngOnInit() {
-    // Carga inicial diferida a ionViewDidEnter para evitar race con la
-    // navegación inicial de AppComponent y la hidratación del cliente Supabase.
-  }
-
-  ionViewWillEnter() {
+  private applySeo(): void {
     this.seo.setPage({
       title: 'Próximas travesías a nado en aguas abiertas',
       description: 'Calendario de travesías a nado en aguas abiertas por España: distancias, fechas y localidades. Encuentra tu próxima carrera.',
       canonicalPath: '/tabs/eventos',
     });
+  }
+
+  ngOnInit() {
+    this.applySeo();
+    // Carga inicial diferida a ionViewDidEnter para evitar race con la
+    // navegación inicial de AppComponent y la hidratación del cliente Supabase.
+  }
+
+  ionViewWillEnter() {
+    this.applySeo();
   }
 
   ionViewDidEnter() {

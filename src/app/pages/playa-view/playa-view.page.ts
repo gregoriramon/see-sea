@@ -39,35 +39,44 @@ export class PlayaViewPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const slugOrCod = this.route.snapshot.paramMap.get('slug');
-    if (!slugOrCod) {
+    if (!slugOrCod) return;
+    const esCodigoLegacy = /^\d+$/.test(slugOrCod);
+
+    // El resolver (playaResolver) puede haber cargado la playa antes del render.
+    const preloaded = this.route.snapshot.data['playa'] as Playa | undefined;
+    if (preloaded && preloaded.cod_playa) {
+      this.onPlayaLoaded(preloaded, esCodigoLegacy);
       return;
     }
-    const esCodigoLegacy = /^\d+$/.test(slugOrCod);
+
     this.isLoading = true;
-    const fetch = esCodigoLegacy
+    const fetchPromise = esCodigoLegacy
       ? this.supabaseService.getPlayaByCodPlayaConPrediccion(slugOrCod)
       : this.supabaseService.getPlayaBySlugConPrediccion(slugOrCod);
-    fetch
+    fetchPromise
       .then((playaDetails) => {
         if (playaDetails && !Array.isArray(playaDetails) && playaDetails.cod_playa) {
-          this.playa = playaDetails;
-          this.esFav = this.localRepositoryService.esFavorita(this.playa);
-          if (esCodigoLegacy && this.playa.slug) {
-            // Redirect cliente al slug (Fase 4 lo moverá a 301 en el Worker).
-            this.router.navigate(['/tabs/playa', this.playa.slug], { replaceUrl: true });
-            return;
-          }
-          this.seo.setPage({
-            title: `Previsión marítima de ${this.playa.playa}`,
-            description: `Estado del mar y previsión meteorológica de la playa ${this.playa.playa}${this.playa.municipio ? ' (' + this.playa.municipio + ')' : ''}: viento, oleaje, temperatura del agua y UV.`,
-            canonicalPath: `/tabs/playa/${this.playa.slug ?? this.playa.cod_playa}`,
-            ogType: 'article',
-          });
+          this.onPlayaLoaded(playaDetails, esCodigoLegacy);
         }
       })
       .catch((err) => console.error('Error cargando playa:', err))
       .finally(() => { this.isLoading = false; });
+  }
 
+  private onPlayaLoaded(playa: Playa, esCodigoLegacy: boolean): void {
+    this.playa = playa;
+    this.esFav = this.localRepositoryService.esFavorita(playa);
+    if (esCodigoLegacy && playa.slug) {
+      // Redirect cliente al slug (Fase 4 lo moverá a 301 en el Worker).
+      this.router.navigate(['/tabs/playa', playa.slug], { replaceUrl: true });
+      return;
+    }
+    this.seo.setPage({
+      title: `Previsión marítima de ${playa.playa}`,
+      description: `Estado del mar y previsión meteorológica de la playa ${playa.playa}${playa.municipio ? ' (' + playa.municipio + ')' : ''}: viento, oleaje, temperatura del agua y UV.`,
+      canonicalPath: `/tabs/playa/${playa.slug ?? playa.cod_playa}`,
+      ogType: 'article',
+    });
     this.favoritasSub = this.localRepositoryService.favoritas$.subscribe(() => {
       if (this.playa) {
         this.esFav = this.localRepositoryService.esFavorita(this.playa);

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { IonSelect, IonSelectOption, IonToolbar, IonSearchbar, IonHeader, IonGrid, IonRow, IonCol, IonButton } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
@@ -21,6 +22,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class FiltroComponent  implements OnInit {
   private supabaseService = inject(Supabase);
   private localRepositoryService = inject(LocalRepositoryService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
 
   @Input()  showMunicipios: boolean = false;
@@ -42,6 +44,7 @@ export class FiltroComponent  implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.isBrowser) return;
     if(this.showProvincias){
       this.getProvincias();
     }

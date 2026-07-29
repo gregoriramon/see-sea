@@ -67,7 +67,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": ["localhost", "sisi-cons.pages.dev", "sisi-prod.pages.dev"]
             },
             "ssr": {
               "entry": "src/server.ts"

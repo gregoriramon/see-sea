@@ -1,5 +1,6 @@
 import { DOCUMENT, Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 export interface SeoPage {
   title: string;
@@ -78,7 +79,10 @@ export class SeoService {
   private resolveUrl(path?: string): string {
     if (!path) return '';
     if (/^https?:\/\//i.test(path)) return path;
-    const origin = this.document.defaultView?.location?.origin ?? '';
+    // En SSR no hay window.location.origin; fallback al siteUrl del entorno.
+    const origin = this.document.defaultView?.location?.origin
+      || (environment as { siteUrl?: string }).siteUrl
+      || '';
     return `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
   }
 }

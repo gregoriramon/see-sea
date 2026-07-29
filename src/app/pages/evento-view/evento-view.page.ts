@@ -57,6 +57,13 @@ export class EventoViewPage implements OnInit, OnDestroy {
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
     const esPasado = fechaParam ? new Date(fechaParam) < hoy : false;
+    // El resolver puede haber cargado el evento antes del render.
+    const preloaded = this.route.snapshot.data['evento'] as Evento | undefined;
+    if (preloaded) {
+      this.onEventoLoaded(preloaded, slug, fechaParam);
+      return;
+    }
+
     this.isLoading = true;
 
     const promesa: Promise<Evento | null> = slug
@@ -69,36 +76,36 @@ export class EventoViewPage implements OnInit, OnDestroy {
 
     promesa
       .then((evento) => {
-        if (!evento) return;
-        this.evento = evento;
-        this.esFav = this.localRepositoryService.esFavoritoEvento(this.evento);
-
-        // Redirect legacy /tabs/evento/:id → /tabs/travesia/:slug
-        if (!slug && evento.slug) {
-          const queryParams = { ...this.route.snapshot.queryParams };
-          this.router.navigate(['/tabs/travesia', evento.slug], {
-            replaceUrl: true,
-            queryParams,
-          });
-          return;
-        }
-
-        const nombre = evento.descripcion || 'Travesía a nado';
-        const localidad = evento.lugar_evento || evento.municipio || '';
-        const fecha = evento.fecha_evento || fechaParam || '';
-        const canonicalPath = evento.slug ? `/tabs/travesia/${evento.slug}` : `/tabs/evento/${evento.id}`;
-
-        this.seo.setPage({
-          title: `Travesía a nado ${nombre}${localidad ? ' · ' + localidad : ''}`,
-          description: `Información de la travesía a nado ${nombre}${localidad ? ' en ' + localidad : ''}${fecha ? ' (' + fecha + ')' : ''}. Distancia, categorías e inscripción.`,
-          canonicalPath,
-          ogType: 'article',
-        });
-
-        this.setJsonLd(evento, canonicalPath);
+        if (evento) this.onEventoLoaded(evento, slug, fechaParam);
       })
       .catch((err) => console.error('Error cargando evento:', err))
       .finally(() => { this.isLoading = false; });
+  }
+
+  private onEventoLoaded(evento: Evento, slug: string | null, fechaParam: string | null): void {
+    this.evento = evento;
+    this.esFav = this.localRepositoryService.esFavoritoEvento(evento);
+
+    // Redirect legacy /tabs/evento/:id → /tabs/travesia/:slug
+    if (!slug && evento.slug) {
+      const queryParams = { ...this.route.snapshot.queryParams };
+      this.router.navigate(['/tabs/travesia', evento.slug], { replaceUrl: true, queryParams });
+      return;
+    }
+
+    const nombre = evento.descripcion || 'Travesía a nado';
+    const localidad = evento.lugar_evento || evento.municipio || '';
+    const fecha = evento.fecha_evento || fechaParam || '';
+    const canonicalPath = evento.slug ? `/tabs/travesia/${evento.slug}` : `/tabs/evento/${evento.id}`;
+
+    this.seo.setPage({
+      title: `Travesía a nado ${nombre}${localidad ? ' · ' + localidad : ''}`,
+      description: `Información de la travesía a nado ${nombre}${localidad ? ' en ' + localidad : ''}${fecha ? ' (' + fecha + ')' : ''}. Distancia, categorías e inscripción.`,
+      canonicalPath,
+      ogType: 'article',
+    });
+
+    this.setJsonLd(evento, canonicalPath);
 
     this.favoritosSub = this.localRepositoryService.favoritosEventos$.subscribe(() => {
       if (this.evento) {

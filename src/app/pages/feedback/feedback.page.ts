@@ -65,9 +65,15 @@ export class FeedbackPage implements OnDestroy {
 
   constructor() {
     this.sub = this.localRepository.deviceId$.subscribe((id) => (this.deviceId = id));
+    // Constructor sí corre en SSR; asegura meta para prerender.
+    this.applySeo();
   }
 
   ionViewWillEnter(): void {
+    this.applySeo();
+  }
+
+  private applySeo(): void {
     this.seo.setPage({
       title: 'Enviar feedback',
       description: 'Cuéntanos qué te parece SiSi: sugerencias, ideas o errores. Nos ayuda a mejorar la app.',

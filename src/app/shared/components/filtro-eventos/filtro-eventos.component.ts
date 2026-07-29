@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader,
@@ -63,7 +64,10 @@ export class FiltroEventosComponent implements OnInit {
 
   @Output() filtroChange = new EventEmitter<FiltroEventos>();
 
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
   ngOnInit() {
+    if (!this.isBrowser) return;
     if (this.showProvincias) {
       this.getProvincias();
     }

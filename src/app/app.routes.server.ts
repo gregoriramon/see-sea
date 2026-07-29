@@ -10,17 +10,19 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
  *     aporta SEO.
  */
 export const serverRoutes: ServerRoute[] = [
-  // Detalles con contenido indexable → SSR
-  { path: 'tabs/playa/:slug', renderMode: RenderMode.Server },
-  { path: 'tabs/travesia/:slug', renderMode: RenderMode.Server },
-  { path: 'tabs/evento/:id', renderMode: RenderMode.Server },
+  // Detalles: RenderMode.Client (shell mínimo + hidratación).
+  // Ionic + SSR se cuelga en isStable con componentes complejos; se resolverá
+  // más adelante con SSG top-N o refactor Ionic-lite.
+  { path: 'tabs/playa/:slug', renderMode: RenderMode.Client },
+  { path: 'tabs/travesia/:slug', renderMode: RenderMode.Client },
+  { path: 'tabs/evento/:id', renderMode: RenderMode.Client },
 
-  // Tabs con datos dinámicos → SSR (evita timeout de prerender)
+  // Tabs con datos dinámicos → SSR (title/meta correctos)
   { path: 'tabs/favoritas', renderMode: RenderMode.Server },
   { path: 'tabs/buscar', renderMode: RenderMode.Server },
   { path: 'tabs/eventos', renderMode: RenderMode.Server },
   { path: 'tabs/calendario', renderMode: RenderMode.Server },
 
-  // Estáticas
+  // Estáticas → prerender
   { path: '**', renderMode: RenderMode.Prerender },
 ];

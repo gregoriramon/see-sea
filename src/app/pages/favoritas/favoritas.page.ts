@@ -27,18 +27,23 @@ export class FavoritasPage implements OnInit {
   public favoritas: Playa[] = [];
   public isLoading = true;
 
+  private applySeo(): void {
+    this.seo.setPage({
+      title: 'Mis playas favoritas',
+      description: 'Tus playas favoritas con previsión marítima (viento, oleaje, temperatura del agua) actualizada.',
+      canonicalPath: '/tabs/favoritas',
+    });
+  }
+
   ngOnInit() {
+    this.applySeo();
     this.localRepositoryService.favoritas$.subscribe((favoritas) => {
       this.favoritas = favoritas;
     });
   }
 
   ionViewWillEnter() {
-    this.seo.setPage({
-      title: 'Mis playas favoritas',
-      description: 'Tus playas favoritas con previsión marítima (viento, oleaje, temperatura del agua) actualizada.',
-      canonicalPath: '/tabs/favoritas',
-    });
+    this.applySeo();
     this.loadFavoritas();
   }
 
