@@ -64,9 +64,6 @@
   "offline": {
     "bannerText": "Sin conexión — algunas funciones no están disponibles"
   },
-  "loading": {
-    "favoritas": "Cargando tus favoritas..."
-  },
   "pages": {
     "playaList": {
       "title": "Volver a favoritas",
@@ -79,8 +76,7 @@
       "emptyLine1Part2": " favoritas para previsión.",
       "emptyLine2Part1": "Busca playas y pulsa ",
       "emptyLine2Part2": " para agregarla.",
-      "searchBeaches": "Buscar playas",
-      "loadingAlt": "Cargando favoritas"
+      "searchBeaches": "Buscar playas"
     },
     "calendario": {
       "title": "Mi Calendario",

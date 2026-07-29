@@ -64,9 +64,6 @@
   "offline": {
     "bannerText": "Offline — some features are unavailable"
   },
-  "loading": {
-    "favoritas": "Loading your favorites..."
-  },
   "pages": {
     "playaList": {
       "title": "Back to favorites",
@@ -79,8 +76,7 @@
       "emptyLine1Part2": " for the forecast.",
       "emptyLine2Part1": "Search beaches and tap ",
       "emptyLine2Part2": " to add it.",
-      "searchBeaches": "Search beaches",
-      "loadingAlt": "Loading favorites"
+      "searchBeaches": "Search beaches"
     },
     "calendario": {
       "title": "My Calendar",
