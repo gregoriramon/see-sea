@@ -3,7 +3,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { RouteReuseStrategy, provideRouter, withPreloading } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { provideServiceWorker } from '@angular/service-worker';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTranslateLoader, provideTranslateService } from '@ngx-translate/core';
 
 import { routes } from './app.routes';
@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular({ innerHTMLTemplatesEnabled: true }),
     provideRouter(routes, withPreloading(SelectivePreloadingStrategy)),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideTranslateService({
       fallbackLang: 'es',
       lang: 'es',
