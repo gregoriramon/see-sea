@@ -17,6 +17,7 @@ import type { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Evento } from 'src/app/models/evento';
 import { EventoComponent } from 'src/app/shared/components/evento/evento.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
@@ -55,6 +56,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   private localRepositoryService = inject(LocalRepositoryService);
   private router = inject(Router);
+  private seo = inject(SeoService);
   private destroy$ = new Subject<void>();
 
   public eventos: Evento[] = [];
@@ -74,6 +76,14 @@ export class EventoListPage implements OnInit, OnDestroy {
   ngOnInit() {
     // Carga inicial diferida a ionViewDidEnter para evitar race con la
     // navegación inicial de AppComponent y la hidratación del cliente Supabase.
+  }
+
+  ionViewWillEnter() {
+    this.seo.setPage({
+      title: 'Próximas travesías a nado en aguas abiertas',
+      description: 'Calendario de travesías a nado en aguas abiertas por España: distancias, fechas y localidades. Encuentra tu próxima carrera.',
+      canonicalPath: '/tabs/eventos',
+    });
   }
 
   ionViewDidEnter() {
@@ -195,7 +205,8 @@ export class EventoListPage implements OnInit, OnDestroy {
   }
 
   onEventoClick(evento: Evento) {
-    this.router.navigate(['/tabs/evento', evento.id], { queryParams: { fecha: evento.fecha_evento, origen: 'eventos' } });
+    const path = evento.slug ? ['/tabs/travesia', evento.slug] : ['/tabs/evento', evento.id];
+    this.router.navigate(path, { queryParams: { fecha: evento.fecha_evento, origen: 'eventos' } });
   }
 
   onFiltroChange(f: FiltroEventos) {

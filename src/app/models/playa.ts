@@ -1,5 +1,6 @@
 export interface Playa {
   cod_playa: string
+  slug?: string
   playa: string
   cod_municipio:string
   municipio:string

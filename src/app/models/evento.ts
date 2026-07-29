@@ -1,5 +1,6 @@
 export interface Evento {
   id: number;
+  slug?: string;
   fecha_evento: string;
   descripcion: string;
   lugar_evento: string;

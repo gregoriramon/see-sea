@@ -117,7 +117,7 @@ export class Supabase {
   }
 
   async getPlayasByName(name: string, conPrevison: boolean | undefined = false): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
     const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
@@ -133,7 +133,7 @@ export class Supabase {
 
 
   async getPlayaAll(): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
     const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select);
@@ -148,7 +148,7 @@ export class Supabase {
   }
 
   async getPlayaByCodPlaya(codPlaya: string): Promise<Playa> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -167,7 +167,7 @@ export class Supabase {
   }
 
 async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -182,6 +182,21 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
 
     return data as Playa;
 
+  }
+
+  async getPlayaBySlugConPrediccion(slug: string): Promise<Playa> {
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const { data, error } = await (await this.getClient())
+      .from('playa')
+      .select(select)
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error) {
+      return {} as Playa;
+    }
+
+    return data as Playa;
   }
 
   async getMunicipioByNameAndCodMunicipio(name: string, codMunicipio: string | string[]): Promise<Municipio[]> {
@@ -334,7 +349,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayasByProvincia(codProvincia: string): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
 
     const { data, error } = await (await this.getClient())
       .from('playa')
@@ -350,7 +365,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayasByMunicipio(codMunicipio: string): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
 
     const { data, error } = await (await this.getClient())
       .from('playa')
@@ -366,7 +381,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayaByNameAndCodProvincia(name: string, codProvincia: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -390,7 +405,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayaByNameAndCodMunicipio(name: string, codMunicipio: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
-    const select = "cod_playa,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -413,9 +428,9 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Playa[];
   }
 
-  private readonly SELECT_EVENTO = "id,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados";
-  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,descripcion,fecha_evento,disciplina,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_reglamento,url_oficial";
-  private readonly SELECT_EVENTO_BY_ID_PASADO = "id,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial";
+  private readonly SELECT_EVENTO = "id,slug,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados";
+  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,slug,descripcion,fecha_evento,disciplina,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_reglamento,url_oficial";
+  private readonly SELECT_EVENTO_BY_ID_PASADO = "id,slug,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial";
 
   private normalizaPatron(pattern: string): string {
     return (pattern ?? '')
@@ -437,6 +452,34 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
       return null;
     }
     return data as Evento;
+  }
+
+  async getEventoBySlug(slug: string): Promise<Evento | null> {
+    const { data, error } = await (await this.getClient())
+      .from('travesias')
+      .select(this.SELECT_EVENTO_BY_ID_ACTIVO)
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error al obtener evento por slug:', error);
+      return null;
+    }
+    return (data as Evento) ?? null;
+  }
+
+  async getEventoPasadoBySlug(slug: string): Promise<Evento | null> {
+    const { data, error } = await (await this.getClient())
+      .from('travesias_pasadas')
+      .select(this.SELECT_EVENTO_BY_ID_PASADO)
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error al obtener evento pasado por slug:', error);
+      return null;
+    }
+    return (data as Evento) ?? null;
   }
 
   async getEventoPasadoById(id: number): Promise<Evento | null> {

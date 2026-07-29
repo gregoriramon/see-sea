@@ -8,6 +8,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'favoritas',
+        data: { preload: true },
         loadComponent: () =>
           import('../pages/favoritas/favoritas.page').then((m) => m.FavoritasPage),
       },
@@ -18,11 +19,13 @@ export const routes: Routes = [
       },
       {
         path: 'eventos',
+        data: { preload: true },
         loadComponent: () =>
           import('../pages/evento-list/evento-list.page').then((m) => m.EventoListPage),
       },
       {
         path: 'calendario',
+        data: { preload: true },
         loadComponent: () =>
           import('../pages/calendario/calendario.page').then((m) => m.CalendarioPage),
       },
@@ -32,9 +35,14 @@ export const routes: Routes = [
           import('../pages/feedback/feedback.page').then((m) => m.FeedbackPage),
       },
       {
-        path: 'playa/:codPlaya',
+        path: 'playa/:slug',
         loadComponent: () =>
           import('../pages/playa-view/playa-view.page').then((m) => m.PlayaViewPage),
+      },
+      {
+        path: 'travesia/:slug',
+        loadComponent: () =>
+          import('../pages/evento-view/evento-view.page').then((m) => m.EventoViewPage),
       },
       {
         path: 'evento/:id',

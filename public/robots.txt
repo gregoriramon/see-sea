@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sisi.pages.dev/sitemap.xml

@@ -1,10 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Injector, OnInit, inject } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonTitle, IonList, IonItem, IonMenuToggle, AlertController, ToastController } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { LocalRepositoryService } from './core/services/local-repository/local-repository.service';
 import { filter, take } from 'rxjs/operators';
-import { Supabase } from './core/services/supabase/supabase';
 import { IosInstallBannerComponent } from './shared/components/ios-install-banner/ios-install-banner.component';
 import { OfflineBannerComponent } from './shared/components/offline-banner/offline-banner.component';
 import { NetworkStatusService } from './core/services/network/network-status.service';
@@ -17,7 +16,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit  {
   private localRepository = inject(LocalRepositoryService);
-  private supabaseService = inject(Supabase);
+  private injector = inject(Injector);
   private alertController = inject(AlertController);
   private toastController = inject(ToastController);
   private swUpdate = inject(SwUpdate);
@@ -52,9 +51,11 @@ export class AppComponent implements OnInit  {
     }
 
     this.runWhenIdle(() => {
-      this.localRepository.deviceId$.pipe(take(1)).subscribe((deviceId) => {
+      this.localRepository.deviceId$.pipe(take(1)).subscribe(async (deviceId) => {
         try {
-          this.supabaseService.registraDispositivo({id_dispositivo: deviceId, accion: 'LOGIN'})
+          const { Supabase } = await import('./core/services/supabase/supabase');
+          const supabase = this.injector.get(Supabase);
+          supabase.registraDispositivo({id_dispositivo: deviceId, accion: 'LOGIN'})
             .then(() => console.log('Dispositivo registrado en Supabase'))
             .catch((error) => console.error('Error al registrar dispositivo en Supabase:', error));
         } catch (error) {

@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { EventoComponent } from 'src/app/shared/components/evento/evento.component';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Evento } from 'src/app/models/evento';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -45,6 +46,7 @@ export class CalendarioPage implements OnInit, OnDestroy {
   private localRepository = inject(LocalRepositoryService);
   private router = inject(Router);
   private translate = inject(TranslateService);
+  private seo = inject(SeoService);
 
   irABuscar(): void {
     this.router.navigate(['/tabs/eventos']);
@@ -55,6 +57,14 @@ export class CalendarioPage implements OnInit, OnDestroy {
   mesesAbiertos: string[] = [];
 
   private sub?: Subscription;
+
+  ionViewWillEnter(): void {
+    this.seo.setPage({
+      title: 'Mi calendario de travesías a nado',
+      description: 'Tus travesías a nado guardadas, agrupadas por mes. Consulta próximas fechas y no te pierdas ninguna.',
+      canonicalPath: '/tabs/calendario',
+    });
+  }
 
   ngOnInit(): void {
     const hoy = new Date();
@@ -81,7 +91,8 @@ export class CalendarioPage implements OnInit, OnDestroy {
   }
 
   onEventoClick(evento: Evento): void {
-    this.router.navigate(['/tabs/evento', evento.id], { queryParams: { fecha: evento.fecha_evento, origen: 'calendario' } });
+    const path = evento.slug ? ['/tabs/travesia', evento.slug] : ['/tabs/evento', evento.id];
+    this.router.navigate(path, { queryParams: { fecha: evento.fecha_evento, origen: 'calendario' } });
   }
 
   trackByClave(_: number, g: GrupoMes): string {

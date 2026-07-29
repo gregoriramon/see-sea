@@ -38,6 +38,27 @@
                 "glob": "manifest.webmanifest",
                 "input": "public",
                 "output": "/"
+              },
+              {
+                "glob": "_headers",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "_redirects",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "robots.txt",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "sitemap.xml",
+                "input": "public",
+                "output": "/",
+                "ignore": []
               }
             ],
             "styles": [
@@ -52,13 +73,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "3kb",
+                  "maximumError": "6kb"
                 }
               ],
               "fileReplacements": [
@@ -80,13 +101,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "3kb",
+                  "maximumError": "6kb"
                 }
               ],
               "fileReplacements": [

@@ -7,6 +7,7 @@ import { PlayaComponent } from 'src/app/shared/components/playa/playa.component'
 import { Playa } from 'src/app/models/playa';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { RefresherCustomEvent } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -21,6 +22,7 @@ export class FavoritasPage implements OnInit {
   private localRepositoryService = inject(LocalRepositoryService);
   private supabaseService = inject(Supabase);
   private router = inject(Router);
+  private seo = inject(SeoService);
 
   public favoritas: Playa[] = [];
   public isLoading = true;
@@ -32,6 +34,11 @@ export class FavoritasPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.seo.setPage({
+      title: 'Mis playas favoritas',
+      description: 'Tus playas favoritas con previsión marítima (viento, oleaje, temperatura del agua) actualizada.',
+      canonicalPath: '/tabs/favoritas',
+    });
     this.loadFavoritas();
   }
 

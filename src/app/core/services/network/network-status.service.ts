@@ -1,12 +1,13 @@
-import { Injectable, inject, NgZone } from '@angular/core';
+import { Injectable, Injector, inject, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable, distinctUntilChanged, filter, map, pairwise } from 'rxjs';
 import { Network } from '@capacitor/network';
-import { Supabase } from '../supabase/supabase';
+import type { Supabase } from '../supabase/supabase';
 
 @Injectable({ providedIn: 'root' })
 export class NetworkStatusService {
-  private readonly supabase = inject(Supabase);
+  private readonly injector = inject(Injector);
   private readonly zone = inject(NgZone);
+  private supabaseCache?: Supabase;
 
   private online$$ = new BehaviorSubject<boolean>(
     typeof navigator !== 'undefined' ? navigator.onLine : true
@@ -54,7 +55,8 @@ export class NetworkStatusService {
       return false;
     }
     try {
-      const ok = await this.supabase.ping();
+      const supabase = await this.getSupabase();
+      const ok = await supabase.ping();
       if (!ok) {
         this.setOnline(false);
       }
@@ -63,5 +65,13 @@ export class NetworkStatusService {
       this.setOnline(false);
       return false;
     }
+  }
+
+  private async getSupabase(): Promise<Supabase> {
+    if (!this.supabaseCache) {
+      const mod = await import('../supabase/supabase');
+      this.supabaseCache = this.injector.get(mod.Supabase);
+    }
+    return this.supabaseCache;
   }
 }

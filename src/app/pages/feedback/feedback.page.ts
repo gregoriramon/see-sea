@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Capacitor } from '@capacitor/core';
 import { Feedback, FeedbackContexto, ModoFeedback, PlataformaFeedback, TipoFeedback } from 'src/app/models/feedback';
 
@@ -51,6 +52,7 @@ export class FeedbackPage implements OnDestroy {
   private localRepository = inject(LocalRepositoryService);
   private toastCtrl = inject(ToastController);
   private translate = inject(TranslateService);
+  private seo = inject(SeoService);
 
   tipo: TipoFeedback = 'comentario';
   titulo = '';
@@ -63,6 +65,15 @@ export class FeedbackPage implements OnDestroy {
 
   constructor() {
     this.sub = this.localRepository.deviceId$.subscribe((id) => (this.deviceId = id));
+  }
+
+  ionViewWillEnter(): void {
+    this.seo.setPage({
+      title: 'Enviar feedback',
+      description: 'Cuéntanos qué te parece SiSi: sugerencias, ideas o errores. Nos ayuda a mejorar la app.',
+      canonicalPath: '/tabs/feedback',
+      robots: 'noindex,follow',
+    });
   }
 
   ngOnDestroy(): void {

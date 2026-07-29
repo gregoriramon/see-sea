@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons, IonSpinner,
 } from '@ionic/angular/standalone';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Playa } from 'src/app/models/playa';
 import { PlayaComponent } from 'src/app/shared/components/playa/playa.component';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -25,8 +26,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class PlayaViewPage implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private supabaseService = inject(Supabase);
   localRepositoryService = inject(LocalRepositoryService);
+  private seo = inject(SeoService);
 
   public playa?: Playa;
   public isLoading: boolean = false;
@@ -35,16 +38,31 @@ export class PlayaViewPage implements OnInit, OnDestroy {
   private favoritasSub?: Subscription;
 
   ngOnInit(): void {
-    const codPlaya = this.route.snapshot.paramMap.get('codPlaya');
-    if (!codPlaya) {
+    const slugOrCod = this.route.snapshot.paramMap.get('slug');
+    if (!slugOrCod) {
       return;
     }
+    const esCodigoLegacy = /^\d+$/.test(slugOrCod);
     this.isLoading = true;
-    this.supabaseService.getPlayaByCodPlayaConPrediccion(codPlaya)
+    const fetch = esCodigoLegacy
+      ? this.supabaseService.getPlayaByCodPlayaConPrediccion(slugOrCod)
+      : this.supabaseService.getPlayaBySlugConPrediccion(slugOrCod);
+    fetch
       .then((playaDetails) => {
-        if (playaDetails && !Array.isArray(playaDetails)) {
+        if (playaDetails && !Array.isArray(playaDetails) && playaDetails.cod_playa) {
           this.playa = playaDetails;
           this.esFav = this.localRepositoryService.esFavorita(this.playa);
+          if (esCodigoLegacy && this.playa.slug) {
+            // Redirect cliente al slug (Fase 4 lo moverá a 301 en el Worker).
+            this.router.navigate(['/tabs/playa', this.playa.slug], { replaceUrl: true });
+            return;
+          }
+          this.seo.setPage({
+            title: `Previsión marítima de ${this.playa.playa}`,
+            description: `Estado del mar y previsión meteorológica de la playa ${this.playa.playa}${this.playa.municipio ? ' (' + this.playa.municipio + ')' : ''}: viento, oleaje, temperatura del agua y UV.`,
+            canonicalPath: `/tabs/playa/${this.playa.slug ?? this.playa.cod_playa}`,
+            ogType: 'article',
+          });
         }
       })
       .catch((err) => console.error('Error cargando playa:', err))

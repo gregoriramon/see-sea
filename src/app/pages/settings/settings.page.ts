@@ -7,6 +7,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 import { TranslatePipe } from '@ngx-translate/core';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { LocalRepositoryService, TabInicial } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-settings',
@@ -32,12 +33,22 @@ import { LocalRepositoryService, TabInicial } from 'src/app/core/services/local-
 export class SettingsPage {
   private localRepository = inject(LocalRepositoryService);
   private location = inject(Location);
+  private seo = inject(SeoService);
 
   lang: 'es' | 'en' = this.localRepository.obtenerIdioma();
   notificaciones: boolean = this.localRepository.obtenerNotificaciones();
   tabInicial: TabInicial = this.localRepository.obtenerTabInicial();
   email: string = this.localRepository.obtenerEmail();
   emailInvalido = false;
+
+  constructor() {
+    this.seo.setPage({
+      title: 'Ajustes',
+      description: 'Configura idioma, notificaciones, tab inicial y datos de contacto de SiSi.',
+      canonicalPath: '/settings',
+      robots: 'noindex,follow',
+    });
+  }
 
   readonly tabsDisponibles: { value: TabInicial; labelKey: string }[] = [
     { value: 'favoritas', labelKey: 'tabs.prevision' },

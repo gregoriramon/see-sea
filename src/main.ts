@@ -1,5 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { PreloadAllModules, RouteReuseStrategy, provideRouter, withPreloading } from '@angular/router';
+import { RouteReuseStrategy, provideRouter, withPreloading } from '@angular/router';
+import { SelectivePreloadingStrategy } from './app/core/router/selective-preloading-strategy';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -13,7 +14,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular({ innerHTMLTemplatesEnabled: true }),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(routes, withPreloading(SelectivePreloadingStrategy)),
     provideHttpClient(),
     provideTranslateService({
       fallbackLang: 'es',

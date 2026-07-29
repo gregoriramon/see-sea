@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonContent, IonGrid, IonRow, IonCol, IonIcon, IonInput, IonButton, IonSearchbar, IonSpinner } from '@ionic/angular/standalone';
 import { Supabase } from 'src/app/core/services/supabase/supabase';
 import { LocalRepositoryService } from 'src/app/core/services/local-repository/local-repository.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Playa } from 'src/app/models/playa';
 import { HeaderComponent } from "src/app/shared/components/header/header.component";
 import { PlayaComponent } from "src/app/shared/components/playa/playa.component";
@@ -24,6 +25,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   localRepositoryService = inject(LocalRepositoryService);
   private router = inject(Router);
+  private seo = inject(SeoService);
 
   private readonly PAGE_SIZE = 25;
   public patterName: string = "";
@@ -52,6 +54,14 @@ export class PlayaListPage implements OnInit, OnDestroy {
   mostrarTodas() {
     this.playas = this.playasAll;
     this.isPaginated = false;
+  }
+
+  ionViewWillEnter() {
+    this.seo.setPage({
+      title: 'Buscar playas de España',
+      description: 'Explora las playas de España con previsión marítima detallada: viento, oleaje, temperatura del agua, UV y sensación térmica.',
+      canonicalPath: '/tabs/buscar',
+    });
   }
 
   ngOnInit() {
@@ -236,7 +246,7 @@ export class PlayaListPage implements OnInit, OnDestroy {
   }
 
   onPlayaClick(playa: Playa) {
-    this.router.navigate(['/tabs/playa', playa.cod_playa]);
+    this.router.navigate(['/tabs/playa', playa.slug ?? playa.cod_playa]);
   }
 
   getSomethingSelected(): boolean {
