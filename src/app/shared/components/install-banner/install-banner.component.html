@@ -1,0 +1,15 @@
+@if (visible) {
+  <div class="install-banner" role="dialog" aria-live="polite">
+    <button type="button" class="close-btn" (click)="dismiss()" [attr.aria-label]="'components.install.closeAria' | translate">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+    <div class="title">{{ 'components.install.title' | translate }}</div>
+    <p class="body">{{ 'components.install.body' | translate }}</p>
+    <div class="actions">
+      <button type="button" class="action-btn primary" (click)="install()">
+        <ion-icon name="download-outline"></ion-icon>
+        {{ 'components.install.installBtn' | translate }}
+      </button>
+    </div>
+  </div>
+}

@@ -1,12 +1,41 @@
 {
-  "name": "SiSi (SeeSea)",
+  "id": "/",
+  "name": "SiSi (SeeSea) — Travesías a nado y previsión marítima",
   "short_name": "SiSi",
+  "description": "Consulta próximas travesías a nado en aguas abiertas y la previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas.",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["sports", "weather", "utilities"],
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "scope": "/",
   "start_url": "/tabs/calendario",
   "theme_color": "#005f73",
   "background_color": "#005f73",
   "orientation": "portrait",
+  "shortcuts": [
+    {
+      "name": "Mis favoritas",
+      "short_name": "Favoritas",
+      "description": "Ver las playas guardadas como favoritas",
+      "url": "/tabs/favoritas",
+      "icons": [{ "src": "/assets/icon/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Próximas travesías",
+      "short_name": "Travesías",
+      "description": "Calendario de travesías a nado en aguas abiertas",
+      "url": "/tabs/eventos",
+      "icons": [{ "src": "/assets/icon/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Buscar playas",
+      "short_name": "Buscar",
+      "description": "Buscar playas por nombre, provincia o municipio",
+      "url": "/tabs/buscar",
+      "icons": [{ "src": "/assets/icon/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    }
+  ],
   "icons": [
     {
       "src": "/assets/icon/web-app-manifest-72x72.png",

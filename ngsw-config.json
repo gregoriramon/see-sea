@@ -11,6 +11,7 @@
         "files": [
           "/favicon.ico",
           "/index.html",
+          "/manifest.webmanifest",
           "/*.css",
           "/*.js",
           "/**/*.css",
@@ -26,6 +27,34 @@
         "files": [
           "/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "supabase-catalogo",
+      "urls": [
+        "https://*.supabase.co/rest/v1/playa*",
+        "https://*.supabase.co/rest/v1/municipio*",
+        "https://*.supabase.co/rest/v1/provincia*"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 200,
+        "maxAge": "12h",
+        "timeout": "5s"
+      }
+    },
+    {
+      "name": "supabase-travesias",
+      "urls": [
+        "https://*.supabase.co/rest/v1/travesias*"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 200,
+        "maxAge": "1d",
+        "timeout": "5s"
       }
     }
   ]

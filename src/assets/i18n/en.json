@@ -192,6 +192,12 @@
       "shareAria": "Share",
       "addAria": "Add",
       "installed": "I already have it installed"
+    },
+    "install": {
+      "closeAria": "Close",
+      "title": "Install SiSi (SeeSea)",
+      "body": "Add the app to your home screen for quick access and offline use.",
+      "installBtn": "Install"
     }
   }
 }

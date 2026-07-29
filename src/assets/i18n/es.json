@@ -192,6 +192,12 @@
       "shareAria": "Compartir",
       "addAria": "Añadir",
       "installed": "Ya la tengo instalada"
+    },
+    "install": {
+      "closeAria": "Cerrar",
+      "title": "Instala SiSi (SeeSea)",
+      "body": "Añade la app a tu pantalla de inicio para acceso rápido y uso sin conexión.",
+      "installBtn": "Instalar"
     }
   }
 }

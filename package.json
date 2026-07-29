@@ -14,13 +14,12 @@
     "build:prod": "ng build --configuration production && node scripts/absolutize-index.mjs",
     "deploy:cons": "ng build --configuration consolidation && firebase deploy --only hosting:cons",
     "deploy:prod": "ng build --configuration production && firebase deploy --only hosting:prod",
-    "deploy:cf:cons": "npm run build:cons && wrangler pages deploy www --project-name=sisi-cons --branch=main",
-    "deploy:cf:prod": "npm run build:prod && wrangler pages deploy www --project-name=sisi-prod --branch=main",
+    "deploy:cf:cons": "npm run build:cons && wrangler pages deploy www/browser --project-name=sisi-cons --branch=main",
+    "deploy:cf:prod": "npm run build:prod && wrangler pages deploy www/browser --project-name=sisi-prod --branch=main",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint",
-    "serve:ssr:app": "node www/server/server.mjs"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {

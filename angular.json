@@ -63,15 +63,7 @@
               "src/theme/variables.scss"
             ],
             "scripts": [],
-            "browser": "src/main.ts",
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": ["localhost", "sisi-cons.pages.dev", "sisi-prod.pages.dev"]
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {

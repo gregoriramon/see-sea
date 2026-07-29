@@ -6,6 +6,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { LocalRepositoryService } from './core/services/local-repository/local-repository.service';
 import { filter, take } from 'rxjs/operators';
 import { IosInstallBannerComponent } from './shared/components/ios-install-banner/ios-install-banner.component';
+import { InstallBannerComponent } from './shared/components/install-banner/install-banner.component';
 import { OfflineBannerComponent } from './shared/components/offline-banner/offline-banner.component';
 import { NetworkStatusService } from './core/services/network/network-status.service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -13,7 +14,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent, OfflineBannerComponent, TranslatePipe, RouterLink],
+  imports: [IonItem, IonList, IonTitle, IonContent, IonToolbar, IonHeader, IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IosInstallBannerComponent, InstallBannerComponent, OfflineBannerComponent, TranslatePipe, RouterLink],
 })
 export class AppComponent implements OnInit  {
   private localRepository = inject(LocalRepositoryService);
