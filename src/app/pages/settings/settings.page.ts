@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonList, IonItem, IonSelect, IonSelectOption, IonToggle, IonButton, IonInput, IonNote } from '@ionic/angular/standalone';
+import { IonContent, IonList, IonItem, IonSelect, IonSelectOption, IonButton, IonInput, IonNote } from '@ionic/angular/standalone';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 import { TranslatePipe } from '@ngx-translate/core';
@@ -23,7 +23,6 @@ import { SeoService } from 'src/app/core/services/seo/seo.service';
     IonItem,
     IonSelect,
     IonSelectOption,
-    IonToggle,
     IonButton,
     IonInput,
     IonNote,
@@ -36,7 +35,6 @@ export class SettingsPage {
   private seo = inject(SeoService);
 
   lang: 'es' | 'en' = this.localRepository.obtenerIdioma();
-  notificaciones: boolean = this.localRepository.obtenerNotificaciones();
   tabInicial: TabInicial = this.localRepository.obtenerTabInicial();
   email: string = this.localRepository.obtenerEmail();
   emailInvalido = false;
@@ -44,7 +42,7 @@ export class SettingsPage {
   constructor() {
     this.seo.setPage({
       title: 'Ajustes',
-      description: 'Configura idioma, notificaciones, tab inicial y datos de contacto de SiSi.',
+      description: 'Configura idioma, tab inicial y datos de contacto de SiSi.',
       canonicalPath: '/settings',
       robots: 'noindex,follow',
     });
@@ -61,10 +59,6 @@ export class SettingsPage {
   onLangChange(event: CustomEvent) {
     const value = event.detail.value as 'es' | 'en';
     this.localRepository.guardarIdioma(value);
-  }
-
-  onNotificacionesChange(event: CustomEvent) {
-    this.localRepository.guardarNotificaciones(!!event.detail.checked);
   }
 
   onTabInicialChange(event: CustomEvent) {

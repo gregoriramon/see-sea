@@ -44,15 +44,12 @@ export class LocalRepositoryService {
   private readonly FAVORITOS_EVENTOS_KEY = 'favoritosEventos';
   private readonly DEVICE_ID_KEY = 'my_app_device_id';
   private readonly LANG_KEY = 'pref_lang';
-  private readonly NOTIFICATIONS_KEY = 'pref_notifications';
   private readonly TAB_INICIAL_KEY = 'pref_tab_inicial';
   private readonly EMAIL_KEY = 'pref_email';
 
   // ===== PREFERENCIAS =====
   private langSubject = new BehaviorSubject<'es' | 'en'>('es');
   public lang$ = this.langSubject.asObservable();
-  private notificacionesSubject = new BehaviorSubject<boolean>(false);
-  public notificaciones$ = this.notificacionesSubject.asObservable();
   private tabInicialSubject = new BehaviorSubject<TabInicial>('calendario');
   public tabInicial$ = this.tabInicialSubject.asObservable();
   private emailSubject = new BehaviorSubject<string>('');
@@ -78,10 +75,7 @@ export class LocalRepositoryService {
       ls.setItem(this.LANG_KEY, 'es');
       this.langSubject.next('es');
     }
-    const notif = ls.getItem(this.NOTIFICATIONS_KEY);
-    if (notif !== null) {
-      this.notificacionesSubject.next(notif === 'true');
-    }
+    ls.removeItem('pref_notifications');
     const tab = ls.getItem(this.TAB_INICIAL_KEY) as TabInicial | null;
     if (tab && TABS_VALIDAS.includes(tab)) {
       this.tabInicialSubject.next(tab);
@@ -122,15 +116,6 @@ export class LocalRepositoryService {
   guardarIdioma(lang: 'es' | 'en'): void {
     ls.setItem(this.LANG_KEY, lang);
     this.langSubject.next(lang);
-  }
-
-  obtenerNotificaciones(): boolean {
-    return this.notificacionesSubject.value;
-  }
-
-  guardarNotificaciones(activadas: boolean): void {
-    ls.setItem(this.NOTIFICATIONS_KEY, String(activadas));
-    this.notificacionesSubject.next(activadas);
   }
 
   // ===== FAVORITAS METHODS =====

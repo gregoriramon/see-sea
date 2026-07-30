@@ -38,14 +38,6 @@
     <ion-item *ngIf="emailInvalido" lines="none">
       <ion-note color="danger">{{ 'settings.emailInvalido' | translate }}</ion-note>
     </ion-item>
-
-    <ion-item>
-      <ion-toggle
-        [checked]="notificaciones"
-        (ionChange)="onNotificacionesChange($event)">
-        {{ 'settings.notifications' | translate }}
-      </ion-toggle>
-    </ion-item>
   </ion-list>
 
   <div class="ion-padding">

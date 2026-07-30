@@ -2,7 +2,6 @@
   "settings": {
     "title": "Configuración",
     "language": "Idioma",
-    "notifications": "Permitir notificaciones",
     "tabInicial": "Página de inicio",
     "email": "Tu email",
     "emailInvalido": "Email no válido",
