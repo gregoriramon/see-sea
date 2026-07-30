@@ -10,7 +10,7 @@ import {
   ToastController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { shareOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
+import { shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -31,7 +31,7 @@ export class HeaderComponent {
   private translate = inject(TranslateService);
 
   constructor() {
-    addIcons({ shareOutline, logoWhatsapp, mailOutline, copyOutline });
+    addIcons({ shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
   }
 
   async compartirApp(): Promise<void> {

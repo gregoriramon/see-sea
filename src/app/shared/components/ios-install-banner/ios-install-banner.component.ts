@@ -2,7 +2,7 @@ import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { shareOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
+import { shareSocialOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
 import { Capacitor } from '@capacitor/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -22,7 +22,7 @@ export class IosInstallBannerComponent implements OnInit {
   visible = false;
 
   constructor() {
-    addIcons({ shareOutline, close, addOutline, checkmarkCircleOutline });
+    addIcons({ shareSocialOutline, close, addOutline, checkmarkCircleOutline });
   }
 
   ngOnInit(): void {
