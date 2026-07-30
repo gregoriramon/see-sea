@@ -19,8 +19,8 @@ const ls: Storage = (typeof globalThis !== 'undefined' && (globalThis as any).lo
   ? (globalThis as any).localStorage
   : noopStorage;
 
-export type TabInicial = 'favoritas' | 'buscar' | 'eventos' | 'calendario' | 'feedback';
-const TABS_VALIDAS: TabInicial[] = ['favoritas', 'buscar', 'eventos', 'calendario', 'feedback'];
+export type TabInicial = 'calendario' | 'favoritas';
+const TABS_VALIDAS: TabInicial[] = ['calendario', 'favoritas'];
 
 @Injectable({
   providedIn: 'root',

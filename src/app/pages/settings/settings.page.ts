@@ -49,11 +49,8 @@ export class SettingsPage {
   }
 
   readonly tabsDisponibles: { value: TabInicial; labelKey: string }[] = [
-    { value: 'favoritas', labelKey: 'tabs.prevision' },
-    { value: 'buscar', labelKey: 'tabs.playas' },
-    { value: 'eventos', labelKey: 'tabs.travesias' },
     { value: 'calendario', labelKey: 'tabs.calendario' },
-    { value: 'feedback', labelKey: 'tabs.feedback' },
+    { value: 'favoritas', labelKey: 'tabs.prevision' },
   ];
 
   onLangChange(event: CustomEvent) {
