@@ -429,7 +429,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   private readonly SELECT_EVENTO = "id,slug,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados";
-  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,slug,descripcion,fecha_evento,disciplina,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_reglamento,url_oficial";
+  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,slug,descripcion,fecha_evento,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_inscritos,url_reglamento,url_oficial,url_redes_sociales";
   private readonly SELECT_EVENTO_BY_ID_PASADO = "id,slug,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial";
 
   private normalizaPatron(pattern: string): string {

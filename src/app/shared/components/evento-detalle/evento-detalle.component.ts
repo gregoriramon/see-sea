@@ -11,7 +11,11 @@ import { FechaPipe } from '../../pipes/fecha-pipe';
 import { ColorFechaPipe } from '../../pipes/color-fecha-pipe';
 import { fechaEsPasada } from '../../utils/templateUtils';
 import { addIcons } from 'ionicons';
-import { calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
+import {
+  calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline,
+  logoFacebook, logoInstagram, logoTwitter, logoYoutube, logoTiktok,
+  informationCircleOutline, createOutline, peopleOutline, trophyOutline, documentTextOutline, earthOutline, globeOutline,
+} from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -37,9 +41,14 @@ export class EventoDetalleComponent implements OnChanges {
   public esFinde: boolean = false;
   public colorCalendario: string = 'medium';
   public esPasado: boolean = false;
+  public redesSociales: { url: string; icono: string; label: string }[] = [];
 
   constructor() {
-    addIcons({ calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
+    addIcons({
+      calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline,
+      logoFacebook, logoInstagram, logoTwitter, logoYoutube, logoTiktok,
+      informationCircleOutline, createOutline, peopleOutline, trophyOutline, documentTextOutline, earthOutline, globeOutline,
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,6 +57,7 @@ export class EventoDetalleComponent implements OnChanges {
       this.diaSemana = this.computarDiaSemana(fecha);
       this.esFinde = this.computarEsFinde(fecha);
       this.esPasado = fechaEsPasada(this.evento?.fecha_evento);
+      this.redesSociales = this.parsearRedesSociales(this.evento?.url_redes_sociales);
     }
     if (changes['evento'] || changes['esParticularFavorito']) {
       this.colorCalendario = this.computarColorCalendario();
@@ -91,6 +101,40 @@ export class EventoDetalleComponent implements OnChanges {
     if (!fecha || isNaN(fecha.getTime())) return false;
     const d = fecha.getDay();
     return d === 0 || d === 6;
+  }
+
+  private parsearRedesSociales(raw: string | undefined | null): { url: string; icono: string; label: string }[] {
+    if (!raw) return [];
+    const partes = raw.split(/[,;]/).map(s => s.trim()).filter(Boolean);
+    const vistos = new Set<string>();
+    const resultado: { url: string; icono: string; label: string }[] = [];
+    for (const url of partes) {
+      let host = '';
+      try {
+        host = new URL(url).hostname.toLowerCase().replace(/^www\./, '');
+      } catch {
+        continue;
+      }
+      const clave = `${host}|${url.replace(/\/$/, '').toLowerCase()}`;
+      if (vistos.has(clave)) continue;
+      vistos.add(clave);
+      const info = this.iconoDeHost(host);
+      resultado.push({ url, icono: info.icono, label: info.label });
+    }
+    const porLabel = new Map<string, { url: string; icono: string; label: string }>();
+    for (const item of resultado) {
+      if (!porLabel.has(item.label)) porLabel.set(item.label, item);
+    }
+    return Array.from(porLabel.values());
+  }
+
+  private iconoDeHost(host: string): { icono: string; label: string } {
+    if (host.includes('facebook.com') || host === 'fb.com') return { icono: 'logo-facebook', label: 'Facebook' };
+    if (host.includes('instagram.com')) return { icono: 'logo-instagram', label: 'Instagram' };
+    if (host.includes('twitter.com') || host === 'x.com') return { icono: 'logo-twitter', label: 'Twitter' };
+    if (host.includes('youtube.com') || host === 'youtu.be') return { icono: 'logo-youtube', label: 'YouTube' };
+    if (host.includes('tiktok.com')) return { icono: 'logo-tiktok', label: 'TikTok' };
+    return { icono: 'globe-outline', label: host };
   }
 
   abrirUrl(event: Event, url: string | undefined | null): void {

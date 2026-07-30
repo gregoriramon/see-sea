@@ -6,6 +6,11 @@
         <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
       </ion-button>
     </div>
+    @if (evento.municipio) {
+      <p class="lugar-text">{{ evento.municipio }}@if (evento.provincia) { ({{ evento.provincia }})}</p>
+    } @else if (evento.lugar_evento) {
+      <p class="lugar-text">{{ evento.lugar_evento }}</p>
+    }
     <p class="fecha-text" [style.color]="evento.fecha_evento | colorFecha">
       {{ evento.fecha_evento | fecha }} -
       <span class="dia-semana" [class.dia-finde]="esFinde">{{ diaSemana }}</span>
@@ -16,22 +21,20 @@
   </header>
 
   <div class="detalle-grid">
-    @if (!esPasado && evento.disciplina) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.disciplina' | translate }}</span>
-        <span class="detalle-value">{{ evento.disciplina }}</span>
-      </div>
-    }
-    @if (evento.distancia) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.distance' | translate }}</span>
-        <span class="detalle-value">{{ evento.distancia }}</span>
-      </div>
-    }
-    @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.price' | translate }}</span>
-        <span class="detalle-value">{{ evento.precio }} €</span>
+    @if (evento.distancia || (!esPasado && evento.precio !== null && evento.precio !== undefined)) {
+      <div class="detalle-row-double">
+        @if (evento.distancia) {
+          <div class="detalle-row">
+            <span class="detalle-label">{{ 'components.evento.distance' | translate }}</span>
+            <span class="detalle-value">{{ evento.distancia }}</span>
+          </div>
+        }
+        @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
+          <div class="detalle-row">
+            <span class="detalle-label">{{ 'components.evento.price' | translate }}</span>
+            <span class="detalle-value">{{ evento.precio }} €</span>
+          </div>
+        }
       </div>
     }
     @if (evento.organizador) {
@@ -40,67 +43,73 @@
         <span class="detalle-value">{{ evento.organizador }}</span>
       </div>
     }
-    @if (evento.lugar_evento) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.lugar' | translate }}</span>
-        <span class="detalle-value">{{ evento.lugar_evento }}</span>
-      </div>
-    }
-    @if (evento.municipio) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.municipio' | translate }}</span>
-        <span class="detalle-value">{{ evento.municipio }}</span>
-      </div>
-    }
-    @if (evento.provincia) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.provincia' | translate }}</span>
-        <span class="detalle-value">{{ evento.provincia }}</span>
-      </div>
-    }
-    @if (!esPasado && evento.fecha_inicio_inscripcion) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.inicioInscripcion' | translate }}</span>
-        <span class="detalle-value">{{ evento.fecha_inicio_inscripcion | fecha }}</span>
-      </div>
-    }
-    @if (!esPasado && evento.fecha_fin_inscripcion) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.finInscripcion' | translate }}</span>
-        <span class="detalle-value">{{ evento.fecha_fin_inscripcion | fecha }}</span>
-      </div>
-    }
-    @if (!esPasado && evento.url_info) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.urlInfo' | translate }}</span>
-        <a class="detalle-link" (click)="abrirUrl($event, evento.url_info)">{{ evento.url_info }}</a>
-      </div>
-    }
-    @if (esPasado && evento.url_resultados) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.urlResultados' | translate }}</span>
-        <a class="detalle-link" (click)="abrirUrl($event, evento.url_resultados)">{{ evento.url_resultados }}</a>
-      </div>
-    }
-    @if (!esPasado && evento.url_inscripcion) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.urlInscripcion' | translate }}</span>
-        <a class="detalle-link" (click)="abrirUrl($event, evento.url_inscripcion)">{{ evento.url_inscripcion }}</a>
-      </div>
-    }
-    @if (!esPasado && evento.url_reglamento) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.urlReglamento' | translate }}</span>
-        <a class="detalle-link" (click)="abrirUrl($event, evento.url_reglamento)">{{ evento.url_reglamento }}</a>
-      </div>
-    }
-    @if (evento.url_oficial) {
-      <div class="detalle-row">
-        <span class="detalle-label">{{ 'components.evento.urlOficial' | translate }}</span>
-        <a class="detalle-link" (click)="abrirUrl($event, evento.url_oficial)">{{ evento.url_oficial }}</a>
+    @if (!esPasado && (evento.fecha_inicio_inscripcion || evento.fecha_fin_inscripcion)) {
+      <div class="detalle-row-double">
+        @if (evento.fecha_inicio_inscripcion) {
+          <div class="detalle-row">
+            <span class="detalle-label">{{ 'components.evento.inicioInscripcion' | translate }}</span>
+            <span class="detalle-value">{{ evento.fecha_inicio_inscripcion | fecha }}</span>
+          </div>
+        }
+        @if (evento.fecha_fin_inscripcion) {
+          <div class="detalle-row">
+            <span class="detalle-label">{{ 'components.evento.finInscripcion' | translate }}</span>
+            <span class="detalle-value">{{ evento.fecha_fin_inscripcion | fecha }}</span>
+          </div>
+        }
       </div>
     }
   </div>
+
+  <div class="urls-grid">
+    @if (!esPasado && evento.url_info) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlInfo' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_info)"><ion-icon name="information-circle-outline"></ion-icon></a>
+      </div>
+    }
+    @if (!esPasado && evento.url_inscripcion) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlInscripcion' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_inscripcion)"><ion-icon name="create-outline"></ion-icon></a>
+      </div>
+    }
+    @if (!esPasado && evento.url_inscritos) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlInscritos' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_inscritos)"><ion-icon name="people-outline"></ion-icon></a>
+      </div>
+    }
+    @if (esPasado && evento.url_resultados) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlResultados' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_resultados)"><ion-icon name="trophy-outline"></ion-icon></a>
+      </div>
+    }
+    @if (!esPasado && evento.url_reglamento) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlReglamento' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_reglamento)"><ion-icon name="document-text-outline"></ion-icon></a>
+      </div>
+    }
+    @if (evento.url_oficial) {
+      <div class="url-cell">
+        <span class="detalle-label">{{ 'components.evento.urlOficial' | translate }}</span>
+        <a (click)="abrirUrl($event, evento.url_oficial)"><ion-icon name="earth-outline"></ion-icon></a>
+      </div>
+    }
+  </div>
+
+  @if (redesSociales.length) {
+    <div class="rs-grid">
+      @for (rs of redesSociales; track rs.url) {
+        <div class="url-cell">
+          <span class="detalle-label">{{ rs.label }}</span>
+          <a (click)="abrirUrl($event, rs.url)"><ion-icon [name]="rs.icono"></ion-icon></a>
+        </div>
+      }
+    </div>
+  }
 
   @if (mostrarBotonFavorito) {
     <div class="boton-favorita-row">
