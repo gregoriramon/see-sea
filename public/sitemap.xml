@@ -871,17 +871,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-javea-xabia-0308204</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-borriana-burriana-1203201</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-san-javier-3003526</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-javea-xabia-0308204</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1131,12 +1131,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/esteiro-muros-1505303</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/esteiro-xove-2702501</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/esteiro-xove-2702501</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/esteiro-muros-1505303</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1436,12 +1436,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-oropesa-del-mar-orpesa-1208503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-suances-3908503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-suances-3908503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-oropesa-del-mar-orpesa-1208503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1646,12 +1646,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-muxia-1505202</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-xove-2702503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-xove-2702503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-muxia-1505202</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2241,17 +2241,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-la-linea-de-la-concepcion-1102207</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-aguilas-3000313</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-adra-0400308</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-la-linea-de-la-concepcion-1102207</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2676,12 +2676,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/sant-pol-sant-pol-de-mar-0823504</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/sant-pol-sant-feliu-de-guixols-1716001</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/sant-pol-sant-feliu-de-guixols-1716001</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/sant-pol-sant-pol-de-mar-0823504</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
