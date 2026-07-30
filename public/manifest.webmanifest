@@ -2,7 +2,7 @@
   "id": "/",
   "name": "SiSi (SeeSea) — Travesías a nado y previsión marítima",
   "short_name": "SiSi",
-  "description": "Consulta próximas travesías a nado en aguas abiertas y la previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas.",
+  "description": "Consulta próximas travesías a nado en aguas abiertas, resultados de pasadas, y la previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas.",
   "lang": "es",
   "dir": "ltr",
   "categories": ["sports", "weather", "utilities"],
@@ -14,6 +14,13 @@
   "background_color": "#005f73",
   "orientation": "portrait",
   "shortcuts": [
+    {
+      "name": "Mi calendario",
+      "short_name": "Calendario",
+      "description": "Ver tus travesías guardadas en el calendario",
+      "url": "/tabs/calendario",
+      "icons": [{ "src": "/assets/icon/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
     {
       "name": "Mis favoritas",
       "short_name": "Favoritas",

@@ -19,9 +19,26 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = resolve(__dirname, '..', 'public', 'sitemap.xml');
 
-const SITE_URL = (process.env.SITE_URL || 'https://sisi.pages.dev').replace(/\/$/, '');
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+const DEFAULTS = {
+  prod: {
+    SITE_URL: 'https://sisi-prod.pages.dev',
+    SUPABASE_URL: 'https://alchktnrwblnwnwrnxim.supabase.co',
+    SUPABASE_ANON_KEY: 'sb_publishable_vVuk_xQYxXpNBTbNLorC-Q_g3QhpoDJ',
+  },
+  cons: {
+    SITE_URL: 'https://sisi-cons.pages.dev',
+    SUPABASE_URL: 'https://peojsedikxvmbirvlgmi.supabase.co',
+    SUPABASE_ANON_KEY: 'sb_publishable_cQUPa0x3FF5UIL6_S9xngg_20E9fLfi',
+  },
+};
+
+const envArg = (process.argv.find((a) => a.startsWith('--env=')) || '').split('=')[1];
+const ENV = envArg || process.env.BUILD_ENV || 'prod';
+const defaults = DEFAULTS[ENV] ?? DEFAULTS.prod;
+
+const SITE_URL = (process.env.SITE_URL || defaults.SITE_URL).replace(/\/$/, '');
+const SUPABASE_URL = process.env.SUPABASE_URL || defaults.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || defaults.SUPABASE_ANON_KEY;
 
 const STATIC_PATHS = [
   { path: '/', changefreq: 'daily', priority: '1.0' },
