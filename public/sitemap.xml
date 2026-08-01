@@ -146,22 +146,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/area-grande-o-grove-3602208</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/area-grande-cangas-3600806</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/area-longa-o-vicedo-2706402</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/area-grande-o-grove-3602208</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/playa/area-longa-foz-2701902</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/area-longa-o-vicedo-2706402</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -491,12 +491,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/cala-mesquida-capdepera-0701401</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/cala-mesquida-mao-mahon-0703211</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/cala-mesquida-mao-mahon-0703211</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/cala-mesquida-capdepera-0701401</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -876,12 +876,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-san-javier-3003526</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-javea-xabia-0308204</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-javea-xabia-0308204</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/el-arenal-san-javier-3003526</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1436,12 +1436,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-suances-3908503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-oropesa-del-mar-orpesa-1208503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-oropesa-del-mar-orpesa-1208503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/la-concha-suances-3908503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1646,12 +1646,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-xove-2702503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-muxia-1505202</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-muxia-1505202</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/lago-xove-2702503</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2241,7 +2241,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-aguilas-3000313</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-la-linea-de-la-concepcion-1102207</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2251,7 +2251,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-la-linea-de-la-concepcion-1102207</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/playa/poniente-aguilas-3000313</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -2981,17 +2981,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-arnao-salinas-castrillon-2026-55388</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-embalse-el-tranco-hornos-2026-55390</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travesia-rototom-sunplash-benicassim-2026-55395</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-isla-colombina-la-gomera-2026-55392</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3001,17 +2991,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/35-travesia-internacional-rio-guadiana-rio-guadiana-2026-55394</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xxvii-copa-de-asturias-de-aguas-abiertas-navia-2026-55389</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-la-tinosa-puerto-del-carmen-2026-55393</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-la-tinosa-2026-tias-2026-54198</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiv-travessa-son-serra-de-marina-2026-mallorca-2026-139181</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3026,47 +3016,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-isla-colombina-la-gomera-2026-55392</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-la-tinosa-2026-tias-2026-54198</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/35-travesia-internacional-rio-guadiana-rio-guadiana-2026-55394</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-la-tinosa-puerto-del-carmen-2026-55393</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/vuelta-a-la-escollera-alicante-2026-55408</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travesia-rototom-sunplash-benicassim-2026-55395</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-isla-san-juan-de-los-terreros-pulpi-2026-55399</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xx-travesia-de-la-bahia-del-txingudi-bahia-txingudi-20280-guipuzcoa-espana-2026-87156</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/21-travessia-maritima-platges-de-nules-playa-de-l-alcudia-parc-de-l-estany-2026-54039</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-port-de-moraira-moraira-2026-55401</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/52-travessia-sant-feliu-de-guixols-sant-feliu-de-guixols-2026-55403</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-travessia-canal-de-nado-de-ses-figueretes-ibiza-2026-55406</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-embalse-el-tranco-hornos-2026-55390</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3076,7 +3041,42 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xx-travesia-bahia-del-txingudi-hondarribia-2026-55405</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-isla-san-juan-de-los-terreros-pulpi-2026-55399</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/21-travessia-maritima-platges-de-nules-playa-de-l-alcudia-parc-de-l-estany-2026-54039</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/lxviii-descenso-a-nado-ria-de-navia-navia-2026-55398</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/lxxiii-travessia-nedant-de-sitges-sitges-2026-55407</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/52-travessia-sant-feliu-de-guixols-sant-feliu-de-guixols-2026-55403</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-port-de-moraira-moraira-2026-55401</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-travessia-canal-de-nado-de-ses-figueretes-ibiza-2026-55406</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3091,17 +3091,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/vuelta-a-la-escollera-alicante-2026-55408</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/swim-4k-anglet-anglet-2026-55404</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xx-travesia-bahia-del-txingudi-hondarribia-2026-55405</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/lxxiii-travessia-nedant-de-sitges-sitges-2026-55407</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xx-travesia-de-la-bahia-del-txingudi-bahia-txingudi-20280-guipuzcoa-espana-2026-87156</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3111,32 +3111,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-travesia-a-nado-isla-cristina-playa-central-isla-cristina-2026-275103</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travesia-vila-do-tea-ponteareas-2026-55415</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-travesia-isla-cristina-isla-cristina-2026-55413</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/iv-descenso-a-nado-rio-tambre-noia-2026-55409</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/acantilados-rincon-de-la-victoria-rincon-de-la-victoria-2026-55414</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/garrucha-garrucha-2026-55410</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/28-travesia-concello-de-cedeira-cedeira-2026-55412</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3146,17 +3126,32 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiv-travesia-a-nado-de-candas-candas-2026-55419</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-travesia-isla-cristina-isla-cristina-2026-55413</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-travesia-a-nado-playa-de-casablanca-2026-almenara-2026-54179</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/acantilados-rincon-de-la-victoria-rincon-de-la-victoria-2026-55414</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/89-gen-roses-roses-2026-55416</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/28-travesia-concello-de-cedeira-cedeira-2026-55412</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/garrucha-garrucha-2026-55410</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/iv-descenso-a-nado-rio-tambre-noia-2026-55409</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-aquatrail-del-cabo-las-huertas-2026-alicante-2026-224813</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3181,7 +3176,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-aquatrail-del-cabo-las-huertas-2026-alicante-2026-224813</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-travesia-a-nado-playa-de-casablanca-2026-almenara-2026-54179</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3191,22 +3186,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-los-angeles-de-san-rafael-los-angeles-de-san-rafael-2026-55423</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiv-travesia-a-nado-de-candas-candas-2026-55419</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiv-travesia-solidaria-ria-de-noia-noia-2026-55430</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxxi-praia-de-coroso-riveira-2026-55426</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxii-travessia-banderes-blaves-moncofa-2026-55429</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/89-gen-roses-roses-2026-55416</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3221,7 +3206,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/50-port-del-fangar-l-ampolla-2026-55425</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxxi-praia-de-coroso-riveira-2026-55426</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiv-travesia-solidaria-ria-de-noia-noia-2026-55430</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-los-angeles-de-san-rafael-los-angeles-de-san-rafael-2026-55423</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiv-travesia-a-nado-o-fisgon-rua-de-concepcion-arenal-s-n-36950-moana-pontevedra-espana-2026-111840</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3236,22 +3236,47 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/volta-a-l-escullera-de-gandia-playa-de-gandia-2026-55431</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xiv-travesia-o-fisgon-moana-2026-55424</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiv-travesia-a-nado-o-fisgon-rua-de-concepcion-arenal-s-n-36950-moana-pontevedra-espana-2026-111840</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/50-port-del-fangar-l-ampolla-2026-55425</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/volta-a-l-escullera-de-gandia-playa-de-gandia-2026-55431</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxii-travessia-banderes-blaves-moncofa-2026-55429</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-travesia-alcala-alcala-2026-111861</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-travesia-la-costilla-rota-cadiz-2026-275846</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-alcala-guia-de-isora-guia-de-isora-2026-59802</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-la-costilla-rota-2026-55433</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/viii-canal-de-castilla-paredes-de-nava-2026-55432</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3266,21 +3291,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/viii-canal-de-castilla-paredes-de-nava-2026-55432</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-travesia-alcala-alcala-2026-111861</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-alcala-guia-de-isora-guia-de-isora-2026-59802</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xii-playitas-resort-gran-tarajal-las-playitas-fuerteventura-2026-55439</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -3291,7 +3301,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxxi-travesia-san-gines-arrecife-2026-55441</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-solidaria-san-fernando-san-fernando-2026-55442</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3306,11 +3316,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-solidaria-san-fernando-san-fernando-2026-55442</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xvi-playa-de-el-arbeyal-gijon-2026-55438</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -3321,22 +3326,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-costa-cedeira-cedeira-2026-55448</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-sant-roc-denia-denia-2026-55445</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-milla-marina-de-cambrils-cambrils-2026-55446</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiii-punta-umbria-punta-umbria-2026-55447</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxxi-travesia-san-gines-arrecife-2026-55441</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3351,22 +3341,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiii-sa-milla-cala-blava-s-arenal-2026-55451</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-costa-cedeira-cedeira-2026-55448</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiii-travesia-illa-da-creba-esteiro-2026-55454</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-sant-roc-denia-denia-2026-55445</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxvi-travesia-bajondillo-carihuela-torremolinos-2026-55452</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiii-punta-umbria-punta-umbria-2026-55447</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-ria-de-villaviciosa-villaviciosa-2026-55450</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-milla-marina-de-cambrils-cambrils-2026-55446</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3381,6 +3371,46 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiii-sa-milla-cala-blava-s-arenal-2026-55451</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiii-sa-milla-travesia-c-n-arenal-cala-blava-2026-mallorca-2026-139211</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxvi-travesia-bajondillo-carihuela-torremolinos-2026-55452</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-ria-de-villaviciosa-villaviciosa-2026-55450</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiii-travesia-illa-da-creba-esteiro-2026-55454</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travessia-la-fosca-palamos-2026-55457</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travessa-la-fosca-palamos-platja-de-la-fosca-passeig-de-la-fosca-palamos-espana-2026-87860</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/picoco-playa-de-regla-chipiona-2026-55455</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/27-travesia-a-nado-vuelta-a-la-isla-2026-donostia-san-sebastian-2026-87546</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -3391,22 +3421,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/picoco-playa-de-regla-chipiona-2026-55455</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travessa-la-fosca-palamos-platja-de-la-fosca-passeig-de-la-fosca-palamos-espana-2026-87860</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/x-travessia-la-fosca-palamos-2026-55457</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-edicio-travessia-la-baells-cercs-2026-54149</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-embalse-de-la-baells-berga-2026-55458</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3416,12 +3431,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-embalse-de-la-baells-berga-2026-55458</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-sheep-cup-calvia-santa-pona-a-rei-en-jaume-2026-mallorca-2026-139219</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-travesia-salome-campos-2026-bermeo-2026-59656</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxi-edicio-travessia-la-baells-cercs-2026-54149</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3441,12 +3456,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/discovery-zahara-de-la-sierra-zahara-de-la-sierra-2026-55468</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-costa-fisterra-condello-de-fisterra-2026-55465</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xi-travesia-salome-campos-2026-bermeo-2026-59656</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3456,17 +3466,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xvi-travessia-panta-de-st-llorenc-de-montgai-sant-llorenc-de-montgai-2026-55467</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/11-tarraco-aigues-obertes-tarragona-2026-55464</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/11a-tarraco-aigues-obertes-la-travessia-de-les-6-platges-platja-del-miracle-tarragona-espana-2026-86451</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiii-travesia-a-nado-faro-de-torrox-torrox-malaga-2026-58298</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3476,7 +3476,27 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xiii-travesia-a-nado-faro-de-torrox-torrox-malaga-2026-58298</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/11-tarraco-aigues-obertes-tarragona-2026-55464</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xvi-travessia-panta-de-st-llorenc-de-montgai-sant-llorenc-de-montgai-2026-55467</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/11a-tarraco-aigues-obertes-la-travessia-de-les-6-platges-platja-del-miracle-tarragona-espana-2026-86451</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/discovery-zahara-de-la-sierra-zahara-de-la-sierra-2026-55468</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-costa-fisterra-condello-de-fisterra-2026-55465</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3496,6 +3516,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-kontxa-badiako-igerialdia-san-sebastian-2026-55474</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-praia-de-mino-mino-2026-55475</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/triple-corona-cies-baiona-baiona-2026-55477</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/maspalomas-open-water-maspalomas-2026-55473</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-travesia-de-la-bahia-de-la-concha-donostia-san-sebastian-guipuzcoa-espana-2026-87355</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/la-brena-almodovar-del-rio-2026-55472</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/trb-ametlla-de-mar-ametlla-de-mar-2026-55476</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -3506,32 +3556,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/triple-corona-cies-baiona-baiona-2026-55477</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ii-travesia-praia-de-mino-mino-2026-55475</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-kontxa-badiako-igerialdia-san-sebastian-2026-55474</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-travesia-de-la-bahia-de-la-concha-donostia-san-sebastian-guipuzcoa-espana-2026-87355</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/maspalomas-open-water-maspalomas-2026-55473</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/la-brena-almodovar-del-rio-2026-55472</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-de-orellana-orellana-la-vieja-2026-55479</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3546,22 +3571,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-de-orellana-orellana-la-vieja-2026-55479</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-travesia-a-nado-rc-mediterraneo-memorial-tomas-garcia-zamudio-malaga-2026-53977</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-travesia-a-nado-el-rio-2026-teguise-2026-54128</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/oncoswim-tarragona-2026-tarragona-espana-2026-87758</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-ribera-marina-hercules-cas-ceuta-2026-55484</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3571,22 +3581,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-alicante-alicante-2026-55486</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-ribera-marina-hercules-cas-ceuta-2026-55484</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/milla-solidaria-oncoswim-tarragona-tarragona-2026-55483</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/cto-autonomico-aguas-abiertas-cv-gandia-2026-55481</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3596,12 +3591,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-a-nado-el-rio-playa-de-bajo-risco-2026-55487</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-playa-de-la-ribera-marina-hercules-cas-playa-de-la-ribera-fuente-caballos-ceuta-2026-55520</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xv-travesia-a-nado-rc-mediterraneo-memorial-tomas-garcia-zamudio-malaga-2026-53977</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3611,12 +3601,32 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/xii-vuelta-al-penon-de-ifach-calpe-2026-55488</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xxx-travesia-a-nado-el-rio-2026-teguise-2026-54128</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-travessia-de-l-estany-de-banyoles-banyoles-2026-55491</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/vii-playa-de-la-ribera-marina-hercules-cas-playa-de-la-ribera-fuente-caballos-ceuta-2026-55520</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-alicante-alicante-2026-55486</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/travesia-a-nado-el-rio-playa-de-bajo-risco-2026-55487</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/oncoswim-tarragona-2026-tarragona-espana-2026-87758</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/cto-autonomico-aguas-abiertas-cv-gandia-2026-55481</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3626,17 +3636,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/82-travessia-de-l-estany-de-banyoles-banyoles-2026-55491</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/viii-doble-playa-de-san-lorenzo-gijon-2026-55489</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/el-arenoso-montoro-2026-55493</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xii-vuelta-al-penon-de-ifach-calpe-2026-55488</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xcix-port-de-tarragona-tarragona-2026-55495</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/xii-triatlon-sprint-san-roque-2026-san-roque-cadiz-2026-275849</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3651,17 +3671,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-travesia-rio-guadalquivir-sevilla-2026-55500</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/etapa-final-copa-espana-aa-melilla-2026-55497</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/el-arenoso-montoro-2026-55493</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/ciutat-de-mataro-mataro-2026-55496</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/etapa-final-copa-espana-aa-melilla-2026-55497</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3672,6 +3692,11 @@
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/swim-in-menorca-10k-cala-macarella-2026-55498</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-travesia-de-albunol-albunol-2026-55499</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3691,12 +3716,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-travesia-de-albunol-albunol-2026-55499</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/snl-experience-2026-platja-de-montgo-2026-55503</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/ix-travesia-rio-guadalquivir-sevilla-2026-55500</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3706,12 +3726,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-sheep-cup-calvia-cas-catala-portals-calvia-2026-55506</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/viii-travesia-solidaria-vilassar-de-mar-vilassar-2026-55508</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/snl-experience-2026-platja-de-montgo-2026-55503</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3726,7 +3741,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/viii-travesia-solidaria-vilassar-de-mar-vilassar-2026-55508</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/i-sheep-cup-calvia-cas-catala-portals-calvia-2026-55506</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/16-radikal-ocean52-llafranc-2026-55509</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/marnaton-edreams-ibiza-by-balearia-ibiza-2026-55510</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3737,11 +3767,6 @@
   </url>
   <url>
     <loc>https://sisi-cons.pages.dev/tabs/travesia/xxiv-travesia-blue-arico-el-poris-de-abona-2026-55511</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/marnaton-edreams-ibiza-by-balearia-ibiza-2026-55510</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -3781,12 +3806,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/iii-travesia-a-nado-the-blue-challenge-playa-de-los-cristianos-38650-santa-cruz-de-tenerife-espana-2026-87553</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/iii-the-blue-challenge-los-cristianos-2026-59889</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sisi-cons.pages.dev/tabs/travesia/iii-the-blue-challenge-los-cristianos-2026-59889</loc>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/iii-travesia-the-blue-challenge-los-cristianos-2026-275561</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sisi-cons.pages.dev/tabs/travesia/iii-travesia-a-nado-the-blue-challenge-playa-de-los-cristianos-38650-santa-cruz-de-tenerife-espana-2026-87553</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

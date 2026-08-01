@@ -14,7 +14,7 @@ import { addIcons } from 'ionicons';
 import {
   calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline,
   logoFacebook, logoInstagram, logoTwitter, logoYoutube, logoTiktok,
-  informationCircleOutline, createOutline, peopleOutline, trophyOutline, documentTextOutline, earthOutline, globeOutline,
+  informationCircleOutline, createOutline, peopleOutline, medalOutline, documentTextOutline, earthOutline, globeOutline,
 } from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
@@ -47,7 +47,7 @@ export class EventoDetalleComponent implements OnChanges {
     addIcons({
       calendar, calendarOutline, openOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline,
       logoFacebook, logoInstagram, logoTwitter, logoYoutube, logoTiktok,
-      informationCircleOutline, createOutline, peopleOutline, trophyOutline, documentTextOutline, earthOutline, globeOutline,
+      informationCircleOutline, createOutline, peopleOutline, medalOutline, documentTextOutline, earthOutline, globeOutline,
     });
   }
 

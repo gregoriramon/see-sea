@@ -13,7 +13,7 @@ import { FechaPipe } from '../../pipes/fecha-pipe';
 import { ColorFechaPipe } from '../../pipes/color-fecha-pipe';
 import { fechaEsPasada } from '../../utils/templateUtils';
 import { addIcons } from 'ionicons';
-import { calendar, calendarOutline, informationCircleOutline, trophy, trophyOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
+import { calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -46,7 +46,7 @@ export class EventoComponent implements OnChanges {
   public esPasado: boolean = false;
 
   constructor() {
-    addIcons({ calendar, calendarOutline, informationCircleOutline, trophy, trophyOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
+    addIcons({ calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
