@@ -4,7 +4,9 @@
   <div slot="start">
     <ion-label style="min-width: 0;">
       <div style="display: flex; justify-content: space-between; align-items: baseline; min-width: 0;">
-        <h2 class="evento-titulo" style="margin: 0;" [title]="evento.descripcion">{{ evento.descripcion }}</h2>
+        <h2 class="evento-titulo" style="margin: 0;" [title]="evento.descripcion">
+          {{ evento.descripcion }}
+        </h2>
       </div>
       @if (evento.municipio) {
         <p class="lugar-text">{{ evento.municipio }}@if (evento.provincia) { ({{ evento.provincia }})}</p>
@@ -29,6 +31,17 @@
         @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
           <p class="extra-text"><strong>{{ 'components.evento.price' | translate }}</strong> {{ evento.precio }} €</p>
         }
+        @if (evento.competicion) {
+          <p class="extra-text competicion-line">
+            <ion-icon name="trophy" color="warning" aria-label="Competición" style="vertical-align: middle; font-size: 1.4em;"></ion-icon>
+            @if (evento.federacion) {
+              <span style="color: var(--ion-color-primary); margin-left: 4px;">{{ evento.federacion }}</span>
+            }
+            @if (evento.competicion_nacional) {
+              <span style="color: var(--ion-color-danger); margin-left: 4px;">RCNE</span>
+            }
+          </p>
+        }
       </div>
     </ion-label>
   </div>
@@ -39,12 +52,10 @@
                 class="link-button">
       <ion-icon slot="icon-only" name="information-circle-outline" color="primary"></ion-icon>
     </ion-button>
-    @if (esPasado) {
+    @if (esPasado && evento.url_resultados) {
       <ion-button fill="clear" size="small" (click)="abrirResultados($event)"
-                  [disabled]="!evento.url_resultados"
-                  class="link-button resultados-button"
-                  [class.resultados-activo]="!!evento.url_resultados">
-        <ion-icon slot="icon-only" [name]="evento.url_resultados ? 'medal' : 'medal-outline'"></ion-icon>
+                  class="link-button resultados-button">
+        <ion-icon slot="icon-only" name="medal-outline"></ion-icon>
       </ion-button>
     }
     @if (!esPasado) {

@@ -428,9 +428,9 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Playa[];
   }
 
-  private readonly SELECT_EVENTO = "id,slug,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados";
-  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,slug,descripcion,fecha_evento,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_inscritos,url_reglamento,url_oficial,url_redes_sociales";
-  private readonly SELECT_EVENTO_BY_ID_PASADO = "id,slug,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial";
+  private readonly SELECT_EVENTO = "id,slug,fecha_evento,descripcion,lugar_evento,distancia,municipio,provincia,cod_provincia,precio,url_info,url_inscripcion,url_resultados,competicion,competicion_nacional,federacion";
+  private readonly SELECT_EVENTO_BY_ID_ACTIVO = "id,slug,descripcion,fecha_evento,distancia,precio,organizador,lugar_evento,municipio,provincia,fecha_inicio_inscripcion,fecha_fin_inscripcion,url_info,url_inscripcion,url_inscritos,url_reglamento,url_oficial,url_redes_sociales,competicion,competicion_nacional,federacion";
+  private readonly SELECT_EVENTO_BY_ID_PASADO = "id,slug,descripcion,fecha_evento,distancia,organizador,lugar_evento,municipio,provincia,url_resultados,url_oficial,competicion,competicion_nacional,federacion";
 
   private normalizaPatron(pattern: string): string {
     return (pattern ?? '')
@@ -582,14 +582,17 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Evento[];
   }
 
-  async getEventoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await (await this.getClient())
+  async getEventoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string, soloCompeticion?: boolean): Promise<Evento[]> {
+    let query = (await this.getClient())
       .from('travesias')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
       .gte('fecha_evento', fechaIni)
-      .lte('fecha_evento', fechaFin)
-      .order('fecha_evento', { ascending: true });
+      .lte('fecha_evento', fechaFin);
+    if (soloCompeticion) {
+      query = query.eq('competicion', true);
+    }
+    const { data, error } = await query.order('fecha_evento', { ascending: true });
 
     if (error) {
       console.error('Error al obtener eventos por descripcion y fecha:', error);
@@ -598,14 +601,17 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
     return data as Evento[];
   }
 
-  async getEventoPasadoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string): Promise<Evento[]> {
-    const { data, error } = await (await this.getClient())
+  async getEventoPasadoByDescripcionAndFecha(pattern: string, fechaIni: string, fechaFin: string, soloCompeticion?: boolean): Promise<Evento[]> {
+    let query = (await this.getClient())
       .from('travesias_pasadas')
       .select(this.SELECT_EVENTO)
       .ilike('descripcion', '%'+this.normalizaPatron(pattern)+'%')
       .gte('fecha_evento', fechaIni)
-      .lte('fecha_evento', fechaFin)
-      .order('fecha_evento', { ascending: false });
+      .lte('fecha_evento', fechaFin);
+    if (soloCompeticion) {
+      query = query.eq('competicion', true);
+    }
+    const { data, error } = await query.order('fecha_evento', { ascending: false });
 
     if (error) {
       console.error('Error al obtener eventos pasados por descripcion y fecha:', error);

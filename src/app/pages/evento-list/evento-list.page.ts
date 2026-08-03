@@ -67,6 +67,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   public distanciaMin: number | null = null;
   public distanciaMax: number | null = null;
   public codProvincia: string = '**';
+  public soloCompeticion: boolean = false;
   public isLoading: boolean = false;
 
   private readonly pageSize = 25;
@@ -119,8 +120,8 @@ export class EventoListPage implements OnInit, OnDestroy {
     const fechaFin = esPasado ? hoyStr : otraStr;
 
     const query = esPasado
-      ? this.supabaseService.getEventoPasadoByDescripcionAndFecha('', fechaIni, fechaFin)
-      : this.supabaseService.getEventoByDescripcionAndFecha('', fechaIni, fechaFin);
+      ? this.supabaseService.getEventoPasadoByDescripcionAndFecha('', fechaIni, fechaFin, this.soloCompeticion)
+      : this.supabaseService.getEventoByDescripcionAndFecha('', fechaIni, fechaFin, this.soloCompeticion);
 
     console.log('[evento-list] cargarEventos', { rango, fechaIni, fechaFin, esPasado, t: Date.now() });
     this.isLoading = true;
@@ -216,13 +217,15 @@ export class EventoListPage implements OnInit, OnDestroy {
 
   onFiltroChange(f: FiltroEventos) {
     const rangoCambio = f.rangoFecha !== this.rangoFecha;
+    const competicionCambio = f.soloCompeticion !== this.soloCompeticion;
     this.patterName = f.patterName;
     this.distanciaMin = f.distanciaMin;
     this.distanciaMax = f.distanciaMax;
     this.rangoFecha = f.rangoFecha;
     this.codProvincia = f.codProvincia;
+    this.soloCompeticion = f.soloCompeticion;
 
-    if (rangoCambio) {
+    if (rangoCambio || competicionCambio) {
       this.cargarEventos(this.rangoFecha);
     } else {
       this.refrescarEventos();

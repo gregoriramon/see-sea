@@ -10,6 +10,10 @@
   "display_override": ["standalone", "minimal-ui", "browser"],
   "scope": "/",
   "start_url": "/tabs/calendario",
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
   "theme_color": "#005f73",
   "background_color": "#005f73",
   "orientation": "portrait",

@@ -1,7 +1,9 @@
 <div class="evento-detalle-card">
   <header class="cabecera">
     <div class="cabecera-top">
-      <h1 class="titulo">{{ evento.descripcion }}</h1>
+      <h1 class="titulo">
+        {{ evento.descripcion }}
+      </h1>
       <ion-button fill="clear" size="small" (click)="compartir($event)" class="share-button">
         <ion-icon slot="icon-only" name="share-social-outline" color="primary"></ion-icon>
       </ion-button>
@@ -34,6 +36,17 @@
             <span class="detalle-label">{{ 'components.evento.price' | translate }}</span>
             <span class="detalle-value">{{ evento.precio }} €</span>
           </div>
+        }
+      </div>
+    }
+    @if (evento.competicion) {
+      <div class="detalle-row competicion-row">
+        <ion-icon name="trophy" color="warning" aria-label="Competición" style="vertical-align: middle;  font-size: 1.4em;"></ion-icon>
+        @if (evento.federacion) {
+          <span class="detalle-value" style="color: var(--ion-color-primary); margin-left: 6px;">{{ evento.federacion }}</span>
+        }
+        @if (evento.competicion_nacional) {
+          <span class="detalle-value" style="color: var(--ion-color-danger); margin-left: 6px;">RCNE</span>
         }
       </div>
     }

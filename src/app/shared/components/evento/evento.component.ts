@@ -13,7 +13,7 @@ import { FechaPipe } from '../../pipes/fecha-pipe';
 import { ColorFechaPipe } from '../../pipes/color-fecha-pipe';
 import { fechaEsPasada } from '../../utils/templateUtils';
 import { addIcons } from 'ionicons';
-import { calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline } from 'ionicons/icons';
+import { calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline, trophy } from 'ionicons/icons';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -46,7 +46,7 @@ export class EventoComponent implements OnChanges {
   public esPasado: boolean = false;
 
   constructor() {
-    addIcons({ calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline });
+    addIcons({ calendar, calendarOutline, informationCircleOutline, medal, medalOutline, shareSocialOutline, logoWhatsapp, mailOutline, copyOutline, trophy });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -145,25 +145,30 @@ export class EventoComponent implements OnChanges {
   async compartir(event: Event): Promise<void> {
     event.stopPropagation();
 
-    const url = this.evento.url_info || this.evento.url_inscripcion || '';
     const fecha = new FechaPipe().transform(this.evento.fecha_evento);
     const lugar = this.evento.municipio
       ? `${this.evento.municipio}${this.evento.provincia ? ' (' + this.evento.provincia + ')' : ''}`
       : (this.evento.lugar_evento ?? '');
 
+    const url = this.evento.url_info || this.evento.url_inscripcion || '';
+    const path = this.evento.slug ? `/tabs/travesia/${this.evento.slug}` : `/tabs/evento/${this.evento.id}`;
+    const appUrl = (typeof window !== 'undefined' ? window.location.origin : '') + path;
+
     const title = this.translate.instant('components.evento.share.title');
-    const text = this.translate.instant('components.evento.share.body', {
+    const body = this.translate.instant('components.evento.share.body', {
       descripcion: this.evento.descripcion ?? '',
       fecha,
       lugar,
       url,
     });
-
-    const appUrl = typeof window !== 'undefined' ? window.location.origin : undefined;
+    const footer = this.translate.instant('components.evento.share.footer', { appUrl });
+    const text = `${body}\n\n${footer}`;
 
     if (typeof navigator !== 'undefined' && (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share) {
       try {
-        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text, url: appUrl });
+        const footerNoUrl = this.translate.instant('components.evento.share.footer', { appUrl: '' }).replace(/\n?👉 ?$/,'').trimEnd();
+        const shareText = `${body}\n\n${footerNoUrl}`;
+        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text: shareText, url: appUrl });
         return;
       } catch (err: unknown) {
         if (err instanceof Error && err.name === 'AbortError') return;

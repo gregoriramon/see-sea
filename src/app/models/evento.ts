@@ -20,4 +20,7 @@ export interface Evento {
   inscripciones_abiertas?: boolean;
   url_inscritos?: string;
   url_redes_sociales?: string;
+  competicion?: boolean;
+  competicion_nacional?: boolean;
+  federacion?: string;
 }

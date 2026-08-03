@@ -38,7 +38,7 @@
 
       @if (showName) {
         <ion-row class="ion-align-items-center">
-          <ion-col size="12">
+          <ion-col [size]="showCompeticion ? 10 : 12">
             <ion-searchbar
               [placeholder]="'components.filtroEventos.searchPlaceholder' | translate"
               [(ngModel)]="patterName"
@@ -47,6 +47,17 @@
               class="compact-search">
             </ion-searchbar>
           </ion-col>
+          @if (showCompeticion) {
+            <ion-col size="2" class="ion-text-center competicion-col">
+              <ion-button
+                fill="clear"
+                [color]="soloCompeticion ? 'warning' : 'medium'"
+                (click)="onToggleCompeticion()"
+                aria-label="Competición">
+                <ion-icon slot="icon-only" name="trophy"></ion-icon>
+              </ion-button>
+            </ion-col>
+          }
         </ion-row>
       }
 

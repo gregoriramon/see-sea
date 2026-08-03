@@ -141,7 +141,8 @@
       "pasada": "PAST",
       "share": {
         "title": "Share Swim",
-        "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n{{url}}\n\n🌊 Shared from SiSi (See-Sea)",
+        "body": "{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n🔗 {{url}}",
+        "footer": "━━━━━━━━━━━━━━━\n🌊 Shared from SiSi (See-Sea)\n👉 {{appUrl}}",
         "whatsapp": "WhatsApp",
         "email": "Email",
         "copy": "Copy link",

@@ -49,13 +49,7 @@
 .favorito-button { height: auto; }
 
 .resultados-button ion-icon {
-  color: var(--ion-color-medium);
-}
-
-.resultados-activo ion-icon {
   color: #d4a017;
-  filter: drop-shadow(0 0 3px rgba(212, 160, 23, 0.6));
-  font-size: 1.7rem;
 }
 
 ion-icon.ion-color-success,
@@ -68,7 +62,7 @@ ion-button.ion-color-success {
 }
 
 .evento-titulo {
-  font-size: 1.1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   margin: 0 0 2px 0;
   line-height: 1.15;
@@ -79,7 +73,7 @@ ion-button.ion-color-success {
 }
 
 .lugar-text {
-  font-size: 0.95rem;
+  font-size: 0.80rem;
   font-weight: 500;
   color: var(--ion-color-step-600);
   margin: 2px 0 0 0;
@@ -108,12 +102,12 @@ ion-button.ion-color-success {
     padding: 0 4px;
     border: 1px solid currentColor;
     border-radius: 3px;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 }
 
 .evento-extras {
-  margin-top: 6px;
+  margin-top: 2px;
   display: flex;
   flex-direction: column;
   gap: 2px;

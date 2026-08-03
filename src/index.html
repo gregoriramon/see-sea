@@ -63,6 +63,25 @@
     </div>
   </app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script>
+    (function () {
+      var TIMEOUT_MS = 8000;
+      var FLAG = 'seesea-splash-reloaded';
+      setTimeout(function () {
+        try {
+          var root = document.querySelector('app-root');
+          if (!root) return;
+          if (!root.querySelector('.seesea-shell')) {
+            sessionStorage.removeItem(FLAG);
+            return;
+          }
+          if (sessionStorage.getItem(FLAG)) return;
+          sessionStorage.setItem(FLAG, '1');
+          location.reload();
+        } catch (e) { /* noop */ }
+      }, TIMEOUT_MS);
+    })();
+  </script>
 </body>
 
 </html>
