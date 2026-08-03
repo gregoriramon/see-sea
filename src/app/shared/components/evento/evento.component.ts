@@ -151,24 +151,20 @@ export class EventoComponent implements OnChanges {
       : (this.evento.lugar_evento ?? '');
 
     const url = this.evento.url_info || this.evento.url_inscripcion || '';
-    const path = this.evento.slug ? `/tabs/travesia/${this.evento.slug}` : `/tabs/evento/${this.evento.id}`;
-    const appUrl = (typeof window !== 'undefined' ? window.location.origin : '') + path;
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
     const title = this.translate.instant('components.evento.share.title');
-    const body = this.translate.instant('components.evento.share.body', {
+    const text = this.translate.instant('components.evento.share.body', {
       descripcion: this.evento.descripcion ?? '',
       fecha,
       lugar,
       url,
+      siteUrl,
     });
-    const footer = this.translate.instant('components.evento.share.footer', { appUrl });
-    const text = `${body}\n\n${footer}`;
 
     if (typeof navigator !== 'undefined' && (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share) {
       try {
-        const footerNoUrl = this.translate.instant('components.evento.share.footer', { appUrl: '' }).replace(/\n?👉 ?$/,'').trimEnd();
-        const shareText = `${body}\n\n${footerNoUrl}`;
-        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text: shareText, url: appUrl });
+        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text });
         return;
       } catch (err: unknown) {
         if (err instanceof Error && err.name === 'AbortError') return;
