@@ -31,7 +31,7 @@
             <span class="detalle-value">{{ evento.distancia }}</span>
           </div>
         }
-        @if (!esPasado && evento.precio !== null && evento.precio !== undefined) {
+        @if (evento.precio !== null && evento.precio !== undefined) {
           <div class="detalle-row">
             <span class="detalle-label">{{ 'components.evento.price' | translate }}</span>
             <span class="detalle-value">{{ evento.precio }} €</span>
@@ -75,7 +75,7 @@
   </div>
 
   <div class="urls-grid">
-    @if (!esPasado && evento.url_info) {
+    @if (evento.url_info) {
       <div class="url-cell">
         <span class="detalle-label">{{ 'components.evento.urlInfo' | translate }}</span>
         <a (click)="abrirUrl($event, evento.url_info)"><ion-icon name="information-circle-outline"></ion-icon></a>
