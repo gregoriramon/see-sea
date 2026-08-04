@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**see-sea** es una app Ionic + Angular para consultar el estado del mar y la previsión meteorológica de playas españolas (formato AEMET). Persiste favoritos y registro de dispositivos/acciones en Supabase, y se despliega como PWA en Firebase Hosting.
+**see-sea** es una app Ionic + Angular para consultar el estado del mar y la previsión meteorológica de playas españolas (formato AEMET). Persiste favoritos y registro de dispositivos/acciones en Supabase, y se despliega como PWA en Cloudflare Pages.
 
 **Stack**: Angular 20 (standalone) · Ionic 8 · Capacitor 8 · Supabase · Puppeteer (scraping en scripts Node) · SCSS · Karma/Jasmine · Angular ESLint.
 
@@ -21,9 +21,9 @@ npm run build:dev
 npm run build:cons
 npm run build:prod          # equivalente a `npm run build` (defaultConfiguration=production)
 
-# Despliegue a Firebase Hosting (dos targets: cons, prod)
-npm run deploy:cons         # build:cons + firebase deploy --only hosting:cons
-npm run deploy:prod         # build:prod + firebase deploy --only hosting:prod
+# Despliegue a Cloudflare Pages (requiere wrangler autenticado)
+npm run deploy:cf:cons      # build:cons + wrangler pages deploy (proyecto sisi-cons)
+npm run deploy:cf:prod      # build:prod + wrangler pages deploy (proyecto sisi-prod)
 
 # Tests y lint
 npm test                    # Karma en watch
@@ -35,30 +35,22 @@ npm run lint                # ESLint sobre src/**/*.ts y src/**/*.html
 
 El proyecto tiene **tres entornos** con file-replacement en `angular.json`:
 
-| Configuración   | Env file                          | Firebase target |
-|-----------------|-----------------------------------|-----------------|
-| `development`   | `environment.ts` (default)        | —               |
-| `consolidation` | `environment.cons.ts`             | `cons`          |
-| `production`    | `environment.prod.ts`             | `prod`          |
+| Configuración   | Env file                          | Cloudflare Pages |
+|-----------------|-----------------------------------|------------------|
+| `development`   | `environment.ts` (default)        | —                |
+| `consolidation` | `environment.cons.ts`             | `sisi-cons`      |
+| `production`    | `environment.prod.ts`             | `sisi-prod`      |
 
-Cada entorno apunta a un proyecto Supabase distinto (ver commit `c872df5`). Los targets de Firebase están definidos en `firebase.json` (ambos publican `www/`). El service worker (`ngsw-config.json`) se incluye en builds `cons` y `prod`, no en `development`.
+Cada entorno apunta a un proyecto Supabase distinto (ver commit `c872df5`). El service worker (`ngsw-config.json`) se incluye en builds `cons` y `prod`, no en `development`.
 
-### Migración a Cloudflare Pages (en curso — Fase 0 del plan SEO/SSR)
-
-Estamos migrando el hosting a **Cloudflare Pages** con dos proyectos:
-
-| Configuración   | Proyecto Cloudflare Pages | Script          |
-|-----------------|---------------------------|-----------------|
-| `consolidation` | `sisi-cons`               | `deploy:cf:cons` |
-| `production`    | `sisi-prod`               | `deploy:cf:prod` |
+### Hosting en Cloudflare Pages
 
 - **Build command** en el dashboard de Cloudflare: `npm run build:cons` / `npm run build:prod`.
 - **Output dir**: `www`.
 - **SPA routing**: `public/_redirects` (`/* /index.html 200`).
-- **Cache**: `public/_headers` replica el `no-cache` sobre `/index.html` y `/ngsw.json` (equivalente a la config previa de Firebase).
+- **Cache**: `public/_headers` aplica `no-cache` sobre `/index.html` y `/ngsw.json`.
 - **Env vars** (por proyecto en Cloudflare): las claves Supabase se inyectan vía `environment.cons.ts` / `environment.prod.ts` en build time, no runtime — configurar en Cloudflare como *build environment variables* si el build se hace en su CI.
-- **Deploy manual** desde local: `npm run deploy:cf:cons` (requiere `wrangler` CLI autenticado con `wrangler login`).
-- **Cutover DNS**: mantener Firebase activo hasta validar Cloudflare; luego apuntar dominios a Cloudflare y retirar `firebase.json` / scripts `deploy:cons|prod`.
+- **Deploy manual** desde local: `npm run deploy:cf:cons` / `npm run deploy:cf:prod` (requiere `wrangler` CLI autenticado con `wrangler login`).
 - **Fase 4 (SSR)**: `wrangler.toml` ya presente como base; se extenderá con el Worker SSR de Angular.
 
 ## Architecture
