@@ -5,7 +5,7 @@
  *   - Rutas dinámicas /tabs/playa/:codPlaya y /tabs/evento/:id (si hay Supabase disponible).
  *
  * Uso:
- *   SITE_URL=https://sisi.pages.dev \
+ *   SITE_URL=https://consisi.com \
  *   SUPABASE_URL=... SUPABASE_ANON_KEY=... \
  *   node scripts/generate-sitemap.mjs
  *
@@ -21,7 +21,7 @@ const OUTPUT = resolve(__dirname, '..', 'public', 'sitemap.xml');
 
 const DEFAULTS = {
   prod: {
-    SITE_URL: 'https://sisi-prod.pages.dev',
+    SITE_URL: 'https://consisi.com',
     SUPABASE_URL: 'https://alchktnrwblnwnwrnxim.supabase.co',
     SUPABASE_ANON_KEY: 'sb_publishable_vVuk_xQYxXpNBTbNLorC-Q_g3QhpoDJ',
   },
