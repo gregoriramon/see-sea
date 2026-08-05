@@ -172,18 +172,31 @@
     "iosInstall": {
       "closeAria": "Cerrar",
       "title": "Instala SiSi (SeeSea) en tu pantalla de inicio",
-      "step1Before": "Pulsa el botón ",
-      "step1Bold": "Compartir",
-      "step1After": " en la barra de Safari.",
-      "step2Before": "Elige ",
-      "step2Bold": "«Añadir a pantalla de inicio»",
-      "step2After": " en el menú.",
-      "step3Before": "Pulsa ",
-      "step3Bold": "«Añadir»",
-      "step3After": " arriba a la derecha.",
+      "installed": "Ya la tengo instalada",
       "shareAria": "Compartir",
       "addAria": "Añadir",
-      "installed": "Ya la tengo instalada"
+      "safari": {
+        "step1Before": "Pulsa el botón ",
+        "step1Bold": "Compartir",
+        "step1After": " en la barra de Safari.",
+        "step2Before": "Desplaza el menú hacia abajo y elige ",
+        "step2Bold": "«Añadir a pantalla de inicio»",
+        "step2After": ".",
+        "noteBookmarks": "No lo confundas con «Añadir a Marcadores o Favoritos».",
+        "step3Before": "Pulsa ",
+        "step3Bold": "«Añadir»",
+        "step3After": " arriba a la derecha."
+      },
+      "other": {
+        "step1Before": "Selecciona ",
+        "step1Bold": "«Compartir»",
+        "step1After": ", desde la barra o menú.",
+        "step2Before": "Elige ",
+        "step2Bold": "«Añadir a pantalla de inicio»",
+        "step2After": ".",
+        "noteBookmarks": "No lo confundas con «Añadir a Marcadores o Favoritos».",
+        "noteSafari": "Para una mejor experiencia, abre esta web en Safari."
+      }
     },
     "install": {
       "closeAria": "Cerrar",

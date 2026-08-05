@@ -50,7 +50,7 @@ export class AppComponent implements OnInit  {
 
     const tabInicial = this.localRepository.obtenerTabInicial();
     const path = window.location.pathname;
-    const enRaiz = path === '/' || path === '' || /^\/tabs\/?[^/]*$/.test(path);
+    const enRaiz = path === '/' || path === '' || /^\/tabs\/?$/.test(path);
     if (enRaiz) {
       this.router.navigateByUrl(`/tabs/${tabInicial}`, { replaceUrl: true });
     }

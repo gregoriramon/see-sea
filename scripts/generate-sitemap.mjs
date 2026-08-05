@@ -62,20 +62,27 @@ async function fetchDynamic() {
   if (ePlayas) console.warn('[sitemap] error playa:', ePlayas.message);
 
   const { data: eventos, error: eEventos } = await supabase
-    .from('travesias')
-    .select('id,slug')
+    .from('tb_travesias')
+    .select('id,slug,created_at')
     .limit(10000);
-  if (eEventos) console.warn('[sitemap] error travesias:', eEventos.message);
+  if (eEventos) console.warn('[sitemap] error tb_travesias:', eEventos.message);
 
   return { playas: playas ?? [], eventos: eventos ?? [] };
 }
 
-function urlEntry(path, changefreq = 'weekly', priority = '0.6') {
+function urlEntry(path, changefreq = 'weekly', priority = '0.6', lastmod) {
+  const lastmodLine = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : '';
   return `  <url>
-    <loc>${SITE_URL}${path}</loc>
+    <loc>${SITE_URL}${path}</loc>${lastmodLine}
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
+}
+
+function toIsoDate(value) {
+  if (!value) return undefined;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10);
 }
 
 async function main() {
@@ -86,7 +93,7 @@ async function main() {
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ...STATIC_PATHS.map((s) => urlEntry(s.path, s.changefreq, s.priority)),
     ...playas.map((p) => urlEntry(`/tabs/playa/${p.slug ?? p.cod_playa}`, 'daily', '0.7')),
-    ...eventos.map((e) => urlEntry(e.slug ? `/tabs/travesia/${e.slug}` : `/tabs/evento/${e.id}`, 'weekly', '0.7')),
+    ...eventos.map((e) => urlEntry(e.slug ? `/tabs/travesia/${e.slug}` : `/tabs/evento/${e.id}`, 'weekly', '0.7', toIsoDate(e.created_at))),
     '</urlset>',
     '',
   ];

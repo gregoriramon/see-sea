@@ -4,21 +4,37 @@
       <ion-icon name="close"></ion-icon>
     </button>
     <div class="title">{{ 'components.iosInstall.title' | translate }}</div>
-    <ol class="steps">
-      <li>
-        {{ 'components.iosInstall.step1Before' | translate }}<strong>{{ 'components.iosInstall.step1Bold' | translate }}</strong>
-        <ion-icon name="share-social-outline" [attr.aria-label]="'components.iosInstall.shareAria' | translate"></ion-icon>
-        {{ 'components.iosInstall.step1After' | translate }}
-      </li>
-      <li>
-        {{ 'components.iosInstall.step2Before' | translate }}<strong>{{ 'components.iosInstall.step2Bold' | translate }}</strong>
-        <ion-icon name="add-outline" [attr.aria-label]="'components.iosInstall.addAria' | translate"></ion-icon>
-        {{ 'components.iosInstall.step2After' | translate }}
-      </li>
-      <li>
-        {{ 'components.iosInstall.step3Before' | translate }}<strong>{{ 'components.iosInstall.step3Bold' | translate }}</strong>{{ 'components.iosInstall.step3After' | translate }}
-      </li>
-    </ol>
+    @if (isSafari) {
+      <ol class="steps">
+        <li>
+          {{ 'components.iosInstall.safari.step1Before' | translate }}<strong>{{ 'components.iosInstall.safari.step1Bold' | translate }}</strong>
+          <ion-icon name="share-outline" [attr.aria-label]="'components.iosInstall.shareAria' | translate"></ion-icon>
+          {{ 'components.iosInstall.safari.step1After' | translate }}
+        </li>
+        <li>
+          {{ 'components.iosInstall.safari.step2Before' | translate }}<strong>{{ 'components.iosInstall.safari.step2Bold' | translate }}</strong>
+          <ion-icon name="add-outline" [attr.aria-label]="'components.iosInstall.addAria' | translate"></ion-icon>
+          {{ 'components.iosInstall.safari.step2After' | translate }}
+          <small class="note">{{ 'components.iosInstall.safari.noteBookmarks' | translate }}</small>
+        </li>
+        <li>
+          {{ 'components.iosInstall.safari.step3Before' | translate }}<strong>{{ 'components.iosInstall.safari.step3Bold' | translate }}</strong>{{ 'components.iosInstall.safari.step3After' | translate }}
+        </li>
+      </ol>
+    } @else {
+      <ol class="steps">
+        <li>
+          {{ 'components.iosInstall.other.step1Before' | translate }}<strong>{{ 'components.iosInstall.other.step1Bold' | translate }}</strong>
+          <ion-icon name="share-outline" [attr.aria-label]="'components.iosInstall.shareAria' | translate"></ion-icon>
+          {{ 'components.iosInstall.other.step1After' | translate }}
+        </li>
+        <li>
+          {{ 'components.iosInstall.other.step2Before' | translate }}<strong>{{ 'components.iosInstall.other.step2Bold' | translate }}</strong>{{ 'components.iosInstall.other.step2After' | translate }}
+          <small class="note">{{ 'components.iosInstall.other.noteBookmarks' | translate }}</small>
+        </li>
+      </ol>
+      <p class="note-safari">{{ 'components.iosInstall.other.noteSafari' | translate }}</p>
+    }
     <div class="actions">
       <button type="button" class="action-btn primary" (click)="yaInstalada()">
         <ion-icon name="checkmark-circle-outline"></ion-icon>

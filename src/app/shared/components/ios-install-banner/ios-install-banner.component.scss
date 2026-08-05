@@ -57,6 +57,21 @@
   color: #005f73;
 }
 
+.steps .note {
+  display: block;
+  font-size: 13px;
+  color: #8a5300;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.note-safari {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #8a5300;
+  font-style: italic;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

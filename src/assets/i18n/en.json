@@ -172,18 +172,31 @@
     "iosInstall": {
       "closeAria": "Close",
       "title": "Install SiSi (SeeSea) on your home screen",
-      "step1Before": "Tap the ",
-      "step1Bold": "Share",
-      "step1After": " button in the Safari bar.",
-      "step2Before": "Choose ",
-      "step2Bold": "«Add to Home Screen»",
-      "step2After": " in the menu.",
-      "step3Before": "Tap ",
-      "step3Bold": "«Add»",
-      "step3After": " at the top right.",
+      "installed": "I already have it installed",
       "shareAria": "Share",
       "addAria": "Add",
-      "installed": "I already have it installed"
+      "safari": {
+        "step1Before": "Tap the ",
+        "step1Bold": "Share",
+        "step1After": " button in the Safari bar.",
+        "step2Before": "Scroll down in the menu and choose ",
+        "step2Bold": "«Add to Home Screen»",
+        "step2After": ".",
+        "noteBookmarks": "Don't confuse it with «Add Bookmark or Favorites».",
+        "step3Before": "Tap ",
+        "step3Bold": "«Add»",
+        "step3After": " at the top right."
+      },
+      "other": {
+        "step1Before": "Select ",
+        "step1Bold": "«Share»",
+        "step1After": " from the bar or menu.",
+        "step2Before": "Choose ",
+        "step2Bold": "«Add to Home Screen»",
+        "step2After": ".",
+        "noteBookmarks": "Don't confuse it with «Add Bookmark or Favorites».",
+        "noteSafari": "For the best experience, open this site in Safari."
+      }
     },
     "install": {
       "closeAria": "Close",

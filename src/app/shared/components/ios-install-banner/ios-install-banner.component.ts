@@ -2,7 +2,7 @@ import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { shareSocialOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
+import { shareOutline, close, addOutline, checkmarkCircleOutline } from 'ionicons/icons';
 import { Capacitor } from '@capacitor/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -20,14 +20,17 @@ export class IosInstallBannerComponent implements OnInit {
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   visible = false;
+  isSafari = false;
 
   constructor() {
-    addIcons({ shareSocialOutline, close, addOutline, checkmarkCircleOutline });
+    addIcons({ shareOutline, close, addOutline, checkmarkCircleOutline });
   }
 
   ngOnInit(): void {
     if (!this.isBrowser) return;
     if (this.shouldShow()) {
+      const ua = navigator.userAgent;
+      this.isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser|DuckDuckGo/.test(ua);
       setTimeout(() => (this.visible = true), 1500);
     }
   }

@@ -84,7 +84,7 @@ export class FavoritasPage implements OnInit {
   }
 
   irABuscar() {
-    this.router.navigate(['/tabs/buscar']);
+  this.router.navigate(['/tabs/buscar']);
   }
 
   async refreshFavoritas(): Promise<void> {

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   IonContent,
   IonGrid,
@@ -26,7 +26,7 @@ import {
   FiltroEventos,
   RangoFecha,
 } from 'src/app/shared/components/filtro-eventos/filtro-eventos.component';
-import { normalizeSearch } from 'src/app/shared/utils/templateUtils';
+import { normalizeSearch, tokenizeSearch } from 'src/app/shared/utils/templateUtils';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -56,6 +56,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   private localRepositoryService = inject(LocalRepositoryService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private seo = inject(SeoService);
   private destroy$ = new Subject<void>();
 
@@ -84,6 +85,10 @@ export class EventoListPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.applySeo();
+    const q = this.route.snapshot.queryParamMap.get('q');
+    if (q) {
+      this.patterName = q;
+    }
     // Carga inicial diferida a ionViewDidEnter para evitar race con la
     // navegación inicial de AppComponent y la hidratación del cliente Supabase.
   }
@@ -156,7 +161,7 @@ export class EventoListPage implements OnInit, OnDestroy {
   }
 
   private refrescarEventos() {
-    const q = normalizeSearch(this.patterName ?? '');
+    const tokens = tokenizeSearch(this.patterName);
     const min = this.distanciaMin;
     const max = this.distanciaMax;
     const hayMin = min !== null && min !== undefined && !isNaN(min);
@@ -167,13 +172,12 @@ export class EventoListPage implements OnInit, OnDestroy {
 
     this.eventosFiltrados = this.eventosAll.filter((e) => {
       if (filtraProvincia && this.normalizaCodProvincia(e.cod_provincia) !== codProvinciaNorm) return false;
-      if (q) {
-        const coincide =
-          normalizeSearch(e.descripcion ?? '').includes(q) ||
-          normalizeSearch(e.lugar_evento ?? '').includes(q) ||
-          normalizeSearch(e.municipio ?? '').includes(q) ||
-          normalizeSearch(e.provincia ?? '').includes(q);
-        if (!coincide) return false;
+      if (tokens.length > 0) {
+        const haystack = [e.descripcion, e.lugar_evento, e.municipio, e.provincia]
+          .map((v) => normalizeSearch(v ?? ''))
+          .join(' | ');
+        const todosCoinciden = tokens.every((t) => haystack.includes(t));
+        if (!todosCoinciden) return false;
       }
       if (hayMin || hayMax) {
         const dists = this.parseDistancias(e.distancia);

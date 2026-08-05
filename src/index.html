@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8"/>
   <title>SiSi (SeeSea) — Travesías a nado y previsión marítima de playas</title>
-  <meta name="description" content="Consulta próximas travesías a nado en aguas abiertas y la previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas. Añade tus favoritas y no te pierdas ninguna."/>
+  <meta name="description" content="Próximas travesías a nado en aguas abiertas, resultados y clasificacones de travesias pasadas y previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas."/>
   <link rel="canonical" href="https://consisi.com/"/>
   <meta name="robots" content="index,follow"/>
 
@@ -51,15 +51,54 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "SiSi (SeeSea)",
-      "url": "https://consisi.com/",
-      "inLanguage": "es-ES",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://consisi.com/tabs/buscar?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://consisi.com/#organization",
+          "name": "SiSi (SeeSea)",
+          "url": "https://consisi.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://consisi.com/assets/icon/web-app-manifest-512x512.png",
+            "width": 512,
+            "height": 512
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://consisi.com/#website",
+          "name": "SiSi (SeeSea)",
+          "url": "https://consisi.com/",
+          "inLanguage": "es-ES",
+          "publisher": { "@id": "https://consisi.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://consisi.com/tabs/eventos?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://consisi.com/#webapp",
+          "name": "SiSi (SeeSea)",
+          "url": "https://consisi.com/",
+          "description": "Próximas travesías a nado en aguas abiertas, resultados de travesías pasadas y previsión marítima (viento, oleaje, temperatura del agua) de las playas españolas.",
+          "applicationCategory": "SportsApplication",
+          "operatingSystem": "Any (PWA)",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "inLanguage": "es-ES",
+          "isAccessibleForFree": true,
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          },
+          "publisher": { "@id": "https://consisi.com/#organization" }
+        }
+      ]
     }
   </script>
 </head>

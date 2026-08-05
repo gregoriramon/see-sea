@@ -64,6 +64,28 @@ function parseAaaaMmDd(str: string): Date {
   return new Date(anio, mes, dia);
 }
 
+const STOP_WORDS_ES = new Set([
+  'de','del','la','las','el','los','y','o','u','a','al','en','con','por','para',
+  'un','una','unos','unas','es','sin','sobre','entre','desde','hasta','que',
+]);
+
+const DOMAIN_NOISE = new Set([
+  'travesia','travesias','nado','natacion','natacio',
+  'agua','aguas','abierta','abiertas','abierto','abiertos',
+  'open','water','swim','swimming','swimrun','crossing',
+  'mar','playa','playas',
+]);
+
+export function tokenizeSearch(value: string | null | undefined): string[] {
+  const norm = normalizeSearch(value);
+  if (!norm) return [];
+  return norm
+    .split(' ')
+    .filter((t) => t.length >= 2)
+    .filter((t) => !STOP_WORDS_ES.has(t))
+    .filter((t) => !DOMAIN_NOISE.has(t));
+}
+
 export function normalizeSearch(value: string | null | undefined): string {
   if (value === null || value === undefined) {
     return '';
