@@ -32,6 +32,7 @@ export class FavoritasPage implements OnInit {
       title: 'Mis playas favoritas',
       description: 'Tus playas favoritas con previsión marítima (viento, oleaje, temperatura del agua) actualizada.',
       canonicalPath: '/tabs/favoritas',
+      robots: 'noindex,follow',
     });
   }
 

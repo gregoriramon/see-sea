@@ -12,7 +12,7 @@
     "build:dev": "ng build --configuration development",
     "build:cons": "ng build --configuration consolidation && node scripts/absolutize-index.mjs",
     "build:prod": "ng build --configuration production && node scripts/absolutize-index.mjs",
-    "build:prod:sitemap": "node scripts/generate-sitemap.mjs --env=prod && ng build --configuration production && node scripts/absolutize-index.mjs",
+    "build:prod:sitemap": "node scripts/generate-sitemap.mjs --env=prod --ping-indexnow && ng build --configuration production && node scripts/absolutize-index.mjs",
     "deploy:cf:cons": "npm run build:cons && wrangler pages deploy www/browser --project-name=sisi-cons --branch=main",
     "deploy:cf:prod": "npm run build:prod && wrangler pages deploy www/browser --project-name=sisi-prod --branch=main",
     "deploy:cf:prod:sitemap": "npm run build:prod:sitemap && wrangler pages deploy www/browser --project-name=sisi-prod --branch=main",

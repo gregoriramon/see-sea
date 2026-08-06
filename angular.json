@@ -56,6 +56,11 @@
                 "input": "public",
                 "output": "/",
                 "ignore": []
+              },
+              {
+                "glob": "e12e7c545fd14f1eae07851367dfc313.txt",
+                "input": "public",
+                "output": "/"
               }
             ],
             "styles": [

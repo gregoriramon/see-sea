@@ -56,14 +56,14 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/calendario',
+        redirectTo: '/tabs/eventos',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/calendario',
+    redirectTo: '/tabs/eventos',
     pathMatch: 'full',
   },
 ];

@@ -49,6 +49,8 @@ export class SettingsPage {
   }
 
   readonly tabsDisponibles: { value: TabInicial; labelKey: string }[] = [
+    { value: 'eventos', labelKey: 'tabs.travesias' },
+    { value: 'buscar', labelKey: 'tabs.playas' },
     { value: 'calendario', labelKey: 'tabs.calendario' },
     { value: 'favoritas', labelKey: 'tabs.prevision' },
   ];

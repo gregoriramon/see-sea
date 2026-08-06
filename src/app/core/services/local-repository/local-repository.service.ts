@@ -19,8 +19,8 @@ const ls: Storage = (typeof globalThis !== 'undefined' && (globalThis as any).lo
   ? (globalThis as any).localStorage
   : noopStorage;
 
-export type TabInicial = 'calendario' | 'favoritas';
-const TABS_VALIDAS: TabInicial[] = ['calendario', 'favoritas'];
+export type TabInicial = 'calendario' | 'favoritas' | 'eventos' | 'buscar';
+const TABS_VALIDAS: TabInicial[] = ['calendario', 'favoritas', 'eventos', 'buscar'];
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +50,7 @@ export class LocalRepositoryService {
   // ===== PREFERENCIAS =====
   private langSubject = new BehaviorSubject<'es' | 'en'>('es');
   public lang$ = this.langSubject.asObservable();
-  private tabInicialSubject = new BehaviorSubject<TabInicial>('calendario');
+  private tabInicialSubject = new BehaviorSubject<TabInicial>('eventos');
   public tabInicial$ = this.tabInicialSubject.asObservable();
   private emailSubject = new BehaviorSubject<string>('');
   public email$ = this.emailSubject.asObservable();

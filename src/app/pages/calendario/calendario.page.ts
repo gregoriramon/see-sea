@@ -63,6 +63,7 @@ export class CalendarioPage implements OnInit, OnDestroy {
       title: 'Mi calendario de travesías a nado',
       description: 'Tus travesías a nado guardadas, agrupadas por mes. Consulta próximas fechas y no te pierdas ninguna.',
       canonicalPath: '/tabs/calendario',
+      robots: 'noindex,follow',
     });
   }
 
