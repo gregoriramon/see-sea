@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonContent, IonTitle, IonList, IonItem, IonMenuToggle, AlertController, ToastController } from '@ionic/angular/standalone';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationError, Router, RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { LocalRepositoryService } from './core/services/local-repository/local-repository.service';
 import { filter, take } from 'rxjs/operators';
@@ -48,6 +48,8 @@ export class AppComponent implements OnInit  {
 
     if (!this.isBrowser) return;
 
+    this.inicializarRecargaAntePeticionChunkObsoleto();
+
     const tabInicial = this.localRepository.obtenerTabInicial();
     const path = window.location.pathname;
     const enRaiz = path === '/' || path === '' || /^\/tabs\/?$/.test(path);
@@ -82,6 +84,38 @@ export class AppComponent implements OnInit  {
     } else {
       setTimeout(cb, 0);
     }
+  }
+
+  /**
+   * Cuando el SW tiene una versión antigua cacheada y el nuevo main.js pide un chunk
+   * inexistente en su caché, la respuesta llega como HTML (fallback SPA) y el módulo
+   * falla al cargar. En ese caso forzamos recarga: la próxima petición irá contra
+   * el servidor y el SW se actualizará.
+   */
+  private inicializarRecargaAntePeticionChunkObsoleto() {
+    const FLAG = 'seesea-chunk-error-reloaded';
+    const esErrorDeChunk = (msg: string) =>
+      /Failed to fetch dynamically imported module|ChunkLoadError|Loading chunk .* failed|MIME type of "text\/html"/i.test(msg);
+
+    this.router.events
+      .pipe(filter((e): e is NavigationError => e instanceof NavigationError))
+      .subscribe((event) => {
+        const msg = String(event.error?.message ?? event.error ?? '');
+        if (esErrorDeChunk(msg) && !sessionStorage.getItem(FLAG)) {
+          sessionStorage.setItem(FLAG, '1');
+          console.warn('[app] chunk obsoleto detectado, recargando…', msg);
+          location.reload();
+        }
+      });
+
+    window.addEventListener('error', (event) => {
+      const msg = String(event.message ?? event.error?.message ?? '');
+      if (esErrorDeChunk(msg) && !sessionStorage.getItem(FLAG)) {
+        sessionStorage.setItem(FLAG, '1');
+        console.warn('[app] error global de chunk, recargando…', msg);
+        location.reload();
+      }
+    });
   }
 
   private inicializarRecargaAlReconectar() {

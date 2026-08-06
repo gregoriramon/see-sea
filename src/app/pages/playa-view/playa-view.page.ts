@@ -71,11 +71,35 @@ export class PlayaViewPage implements OnInit, OnDestroy {
       this.router.navigate(['/tabs/playa', playa.slug], { replaceUrl: true });
       return;
     }
+    const canonicalPath = `/tabs/playa/${playa.slug ?? playa.cod_playa}`;
     this.seo.setPage({
       title: `Previsión marítima de ${playa.playa}`,
       description: `Estado del mar y previsión meteorológica de la playa ${playa.playa}${playa.municipio ? ' (' + playa.municipio + ')' : ''}: viento, oleaje, temperatura del agua y UV.`,
-      canonicalPath: `/tabs/playa/${playa.slug ?? playa.cod_playa}`,
+      canonicalPath,
       ogType: 'article',
+    });
+    const lat = this.toDecimalDegrees(playa.lat);
+    const lon = this.toDecimalDegrees(playa.lon);
+    this.seo.setJsonLd('playa-jsonld', {
+      '@context': 'https://schema.org',
+      '@type': 'Beach',
+      name: playa.playa,
+      url: `${this.seo.getOrigin()}${canonicalPath}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: playa.municipio || undefined,
+        addressRegion: playa.provincia || undefined,
+        addressCountry: 'ES',
+      },
+      geo: (lat !== undefined && lon !== undefined) ? {
+        '@type': 'GeoCoordinates',
+        latitude: lat,
+        longitude: lon,
+      } : undefined,
+      containedInPlace: playa.ccaa ? {
+        '@type': 'AdministrativeArea',
+        name: playa.ccaa,
+      } : undefined,
     });
     this.favoritasSub = this.localRepositoryService.favoritas$.subscribe(() => {
       if (this.playa) {
@@ -86,6 +110,29 @@ export class PlayaViewPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.favoritasSub?.unsubscribe();
+    this.seo.clearJsonLd('playa-jsonld');
+  }
+
+  /**
+   * Convierte una coordenada a grados decimales.
+   * Acepta:
+   *   - number: se devuelve tal cual
+   *   - string decimal (ej "42.44"): parseFloat
+   *   - string DMS con º ' " (ej "42º 26' 53\"" o "-08º 52' 28\""): se convierte
+   * Devuelve undefined si no es parseable.
+   */
+  private toDecimalDegrees(value: unknown): number | undefined {
+    if (value === null || value === undefined || value === '') return undefined;
+    if (typeof value === 'number') return Number.isFinite(value) ? value : undefined;
+    const raw = String(value).trim();
+    const asFloat = parseFloat(raw);
+    if (!isNaN(asFloat) && /^-?\d+(\.\d+)?$/.test(raw.replace(',', '.'))) return asFloat;
+    const match = raw.match(/^\s*(-?)\s*(\d+)\s*[º°]\s*(\d+)\s*['′]\s*(\d+(?:\.\d+)?)\s*["″]?\s*$/);
+    if (!match) return undefined;
+    const [, sign, deg, min, sec] = match;
+    const decimal = parseInt(deg, 10) + parseInt(min, 10) / 60 + parseFloat(sec) / 3600;
+    const signed = sign === '-' ? -decimal : decimal;
+    return Number.isFinite(signed) ? Number(signed.toFixed(6)) : undefined;
   }
 
   onToggleFavorita(playa: Playa): void {

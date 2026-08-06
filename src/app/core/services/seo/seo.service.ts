@@ -1,4 +1,4 @@
-import { DOCUMENT, Inject, Injectable } from '@angular/core';
+import { DOCUMENT, Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
@@ -17,11 +17,9 @@ const SITE_NAME = 'SiSi (SeeSea)';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
-  constructor(
-    private title: Title,
-    private meta: Meta,
-    @Inject(DOCUMENT) private document: Document,
-  ) {}
+  private title = inject(Title);
+  private meta = inject(Meta);
+  private document = inject(DOCUMENT);
 
   setPage(page: SeoPage): void {
     const fullTitle = `${page.title} | ${SITE_NAME}`;
@@ -68,6 +66,29 @@ export class SeoService {
       this.document.head.appendChild(link);
     }
     link.setAttribute('href', url);
+  }
+
+  /** Inserta o reemplaza un bloque JSON-LD identificado por `id`. */
+  setJsonLd(id: string, data: Record<string, unknown>): void {
+    this.clearJsonLd(id);
+    const script = this.document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = id;
+    script.text = JSON.stringify(data, (_, v) => (v === undefined ? undefined : v));
+    this.document.head.appendChild(script);
+  }
+
+  /** Elimina un bloque JSON-LD previamente insertado con `setJsonLd`. */
+  clearJsonLd(id: string): void {
+    const existing = this.document.getElementById(id);
+    if (existing) existing.remove();
+  }
+
+  /** Devuelve el origin actual (o el `siteUrl` del entorno si no hay window). */
+  getOrigin(): string {
+    return this.document.defaultView?.location?.origin
+      || (environment as { siteUrl?: string }).siteUrl
+      || '';
   }
 
   private upsertName(name: string, content: string): void {

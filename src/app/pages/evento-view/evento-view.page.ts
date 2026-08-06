@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, Inject, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -32,8 +32,6 @@ export class EventoViewPage implements OnInit, OnDestroy {
   private supabaseService = inject(Supabase);
   localRepositoryService = inject(LocalRepositoryService);
   private seo = inject(SeoService);
-
-  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   public evento?: Evento;
   public isLoading: boolean = false;
@@ -124,15 +122,23 @@ export class EventoViewPage implements OnInit, OnDestroy {
   }
 
   private setJsonLd(evento: Evento, canonicalPath: string): void {
-    const origin = this.document.defaultView?.location?.origin ?? '';
-    const url = `${origin}${canonicalPath}`;
-    const jsonld: Record<string, unknown> = {
+    const url = `${this.seo.getOrigin()}${canonicalPath}`;
+    const descripcion = [
+      `Travesía a nado ${evento.descripcion || ''}`.trim(),
+      evento.distancia ? `Distancia: ${evento.distancia}` : '',
+      evento.lugar_evento || evento.municipio ? `Lugar: ${evento.lugar_evento || evento.municipio}` : '',
+    ].filter(Boolean).join('. ');
+
+    this.seo.setJsonLd(JSONLD_ID, {
       '@context': 'https://schema.org',
       '@type': 'SportsEvent',
       name: evento.descripcion || 'Travesía a nado',
+      description: descripcion || undefined,
       sport: 'Open Water Swimming',
       url,
       startDate: evento.fecha_evento || undefined,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: {
         '@type': 'Place',
         name: evento.lugar_evento || evento.municipio || 'España',
@@ -151,20 +157,13 @@ export class EventoViewPage implements OnInit, OnDestroy {
             price: evento.precio ?? undefined,
             priceCurrency: 'EUR',
             availability: evento.inscripciones_abiertas ? 'https://schema.org/InStock' : undefined,
+            validThrough: evento.fecha_fin_inscripcion || undefined,
           }
         : undefined,
-    };
-
-    this.removeJsonLd();
-    const script = this.document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = JSONLD_ID;
-    script.text = JSON.stringify(jsonld, (_, v) => (v === undefined ? undefined : v));
-    this.document.head.appendChild(script);
+    });
   }
 
   private removeJsonLd(): void {
-    const existing = this.document.getElementById(JSONLD_ID);
-    if (existing) existing.remove();
+    this.seo.clearJsonLd(JSONLD_ID);
   }
 }
