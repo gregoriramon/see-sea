@@ -150,21 +150,22 @@ export class EventoComponent implements OnChanges {
       ? `${this.evento.municipio}${this.evento.provincia ? ' (' + this.evento.provincia + ')' : ''}`
       : (this.evento.lugar_evento ?? '');
 
-    const url = this.evento.url_info || this.evento.url_inscripcion || '';
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    const consisiUrl = this.evento.slug && siteUrl
+      ? `${siteUrl}/tabs/travesia/${this.evento.slug}`
+      : (siteUrl || '');
 
     const title = this.translate.instant('components.evento.share.title');
     const text = this.translate.instant('components.evento.share.body', {
       descripcion: this.evento.descripcion ?? '',
       fecha,
       lugar,
-      url,
-      siteUrl,
     });
+    const textConUrl = consisiUrl ? `${consisiUrl}\n\n${text}` : text;
 
     if (typeof navigator !== 'undefined' && (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share) {
       try {
-        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text });
+        await (navigator as Navigator & { share: (data: ShareData) => Promise<void> }).share({ title, text: textConUrl });
         return;
       } catch (err: unknown) {
         if (err instanceof Error && err.name === 'AbortError') return;
@@ -178,14 +179,14 @@ export class EventoComponent implements OnChanges {
           text: this.translate.instant('components.evento.share.whatsapp'),
           icon: 'logo-whatsapp',
           handler: () => {
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://wa.me/?text=${encodeURIComponent(textConUrl)}`, '_blank');
           },
         },
         {
           text: this.translate.instant('components.evento.share.email'),
           icon: 'mail-outline',
           handler: () => {
-            window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text)}`;
+            window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(textConUrl)}`;
           },
         },
         {
@@ -193,7 +194,7 @@ export class EventoComponent implements OnChanges {
           icon: 'copy-outline',
           handler: async () => {
             try {
-              await navigator.clipboard.writeText(text);
+              await navigator.clipboard.writeText(consisiUrl || text);
               this.presentToast(this.translate.instant('components.evento.share.copied'));
             } catch {
               // ignore

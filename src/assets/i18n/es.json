@@ -143,7 +143,7 @@
       "pasada": "PASADA",
       "share": {
         "title": "Compartir Travesía",
-        "body": "🌊 SiSi (See-Sea) — {{siteUrl}}\n\n{{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}\n🔗 {{url}}",
+        "body": "🌊 {{descripcion}}\n📅 {{fecha}} · 📍 {{lugar}}",
         "whatsapp": "WhatsApp",
         "email": "Correo",
         "copy": "Copiar enlace",

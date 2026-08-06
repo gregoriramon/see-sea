@@ -12,7 +12,7 @@ export interface SeoPage {
   robots?: string;
 }
 
-const DEFAULT_OG_IMAGE = '/assets/icon/web-app-manifest-512x512.png';
+const DEFAULT_OG_IMAGE = '/assets/og-image.png';
 const SITE_NAME = 'SiSi (SeeSea)';
 
 @Injectable({ providedIn: 'root' })
