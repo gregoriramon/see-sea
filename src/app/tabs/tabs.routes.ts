@@ -32,11 +32,6 @@ export const routes: Routes = [
           import('../pages/calendario/calendario.page').then((m) => m.CalendarioPage),
       },
       {
-        path: 'feedback',
-        loadComponent: () =>
-          import('../pages/feedback/feedback.page').then((m) => m.FeedbackPage),
-      },
-      {
         path: 'playa/:slug',
         loadComponent: () =>
           import('../pages/playa-view/playa-view.page').then((m) => m.PlayaViewPage),

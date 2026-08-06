@@ -1,5 +1,5 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
@@ -53,6 +53,7 @@ export class FeedbackPage implements OnDestroy {
   private toastCtrl = inject(ToastController);
   private translate = inject(TranslateService);
   private seo = inject(SeoService);
+  private location = inject(Location);
 
   tipo: TipoFeedback = 'comentario';
   titulo = '';
@@ -77,7 +78,7 @@ export class FeedbackPage implements OnDestroy {
     this.seo.setPage({
       title: 'Enviar feedback',
       description: 'Cuéntanos qué te parece SiSi: sugerencias, ideas o errores. Nos ayuda a mejorar la app.',
-      canonicalPath: '/tabs/feedback',
+      canonicalPath: '/feedback',
       robots: 'noindex,follow',
     });
   }
@@ -137,14 +138,11 @@ export class FeedbackPage implements OnDestroy {
     }
 
     this.mostrarToast('feedback.exito', 'success');
-    this.reset();
+    this.location.back();
   }
 
-  private reset() {
-    this.tipo = 'comentario';
-    this.titulo = '';
-    this.contenido = '';
-    this.email = this.localRepository.obtenerEmail();
+  cancelar() {
+    this.location.back();
   }
 
   private async mostrarToast(key: string, color: 'success' | 'danger') {

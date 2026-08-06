@@ -13,6 +13,7 @@
   "menu": {
     "home": "Home",
     "settings": "Settings",
+    "feedback": "Feedback",
     "about": "About..."
   },
   "header": {
@@ -33,8 +34,7 @@
     "prevision": "Forecast ",
     "playas": "Beaches",
     "travesias": "Swims",
-    "calendario": "My Calendar",
-    "feedback": "Feedback"
+    "calendario": "My Calendar"
   },
   "alerts": {
     "about": {
@@ -108,11 +108,13 @@
       "label": "Type",
       "bug": "Bug",
       "mejora": "Improvement",
-      "comentario": "Comment"
+      "comentario": "Comment",
+      "travesiaNoEncontrada": "Swim not found",
+      "travesiaNueva": "New swim"
     },
     "titulo": "Title (optional)",
     "contenido": "Description",
-    "contenidoPlaceholder": "Tell us what happens or what you'd like to see...",
+    "contenidoPlaceholder": "Tell us what happens or what you'd like to see, if you haven't found your swim, if you want to report a new one ...",
     "email": "Your email (optional, so we can reply)",
     "enviar": "Send",
     "exito": "Thanks! Feedback sent.",

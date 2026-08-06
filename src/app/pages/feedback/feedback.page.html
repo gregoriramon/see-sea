@@ -17,6 +17,8 @@
         <ion-select-option value="bug">{{ 'feedback.tipo.bug' | translate }}</ion-select-option>
         <ion-select-option value="mejora">{{ 'feedback.tipo.mejora' | translate }}</ion-select-option>
         <ion-select-option value="comentario">{{ 'feedback.tipo.comentario' | translate }}</ion-select-option>
+        <ion-select-option value="travesia_no_encontrada">{{ 'feedback.tipo.travesiaNoEncontrada' | translate }}</ion-select-option>
+        <ion-select-option value="travesia_nueva">{{ 'feedback.tipo.travesiaNueva' | translate }}</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -58,6 +60,12 @@
       [disabled]="!puedeEnviar()"
       (click)="enviar()">
       {{ 'feedback.enviar' | translate }}
+    </ion-button>
+    <ion-button
+      expand="block"
+      fill="outline"
+      (click)="cancelar()">
+      {{ 'common.cancel' | translate }}
     </ion-button>
     <ion-note class="privacidad">
       {{ 'feedback.privacidad' | translate }}

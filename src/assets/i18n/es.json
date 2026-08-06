@@ -13,6 +13,7 @@
   "menu": {
     "home": "Inicio",
     "settings": "Configuración",
+    "feedback": "Opina",
     "about": "Acerca de..."
   },
   "header": {
@@ -33,8 +34,7 @@
     "prevision": "Prevision ",
     "playas": "Playas",
     "travesias": "Travesias",
-    "calendario": "Mi Calendario",
-    "feedback": "Opina"
+    "calendario": "Mi Calendario"
   },
   "alerts": {
     "about": {
@@ -108,11 +108,13 @@
       "label": "Tipo",
       "bug": "Incidencia",
       "mejora": "Mejora",
-      "comentario": "Comentario"
+      "comentario": "Comentario",
+      "travesiaNoEncontrada": "Travesía NO Encontrada",
+      "travesiaNueva": "Travesía Nueva"
     },
     "titulo": "Título (opcional)",
     "contenido": "Descripción",
-    "contenidoPlaceholder": "Cuéntanos qué ocurre o qué te gustaría ver...",
+    "contenidoPlaceholder": "Cuéntanos qué ocurre o qué te gustaría ver, si no has encontrado tu travesía, si quieres informar de una nueva ...",
     "email": "Tu email (opcional, para responderte)",
     "enviar": "Enviar",
     "exito": "¡Gracias! Feedback enviado.",

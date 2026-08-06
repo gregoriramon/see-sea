@@ -27,7 +27,9 @@ export class SeoService {
     const fullTitle = `${page.title} | ${SITE_NAME}`;
     this.title.setTitle(fullTitle);
 
-    this.upsertName('description', page.description);
+    const description = this.clampDescription(page.description);
+
+    this.upsertName('description', description);
     this.upsertName('robots', page.robots ?? 'index,follow');
 
     const ogImage = page.ogImage ?? DEFAULT_OG_IMAGE;
@@ -35,7 +37,7 @@ export class SeoService {
     const canonical = this.resolveUrl(page.canonicalPath);
 
     this.upsertProperty('og:title', fullTitle);
-    this.upsertProperty('og:description', page.description);
+    this.upsertProperty('og:description', description);
     this.upsertProperty('og:type', ogType);
     this.upsertProperty('og:image', this.resolveUrl(ogImage));
     if (canonical) {
@@ -43,10 +45,18 @@ export class SeoService {
     }
 
     this.upsertName('twitter:title', fullTitle);
-    this.upsertName('twitter:description', page.description);
+    this.upsertName('twitter:description', description);
     this.upsertName('twitter:image', this.resolveUrl(ogImage));
 
     this.setCanonical(canonical);
+  }
+
+  private clampDescription(text: string, max = 155): string {
+    if (!text || text.length <= max) return text;
+    const slice = text.slice(0, max);
+    const lastSpace = slice.lastIndexOf(' ');
+    const cut = lastSpace > 0 ? slice.slice(0, lastSpace) : slice;
+    return `${cut.replace(/[\s.,;:·—-]+$/, '')}…`;
   }
 
   private setCanonical(url: string): void {

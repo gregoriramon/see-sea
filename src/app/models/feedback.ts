@@ -1,4 +1,9 @@
-export type TipoFeedback = 'bug' | 'mejora' | 'comentario';
+export type TipoFeedback =
+  | 'bug'
+  | 'mejora'
+  | 'comentario'
+  | 'travesia_no_encontrada'
+  | 'travesia_nueva';
 
 export type PlataformaFeedback = 'ios' | 'android' | 'web';
 export type ModoFeedback = 'native' | 'pwa' | 'browser';
