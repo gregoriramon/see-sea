@@ -58,11 +58,10 @@ const html = `<!DOCTYPE html>
     z-index: 2;
   }
   .logo {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: #ffffff;
-    padding: 18px;
+    width: 320px;
+    height: 320px;
+    border-radius: 24px;
+    overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
     flex-shrink: 0;
   }
@@ -78,18 +77,26 @@ const html = `<!DOCTYPE html>
     min-height: 260px;
   }
   .tagline {
-    font-size: 62px;
+    font-size: 58px;
     font-weight: 700;
     line-height: 1.15;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.30);
+  }
+  .tagline .sub {
+    display: block;
+    font-size: 46px;
+    font-weight: 600;
+    margin-top: 14px;
+    opacity: 0.95;
   }
   .domain {
     position: absolute;
     bottom: 40px;
     right: 90px;
-    font-size: 22px;
+    font-size: 36px;
+    font-weight: 600;
     letter-spacing: 2px;
-    opacity: 0.75;
+    opacity: 0.85;
     z-index: 2;
   }
 </style>
@@ -99,7 +106,7 @@ const html = `<!DOCTYPE html>
   <div class="content">
     <div class="logo"><img src="${logoDataUri}" alt=""/></div>
     <div class="text">
-      <div class="tagline">Travesías a nado en aguas abiertas · Previsión marítima de playas españolas</div>
+      <div class="tagline">Travesías a nado en aguas abiertas.<span class="sub">Calendario, resultados y previsión marítima.</span></div>
     </div>
   </div>
   <div class="domain">consisi.com</div>

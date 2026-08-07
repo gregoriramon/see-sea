@@ -211,7 +211,17 @@ export class EventoListPage implements OnInit, OnDestroy {
   }
 
   onToggleFavorito(evento: Evento) {
+    const eraFavorito = this.localRepositoryService.esFavoritoEvento(evento);
     this.localRepositoryService.toggleFavoritoEvento(evento);
+    if (!eraFavorito) {
+      this.localRepositoryService.deviceId$.subscribe((deviceId) => {
+        this.supabaseService.registraDispositivo({
+          id_dispositivo: deviceId,
+          accion: 'ADD-EVENTO',
+          data: String(evento.id),
+        }).catch((error) => console.error('Error al registrar dispositivo en Supabase:', error));
+      });
+    }
   }
 
   onEventoClick(evento: Evento) {

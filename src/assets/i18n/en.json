@@ -54,8 +54,8 @@
   "toasts": {
     "updateAvailable": "A new version is available",
     "reloadRequired": "The app needs to reload to continue",
-    "favoritaRemoved": "Beach {{name}} removed from favorites",
-    "favoritaAdded": "Beach {{name}} added to favorites",
+    "favoritaRemoved": "{{name}} removed from your favorite forecasts",
+    "favoritaAdded": "{{name}} added to your favorite forecasts",
     "eventoRemoved": "Swim {{name}} removed from calendar",
     "eventoAdded": "Swim {{name}} added to calendar",
     "offlineNoService": "Offline: couldn't confirm with the service"
@@ -127,8 +127,8 @@
       "addFav": "Add to Favorites"
     },
     "evento": {
-      "removeCal": "Remove from Calendar",
-      "addCal": "Add to Calendar",
+      "removeCal": "Remove from My Calendar",
+      "addCal": "Add to My Calendar",
       "distance": "Distance",
       "price": "Price",
       "organizador": "Organizer",

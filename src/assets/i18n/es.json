@@ -54,8 +54,8 @@
   "toasts": {
     "updateAvailable": "Hay una nueva versión disponible",
     "reloadRequired": "La aplicación necesita recargarse para continuar",
-    "favoritaRemoved": "Playa {{name}} eliminada de favoritas",
-    "favoritaAdded": "Playa {{name}} añadida a favoritas",
+    "favoritaRemoved": "{{name}} eliminada de tus previsiones favoritas",
+    "favoritaAdded": "{{name}} añadida a tus previsiones favoritas",
     "eventoRemoved": "Travesia {{name}} eliminada del calendario",
     "eventoAdded": "Travesía {{name}} añadido al calendario",
     "offlineNoService": "Sin conexión: no se pudo confirmar con el servicio"
@@ -127,8 +127,8 @@
       "addFav": "Añadir a Favoritas"
     },
     "evento": {
-      "removeCal": "Eliminar de Calendario",
-      "addCal": "Añadir a Calendario",
+      "removeCal": "Eliminar de Mi Calendario",
+      "addCal": "Añadir a Mi Calendario",
       "distance": "Distancia",
       "price": "Precio",
       "organizador": "Organizador",
