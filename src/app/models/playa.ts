@@ -12,6 +12,7 @@ export interface Playa {
   lon:number
   last_update_date:string
   aemet_date:string
+  updated_at?:string
   prediccion?:Prediccion
 }
 

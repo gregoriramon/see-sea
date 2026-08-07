@@ -117,7 +117,7 @@ export class Supabase {
   }
 
   async getPlayasByName(name: string, conPrevison: boolean | undefined = false): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
     const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
@@ -133,7 +133,7 @@ export class Supabase {
 
 
   async getPlayaAll(): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
     const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select);
@@ -148,7 +148,7 @@ export class Supabase {
   }
 
   async getPlayaByCodPlaya(codPlaya: string): Promise<Playa> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at,prediccion";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -167,7 +167,7 @@ export class Supabase {
   }
 
 async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at,prediccion";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -185,7 +185,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayaBySlugConPrediccion(slug: string): Promise<Playa> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,prediccion";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at,prediccion";
     const { data, error } = await (await this.getClient())
       .from('playa')
       .select(select)
@@ -349,7 +349,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayasByProvincia(codProvincia: string): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
 
     const { data, error } = await (await this.getClient())
       .from('playa')
@@ -365,7 +365,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayasByMunicipio(codMunicipio: string): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
 
     const { data, error } = await (await this.getClient())
       .from('playa')
@@ -381,7 +381,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayaByNameAndCodProvincia(name: string, codProvincia: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
     let query = (await this.getClient())
       .from('playa')
       .select(select)
@@ -405,7 +405,7 @@ async getPlayaByCodPlayaConPrediccion(codPlaya: string): Promise<Playa> {
   }
 
   async getPlayaByNameAndCodMunicipio(name: string, codMunicipio: string | string[], conPrevison: boolean = false): Promise<Playa[]> {
-    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date";
+    const select = "cod_playa,slug,playa,cod_municipio,municipio,cod_provincia,provincia,cod_ccaa,ccaa,lat,lon,last_update_date,aemet_date,updated_at";
     let query = (await this.getClient())
       .from('playa')
       .select(select)

@@ -88,19 +88,20 @@ export class FavoritasPage implements OnInit {
   this.router.navigate(['/tabs/buscar']);
   }
 
-  async refreshFavoritas(): Promise<void> {
+  private static readonly TTL_MS = 12 * 60 * 60 * 1000;
+
+  async refreshFavoritas(force = false): Promise<void> {
     if (this.favoritas.length === 0) {
       return;
     }
 
-    const fechaActual = new Date().setHours(0, 0, 0, 0);
+    const ahora = Date.now();
     const updates: Promise<void>[] = [];
 
     this.favoritas.forEach((playa) => {
-      const primerDia = playa.prediccion?.dia?.[0]?.fecha;
-      const fechaAComparar = primerDia ? this.getFecha(primerDia).setHours(0, 0, 0, 0) : NaN;
-      if (!primerDia || isNaN(fechaAComparar) || fechaAComparar !== fechaActual) {
-        console.log(`La playa ${playa.playa} tiene datos desactualizados (dia[0]=${primerDia}), actualizando...`);
+      const ts = playa.updated_at ? Date.parse(playa.updated_at) : NaN;
+      const caducada = isNaN(ts) || (ahora - ts) > FavoritasPage.TTL_MS;
+      if (force || caducada) {
         const updatePromise = this.supabaseService.getPlayaByCodPlayaConPrediccion(playa.cod_playa).then((playaDetails) => {
           if (playaDetails) {
             if (!Array.isArray(playaDetails)) {
@@ -119,32 +120,9 @@ export class FavoritasPage implements OnInit {
 
     await Promise.all(updates);
   }
-  private getFecha(fecha: unknown): Date {
-    if (fecha instanceof Date) {
-      return new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
-    }
 
-    const str = String(fecha ?? '').trim();
-
-    // Formato AAAAMMDD (8 dígitos)
-    if (/^\d{8}$/.test(str)) {
-      const anio = parseInt(str.substring(0, 4), 10);
-      const mes = parseInt(str.substring(4, 6), 10) - 1;
-      const dia = parseInt(str.substring(6, 8), 10);
-      return new Date(anio, mes, dia);
-    }
-
-    // Formato ISO (AAAA-MM-DD o con hora)
-    const iso = new Date(str);
-    if (!isNaN(iso.getTime())) {
-      return new Date(iso.getFullYear(), iso.getMonth(), iso.getDate());
-    }
-
-    return new Date(NaN);
-  }
-
-    handleRefresh(event: RefresherCustomEvent) {
-    this.refreshFavoritas().then(() => {
+  handleRefresh(event: RefresherCustomEvent) {
+    this.refreshFavoritas(true).finally(() => {
       event.target.complete();
     });
   }
